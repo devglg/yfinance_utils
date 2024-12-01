@@ -5,13 +5,13 @@
 #
 
 import pandas as pd
-import utils.financials_utils as du
+import utils.financials_utils as fu
 import utils.ratio_utils as ru
 import math
 
 LOG=False
 
-def get_sacks_value_stocks(t, max_price_to_sales = 1.00, max_price_to_earnings = 20.00):
+def get_value_stocks(t, max_price_to_sales = 1.00, max_price_to_earnings = 20.00):
     MAX_PRICE_TO_SALES = max_price_to_sales
     MAX_PRICE_TO_EARNINGS = max_price_to_earnings
 
@@ -20,7 +20,7 @@ def get_sacks_value_stocks(t, max_price_to_sales = 1.00, max_price_to_earnings =
     results = pd.DataFrame(columns=COLUMNS)
 
     for tick in t.tickers:
-        last_price = du.get_last_price(t.tickers[tick])
+        last_price = fu.get_last_price(t.tickers[tick])
         if not last_price or math.isnan(last_price):
             continue
 
