@@ -13,31 +13,23 @@ import utils.constants as const
 import pandas as pd
 
 
-def get_rsi(ticker, window_length=14, period="1mo", interval = "1d", price_field = 0):
+def get_rsi(ticker, window_length=14, period="1mo", interval="1d"):
     """
     get rsi from the data
     lookback = number of days to use to calculate the rsi
-    price_field: 0=Close (Default), 1=Open, 2=High, 3=Low
-
     returns data frame with price history including rsi
-
     """
     df = pd.DataFrame()
-
-    if price_field not in (0,1,2,3):
-        # print("field can only be a digit 0-3. 0=Close (default), 1=Open, 2=High, 3=Low")
-        return
-    
     try:
         data = ticker.history(period=period, interval=interval)
     except Exception:
         return None
 
     if window_length > len(data):
-        # print(f"{ticker.info['symbol']} does not have enough data. window length {window_length} data items {len(data)}")
+        print(f"{ticker.info['symbol']} does not have enough data. window length {window_length} data items {len(data)}")
         return None
 
-    df['diff'] = data[const.price_volume_fields[price_field]].diff(1)
+    df['diff'] = data["Close"].diff(1)
     df['gain'] = df['diff'].clip(lower=0).round(2)
     df['loss'] = df['diff'].clip(upper=0).abs().round(2)
 
