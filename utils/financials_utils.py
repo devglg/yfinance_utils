@@ -6,8 +6,6 @@
 
 #
 
-import utils.constants as constants
-
 """
 GET FINANCIAL STATEMENTS as dictionary
 """
@@ -35,7 +33,7 @@ def get_up_down_action(ticker):
 
 
 
-def get_historic_price(ticker, price_field = constants.CLOSE):
+def get_historic_price(ticker, price_field = "Close"):
   d = ticker.history()
   return list(d[price_field])
 
