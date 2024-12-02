@@ -6,6 +6,9 @@
 # https://www.alpharithms.com/relative-strength-index-rsi-in-python-470209/
 #
 
+import warnings
+warnings.filterwarnings("ignore")
+
 import pandas as pd
 
 def get_rsi(ticker, window_length=14, period="1mo", interval="1d"):
