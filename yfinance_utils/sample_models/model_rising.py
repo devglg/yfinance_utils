@@ -52,7 +52,7 @@ def get_stock_rising(x, weeks_rising = 5):
 
     rsi_list = []
     for tick in df["ticker"]:
-        r = utils.rsi_util.get_rsi(t.tickers[tick], period="1y")
+        r = rsi_utils.get_rsi(t.tickers[tick], period="1y")
         if r is None:
             continue
         else:
