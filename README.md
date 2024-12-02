@@ -90,6 +90,6 @@ Date
 2024-11-29 00:00:00-05:00  136.240005  138.589996  135.779999  137.179993  16085700        0.0           0.0  38.368962
 ```
 
- 
-# TODO: I uploaded this manually, the paths may be wrong, need to update as soon as I can connect from my computer.
-It may be working now but if it is not just post some message or you can fix it and send me the change requrest, if you can.
+>[!CAUTION] 
+>TODO: I uploaded this manually, the paths may be wrong, need to update as soon as I can.
+>Some stuff may be working but if it is not, just post some message or you can fix it and send me the change requrest, if you can.
