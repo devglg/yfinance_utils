@@ -10,9 +10,10 @@ from yfinance_utils.sample_lists.nasdaq100 import nasdaq100
 from yfinance_utils.sample_lists.snp500 import snp500
 from yfinance_utils.sample_lists.aero_def import aero_def
 from yfinance_utils.sample_lists.nasdaq import nasdaq
+from yfinance_utils.sample_lists.nyse import nyse
 
 def get_all_tickers():
-    all = mag7 + nasdaq100 + snp500 + aero_def + nasdaq
+    all = mag7 + nasdaq100 + snp500 + aero_def + nasdaq + nyse
     return list(set(all))
 
 def get_aero_def():
@@ -29,3 +30,6 @@ def get_nasdaq100():
 
 def get_nasdaq():
     return list(set(nasdaq))
+
+def get_nyse():
+    return list(set(nyse))
