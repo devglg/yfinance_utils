@@ -26,13 +26,13 @@ python -m venv venv
 
 ### open the command line
 ```
-.\venv\Scripts\python.exe 
-import warnings
-warnings.filterwarnings("ignore")
-import yfinance
-from yfinance_utils import rsi_utils
-tick = yfinance.Ticker("AMD")
-tick.history()
+> .\venv\Scripts\python.exe 
+>>> import warnings
+>>> warnings.filterwarnings("ignore")
+>>> import yfinance
+>>> from yfinance_utils import rsi_utils
+>>> tick = yfinance.Ticker("AMD")
+>>> tick.history()
 >>> tick.history()
                                  Open        High         Low       Close    Volume  Dividends  Stock Splits
 Date
@@ -59,9 +59,9 @@ Date
 2024-11-27 00:00:00-05:00  137.199997  137.940002  132.960007  136.240005  30175300        0.0           0.0
 2024-11-29 00:00:00-05:00  136.240005  138.589996  135.779999  137.179993  16085700        0.0           0.0
 
-data = rsi_utils.get_rsi(tick)
+>>> data = rsi_utils.get_rsi(tick)
 
-ignore the warnings...
+...ignore the warnings...
 
 >>> print(data)
                                  Open        High         Low       Close    Volume  Dividends  Stock Splits        rsi
