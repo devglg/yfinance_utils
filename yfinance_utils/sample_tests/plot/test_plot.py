@@ -4,34 +4,28 @@
 # Copyright 2024 Lehi Gracia
 #
 
-
 import warnings
 warnings.filterwarnings("ignore")
 
-import sys
-import os
-current = os.path.dirname(os.path.realpath(__file__))
-parent = os.path.dirname(current)
-grandparent = os.path.dirname(parent)
-sys.path.append(parent)
-sys.path.append(grandparent)
-
-
 import matplotlib.pyplot as plt
 import yfinance
-from lists.mag7 import mag7 as ticklist
-from utils import rsi_util
+from yfinance_utils import list_utils
+from yfinance_utils import rsi_utils
+import pandas as pd
 
 df_ticks = {}
 counter = 0
 
+ticklist = list_utils.get_mag7()
 t = yfinance.Tickers(ticklist)
 
 for tick in t.tickers:
-    df = rsi_util.get_rsi(t.tickers[tick])
+    df = rsi_utils.get_rsi(t.tickers[tick])
     df_ticks[tick] = df
 
 figure, axis = plt.subplots(len(df_ticks), 1)
+
+print(df_ticks)
 
 for i in range(len(df_ticks)):
     axis[i].plot(df_ticks[ticklist[i]]["Low"])

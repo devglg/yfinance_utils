@@ -4,26 +4,23 @@
 # Copyright 2024 Lehi Gracia
 #
 
-
-
 import warnings
 warnings.filterwarnings("ignore")
 
-import utils
 import yfinance
-import utils.list_util 
-import utils.rsi_util
-import utils.volume_util
+from yfinance_utils import list_utils 
+from yfinance_utils import rsi_utils
+from yfinance_utils import volume_utils
 
 
-ticker_list = utils.list_util.positions
+ticker_list = list_utils.get_mag7()
 t = yfinance.Tickers(ticker_list)
 
 print("===============================================================================")
 
 for tick in ticker_list:
     x = t.tickers[tick]
-    data = list(utils.rsi_util.get_rsi(x)["rsi"])
+    data = list(rsi_utils.get_rsi(x)["rsi"])
     rsi = data[-1]
     avg_vol =  x.info["averageVolume"]
     vol_info = x.info['volume']

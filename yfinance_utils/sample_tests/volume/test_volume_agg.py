@@ -4,16 +4,7 @@
 # Copyright 2024 Lehi Gracia
 #
 
-
 # output to daily ETF volume file
-
-# change directory to root of project
-import sys
-import os
-current = os.path.dirname(os.path.realpath(__file__))
-parent = os.path.dirname(current)
-parent2 = os.path.dirname(parent)
-sys.path.append(parent2)
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -23,15 +14,15 @@ import statistics
 
 import pandas as pd
 import yfinance
-import utils.list_util 
-import utils.volume_util
+from yfinance_utils import list_utils
+from yfinance_utils import volume_utils
 
 HEADERS = ["VOLUME", "AVERAGE", "MEDIAN"]
 dfnas = pd.DataFrame(HEADERS)
 dfsnp = pd.DataFrame(HEADERS)
 
-tickers_nq = yfinance.Tickers(utils.list_util.get_nasdaq100())
-tickers_snp = yfinance.Tickers(utils.list_util.get_snp500())
+tickers_nq = yfinance.Tickers(list_utils.get_nasdaq100())
+tickers_snp = yfinance.Tickers(list_utils.get_snp500())
 
 print(f"ETF, VOLUME, AVG, MEDIAN")
 

@@ -13,8 +13,8 @@ sys.path.append(parent)
 
 
 import yfinance 
-import utils.list_util as list_utils
-import utils.model_utils as mu
+from yfinance_utils import list_utils
+from yfinance_utils import model_utils as mu
 
 MAX_PRICE_TO_SALES = 1.00
 MAX_PRICE_TO_EARNINGS = 20.00

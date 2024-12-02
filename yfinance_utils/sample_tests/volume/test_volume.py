@@ -4,27 +4,24 @@
 # Copyright 2024 Lehi Gracia
 #
 
-
-
 import warnings
 warnings.filterwarnings("ignore")
 
-import utils
-import yfinance
 import pprint
-from lists.nasdaq100 import nasdaq100 as ticklist
-import utils.rsi_util
-import utils.volume_util
+import yfinance
+from yfinance_utils import list_utils
+from yfinance_utils import volume_utils
 
+ticklist = list_utils.get_nasdaq100()
 df_ticks = {}
 counter = 0
 
 t = yfinance.Tickers(ticklist)
 
 for tick in ticklist:
-    percent, average =  utils.volume_util.get_percent_volume(t.tickers[tick], period='1mo', days_back=2)
-    if percent and average: 
-        pprint.pprint(f"{t.tickers[tick].info['symbol']:6} volume is {percent:4}% from Average {average:13,}")
+    data =  volume_utils.get_percent_volume(t.tickers[tick], period='1mo', days_back=2)
+    if data["percentage"] and data["average"]: 
+        pprint.pprint(f"{t.tickers[tick].info['symbol']:6} volume is {data["percentage"]:4}% from Average {data["average"]:13,}")
 
 
 

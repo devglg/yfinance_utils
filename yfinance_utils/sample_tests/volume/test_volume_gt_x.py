@@ -4,21 +4,18 @@
 # Copyright 2024 Lehi Gracia
 #
 
-
-
 import warnings
 warnings.filterwarnings("ignore")
 
 import pandas as pd
-import utils
 import yfinance
-import utils.list_util 
-import utils.rsi_util
-import utils.volume_util
+from yfinance_utils import list_utils
+from yfinance_utils import rsi_utils
+from yfinance_utils import volume_utils
 
 TEN_MILLION = 10000000
 
-ticker_list = utils.list_util.get_all_tickers()
+ticker_list = list_utils.get_all_tickers()
 t = yfinance.Tickers(ticker_list)
 
 print("================================================================")
@@ -30,10 +27,10 @@ df = pd.DataFrame(columns=COLUMNS)
 
 for tick in ticker_list:
     x = t.tickers[tick]
-    avg_vol =  x.info["averageVolume"]
-    vol_info = x.info['volume']
+    avg_vol =  x.info["averageVolume"] or 0
+    vol_info = x.info['volume'] or 0
 
-    rsi = utils.rsi_util.get_rsi(x)
+    rsi = rsi_utils.get_rsi(x)
     rsix = round(rsi["rsi"].iloc[len(rsi) - 1], 2)
     pct = vol_info / avg_vol * 100
 

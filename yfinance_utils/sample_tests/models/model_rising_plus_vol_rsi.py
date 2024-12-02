@@ -23,13 +23,13 @@ from datetime import date
 import statistics
 import pandas as pd
 import yfinance
-import utils.list_util 
-import utils.rsi_util
+from yfinance_utils import list_utils 
+from yfinance_utils import rsi_utils 
 
 # local variables
 WEEKS_RISING = 5
 df = pd.DataFrame()
-t = yfinance.Tickers(utils.list_util.get_all_tickers())
+t = yfinance.Tickers(list_utils.get_all_tickers())
 # t = yfinance.Tickers(["GS", "SOFI", "FDS", "C"])
 
 print(str(date.today()))
@@ -56,7 +56,7 @@ print("Getting rsi")
 
 rsi_list = []
 for tick in df["ticker"]:
-    r = utils.rsi_util.get_rsi(t.tickers[tick], period="1y")
+    r = rsi_utils.get_rsi(t.tickers[tick], period="1y")
     if r is None:
         continue
     else:

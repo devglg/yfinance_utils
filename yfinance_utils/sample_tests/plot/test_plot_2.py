@@ -10,11 +10,10 @@ import warnings
 warnings.filterwarnings("ignore")
 
 import pandas as pd
-import utils
 import yfinance
-import utils.list_util 
-import utils.rsi_util
-import utils.volume_util
+from yfinance_utils import list_utils
+from yfinance_utils import rsi_utils
+from yfinance_utils import volume_utils
 import matplotlib.pyplot as plt
 
 print("================================================================")
@@ -23,14 +22,14 @@ print("================================================================")
 
 COLUMNS = ["TICK","Close", "Volume", "rsi"]
 
-tickers = utils.list_util.get_mag7()
+tickers = list_utils.get_mag7()
 figure, axis = plt.subplots(len(tickers),1)
 
 for i in range(len(tickers)):
     t = yfinance.Ticker(tickers[i])
 
     df = pd.DataFrame(columns=COLUMNS)
-    rsi = utils.rsi_util.get_rsi(t, period="1y", interval="1d")
+    rsi = rsi_utils.get_rsi(t, period="1y", interval="1d")
 
     axis[i].plot(rsi["Close"], label="Price", color="tab:red")
     ax2 = axis[i].twinx()
@@ -39,7 +38,6 @@ for i in range(len(tickers)):
     ax3.plot(rsi["rsi"], label="rsi")
     
     axis[i].set_ylabel(tickers[i])
-
 
 plt.grid()
 plt.show()

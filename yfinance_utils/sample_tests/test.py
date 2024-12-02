@@ -4,22 +4,14 @@
 # Copyright 2024 Lehi Gracia
 #
 
-import sys
-import os
-current = os.path.dirname(os.path.realpath(__file__))
-parent = os.path.dirname(current)
-sys.path.append(parent)
-
 import warnings
 warnings.filterwarnings("ignore")
 
 import statistics
-import utils
 import yfinance
-import utils.list_util 
-import utils.rsi_util
-import utils.volume_util
-
+from yfinance_utils import list_utils
+from yfinance_utils import rsi_utils
+from yfinance_utils import volume_utils
 
 ticker_list = [
     "PRZO",
@@ -55,12 +47,12 @@ ticker_list = [
 ]
 t = yfinance.Tickers(ticker_list)
 
-print("===============================================================================")
-print(f":last2:last1:up %:vol_avg:vol2:vol1:rsi2:rsi1:mean%:median%:")
+print("===========================================================================================================================")
+print(f"tick  | last2   | last1   | up %        | vol_avg     | vol2        | vol1        | rsi2    | rsi1    | mean%   | median% |")
 
 for tick in ticker_list:
     x = t.tickers[tick]
-    rsi = utils.rsi_util.get_rsi(x, period= "1y", interval="1d")
+    rsi = rsi_utils.get_rsi(x, period= "1y", interval="1d")
     if rsi is None:
         continue
     
@@ -78,7 +70,7 @@ for tick in ticker_list:
 
 
     # print(f"{tick:6}:last2:{last2:9,.2f} :last1: {last1:9,.2f}: up % :{last1 / last2 * 100:12,.2f}:vol_avg:{avg_vol:13,.2f}: vol2:{vol2 / avg_vol * 100:13,.2f}: vol1:{vol1 / avg_vol * 100:13,.2f}: rsi2:{rsi2:9,.2f}: rsi1:{rsi1:9,.2f}: mean%: {last1/avg*100:9,.2f}: median%: {last1/med*100:9,.2f}: ")
-    print(f"{tick:6}:{last2:9,.2f}:{last1:9,.2f}: {last1 / last2 * 100:12,.2f}:{avg_vol:13,.2f}:{vol2 / avg_vol * 100:13,.2f}:{vol1 / avg_vol * 100:13,.2f}:{rsi2:9,.2f}:{rsi1:9,.2f}:{last1/avg*100:9,.2f}:{last1/med*100:9,.2f}: ")
+    print(f"{tick:6}|{last2:9,.2f}|{last1:9,.2f}| {last1 / last2 * 100:12,.2f}|{avg_vol:13,.2f}|{vol2 / avg_vol * 100:13,.2f}|{vol1 / avg_vol * 100:13,.2f}|{rsi2:9,.2f}|{rsi1:9,.2f}|{last1/avg*100:9,.2f}|{last1/med*100:9,.2f}| ")
 
-print("===============================================================================")
+print("===========================================================================================================================")
 
