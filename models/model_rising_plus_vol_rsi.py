@@ -23,8 +23,8 @@ from datetime import date
 import statistics
 import pandas as pd
 import yfinance
-import utils.list_util 
-import utils.rsi_util
+
+import rsi_util
 
 # local variables
 WEEKS_RISING = 5
