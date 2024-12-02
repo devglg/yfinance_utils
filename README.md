@@ -1,6 +1,9 @@
 # yfinance_utils
 Just adding some utilities to the yfinance library to make it easier to do technical analysis on any stock. maybe run models and do ad-hoc scenarios.
 
+> [!IMPORTANT]
+> Some files still have the old apache 2 license text. they are not, this whole project is GPL3 licensed, not apache 2. Could have used a little more planning.
+
 ## install
 git clone https://github.com/devglg/yfinance_utils.git
 
