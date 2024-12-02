@@ -5,10 +5,10 @@
 #
 #
 
-from sample_lists.mag7 import mag7
-from sample_lists.nasdaq100 import nasdaq100
-from sample_lists.snp500 import snp500
-from sample_lists.aero_def import aero_def
+from yfinance_utils.sample_lists.mag7 import mag7
+from yfinance_utils.sample_lists.nasdaq100 import nasdaq100
+from yfinance_utils.sample_lists.snp500 import snp500
+from yfinance_utils.sample_lists.aero_def import aero_def
 
 def get_all_tickers():
     all = mag7 + nasdaq100 + snp500 + aero_def
