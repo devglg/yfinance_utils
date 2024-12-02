@@ -25,6 +25,7 @@ python -m venv venv
 ## does it work?
 
 ### open the command line
+```
 .\venv\Scripts\python.exe 
 import warnings
 warnings.filterwarnings("ignore")
@@ -87,7 +88,7 @@ Date
 2024-11-26 00:00:00-05:00  142.550003  142.800003  136.619995  137.720001  32092400        0.0           0.0  38.187679
 2024-11-27 00:00:00-05:00  137.199997  137.940002  132.960007  136.240005  30175300        0.0           0.0  36.442775
 2024-11-29 00:00:00-05:00  136.240005  138.589996  135.779999  137.179993  16085700        0.0           0.0  38.368962
-
+```
 
  
 # TODO: I uploaded this manually, the paths may be wrong, need to update as soon as I can connect from my computer.
