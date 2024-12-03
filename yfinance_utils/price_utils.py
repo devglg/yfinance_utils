@@ -10,4 +10,4 @@ def get_price_intervals_rising(tick, period = "3mo", interval = "1wk"):
         if c[i-1] < c[i]:
             continue
         else:
-            return(len(c) - (i + 1))
+            return(len(c) - i)
