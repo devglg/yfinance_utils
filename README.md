@@ -98,4 +98,4 @@ Date
 
 >[!CAUTION] 
 >TODO: I uploaded this manually, the paths may be wrong, need to update as soon as I can.
->Some stuff may be working but if it is not, just post some message or you can fix it and send me the change requrest, if you can.
+>Some stuff may be working but if it is not, just post some message or you can fix it and send me the pull requrest.

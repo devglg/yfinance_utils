@@ -6,7 +6,7 @@ setup(
     description='a few methods to help with tech analysis and plotting',
     license='GPL 2.0',
     packages=find_packages(),
-    install_requires=['yfinance', 'pandas', 'matplotlib', 'PyQt6', 'numpy', 'requests_cache', 'plotly'],
+    install_requires=['yfinance', 'pandas', 'numpy', 'requests_cache', 'finta', 'plotly'],
     author='Lehi Gracia',
     author_email='dev@glgracia.com',
     keywords=['utils', 'technical analysis', 'finance'],
