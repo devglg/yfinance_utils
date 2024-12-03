@@ -66,15 +66,18 @@ def get_stock_rising(x, weeks_rising = 5):
 
     volume_list_1 = []
     volume_list_2 = []
+    volume_list_3 = []
     vol_avg_list = []
     for tick in df["ticker"]:
         d = t.tickers[tick].history()
         volume_list_1.append(d["Volume"].iloc[len(d)-1])
         volume_list_2.append(d["Volume"].iloc[len(d)-2])
+        volume_list_2.append(d["Volume"].iloc[len(d)-3])
         vol_avg_list.append(statistics.mean(d["Volume"]))
     df["vol_average"] = vol_avg_list
-    df["volume_last_day"] = volume_list_1
-    df["volume_two_days_ago"] = volume_list_2
+    df["volume_today"] = volume_list_1
+    df["volume_yesterday"] = volume_list_2
+    df["volume_2days_ago"] = volume_list_3
 
     print("================================================================")
     print("Creating file")
