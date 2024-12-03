@@ -4,6 +4,11 @@ Just adding some utilities to the yfinance library to make it easier to do techn
 > [!IMPORTANT]
 > Some files still have the old apache 2 license text. they are not, this whole project is GPL3 licensed, not apache 2. Could have used a little more planning.
 
+> [!NOTE]
+> After learnings enough about dataframes, matplotlib, pandas, and technical analysis, I would say that you're probably better off using yfinance, plotly, 
+> and FINTA to create models instead of having to re-write everything from scratch. However, I think it is beneficial to do it manually until you understand 
+> it before you start using someone else's libraries.
+
 ## install
 `git clone https://github.com/devglg/yfinance_utils.git`
 
