@@ -5,15 +5,6 @@
 #
 
 
-# change directory to root of project
-import sys
-import os
-import math
-current = os.path.dirname(os.path.realpath(__file__))
-parent = os.path.dirname(current)
-parent2 = os.path.dirname(parent)
-sys.path.append(parent2)
-
 # remove warnings
 import warnings
 warnings.filterwarnings("ignore")
@@ -60,7 +51,7 @@ for tick in df["ticker"]:
     if r is None:
         continue
     else:
-        rsi_list.append(r["rsi"].iloc[len(r)-1])
+        rsi_list.append(r["rsi"].iloc[-1])
 
 df["rsi"] = rsi_list
 df = df.dropna(subset="rsi")
@@ -73,8 +64,8 @@ volume_list_2 = []
 vol_avg_list = []
 for tick in df["ticker"]:
     d = t.tickers[tick].history()
-    volume_list_1.append(d["Volume"].iloc[len(d)-1])
-    volume_list_2.append(d["Volume"].iloc[len(d)-2])
+    volume_list_1.append(d["Volume"].iloc[-1])
+    volume_list_2.append(d["Volume"].iloc[-2])
     vol_avg_list.append(statistics.mean(d["Volume"]))
 df["vol_average"] = vol_avg_list
 df["volume_last_day"] = volume_list_1

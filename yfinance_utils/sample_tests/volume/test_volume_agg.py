@@ -28,12 +28,12 @@ print(f"ETF, VOLUME, AVG, MEDIAN")
 
 for t in tickers_nq.tickers:
     n =  tickers_nq.tickers[t].history()
-    temp = pd.DataFrame([[n["Volume"].iloc[len(t)-1], statistics.mean(n["Volume"]), statistics.median(n["Volume"])]], columns=HEADERS)
+    temp = pd.DataFrame([[n["Volume"].iloc[-1], statistics.mean(n["Volume"]), statistics.median(n["Volume"])]], columns=HEADERS)
     dfnas = pd.concat([dfnas, temp], ignore_index=True)
 
 for t in tickers_snp.tickers:
     s =  tickers_snp.tickers[t].history()
-    temp = pd.DataFrame([[s["Volume"].iloc[len(t)-1], statistics.mean(s["Volume"]), statistics.median(s["Volume"])]], columns=HEADERS)
+    temp = pd.DataFrame([[s["Volume"].iloc[-1], statistics.mean(s["Volume"]), statistics.median(s["Volume"])]], columns=HEADERS)
     dfsnp = pd.concat([dfsnp, temp], ignore_index=True)
 
 print(f"Nasdaq 100:{int(dfnas["VOLUME"].mean())}:{int(dfnas["AVERAGE"].mean())}:{int(dfnas["MEDIAN"].mean())}")

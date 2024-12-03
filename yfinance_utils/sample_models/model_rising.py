@@ -56,7 +56,7 @@ def get_stock_rising(x, weeks_rising = 5):
         if r is None:
             continue
         else:
-            rsi_list.append(r["rsi"].iloc[len(r)-1])
+            rsi_list.append(r["rsi"].iloc[-1])
 
     df["rsi"] = rsi_list
     df = df.dropna(subset="rsi")
@@ -70,9 +70,9 @@ def get_stock_rising(x, weeks_rising = 5):
     vol_avg_list = []
     for tick in df["ticker"]:
         d = t.tickers[tick].history()
-        volume_list_1.append(d["Volume"].iloc[len(d)-1])
-        volume_list_2.append(d["Volume"].iloc[len(d)-2])
-        volume_list_2.append(d["Volume"].iloc[len(d)-3])
+        volume_list_1.append(d["Volume"].iloc[-1])
+        volume_list_2.append(d["Volume"].iloc[-2])
+        volume_list_3.append(d["Volume"].iloc[-3])
         vol_avg_list.append(statistics.mean(d["Volume"]))
     df["vol_average"] = vol_avg_list
     df["volume_today"] = volume_list_1

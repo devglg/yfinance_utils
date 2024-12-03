@@ -31,7 +31,7 @@ for tick in ticker_list:
     vol_info = x.info['volume'] or 0
 
     rsi = rsi_utils.get_rsi(x)
-    rsix = round(rsi["rsi"].iloc[len(rsi) - 1], 2)
+    rsix = round(rsi["rsi"].iloc[-1], 2)
     pct = vol_info / avg_vol * 100
 
     if pct > 100.0 and vol_info > TEN_MILLION:

@@ -61,12 +61,12 @@ for tick in ticker_list:
     avg_vol = statistics.mean(list(rsi["Volume"]))
 
 
-    vol2 = rsi["Volume"].iloc[len(rsi) - 2]
-    vol1 = rsi["Volume"].iloc[len(rsi) - 1]
-    last2 = rsi["Close"].iloc[len(rsi) - 2]
-    last1 = rsi["Close"].iloc[len(rsi) - 1]
-    rsi2 = rsi["rsi"].iloc[len(rsi) - 2]
-    rsi1 = rsi["rsi"].iloc[len(rsi) - 1]
+    vol2 = rsi["Volume"].iloc[-2]
+    vol1 = rsi["Volume"].iloc[-1]
+    last2 = rsi["Close"].iloc[-2]
+    last1 = rsi["Close"].iloc[-1]
+    rsi2 = rsi["rsi"].iloc[-2]
+    rsi1 = rsi["rsi"].iloc[-1]
 
 
     # print(f"{tick:6}:last2:{last2:9,.2f} :last1: {last1:9,.2f}: up % :{last1 / last2 * 100:12,.2f}:vol_avg:{avg_vol:13,.2f}: vol2:{vol2 / avg_vol * 100:13,.2f}: vol1:{vol1 / avg_vol * 100:13,.2f}: rsi2:{rsi2:9,.2f}: rsi1:{rsi1:9,.2f}: mean%: {last1/avg*100:9,.2f}: median%: {last1/med*100:9,.2f}: ")
