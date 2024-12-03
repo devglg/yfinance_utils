@@ -5,25 +5,28 @@ Just adding some utilities to the yfinance library to make it easier to do techn
 > Some files still have the old apache 2 license text. they are not, this whole project is GPL3 licensed, not apache 2. Could have used a little more planning.
 
 ## install
-git clone https://github.com/devglg/yfinance_utils.git
+`git clone https://github.com/devglg/yfinance_utils.git`
 
 ### this is a python module so of course
-python -m venv venv
+`python -m venv venv`
 
 ### activate the python venv
-.\venv\Scripts\activate.bat
+`.\venv\Scripts\activate.bat`
 
 ### upgrade pip
-.\venv\Scripts\python.exe -m pip install --upgrade pip
+`.\venv\Scripts\python.exe -m pip install --upgrade pip`
 
 ### install setuptools
-.\venv\Scripts\pip.exe install setuptools
+`.\venv\Scripts\pip.exe install setuptools`
 
-### setup the module
-.\venv\Scripts\pip.exe install .
+### install the module (you don't plan to edit the library)
+`.\venv\Scripts\pip.exe install .`
+
+### install the module (you plan to edit the library)
+`.\venv\Scripts\pip.exe install -e .`
 
 ### install requirements
-.\venv\Scripts\pip.exe install -r requirements.txt
+`.\venv\Scripts\pip.exe install -r requirements.txt`
 
 ## does it work?
 
