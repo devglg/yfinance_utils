@@ -15,12 +15,7 @@ def get_percent_volume(ticker, period='1mo', days_back=0):
 
         returns the percentage of volume / average for the period
     """
-    periods_allowed = ['1d', '5d', '1mo', '3mo', '6mo']
 
-    if period not in periods_allowed:
-        print(f"period is invalid for this method. use {periods_allowed}")
-        return
-    
     data = ticker.history(period = period)
     volume = data["Volume"].iloc[len(data)-days_back]
     average = statistics.mean(data["Volume"])

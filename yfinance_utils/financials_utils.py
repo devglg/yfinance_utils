@@ -6,6 +6,9 @@
 
 #
 
+RATINGS = ['Buy', 'Hold', 'Neutral', 'Outperform', 'Overweight', 'Underweight', 'Equal-Weight', 'Underperform', 'Market Perform', 'Sector Weight', 'Sector Perform', 'Gradually Accumulate']
+
+
 """
 GET FINANCIAL STATEMENTS as dictionary
 """
@@ -24,13 +27,15 @@ def get_cashflow(ticker, period = 0):
 GET OTHER FINANCIAL INFORMATION
 """
 
-def get_up_down_action(ticker):
+def get_ratings(ticker):
   d = ticker.get_upgrades_downgrades()
-  up = d[d.Action == "up"].shape[0]
-  down = d[d.Action == "down"].shape[0]
-  total = len(d)
-  return {"up":up, "down":down, "total":total}
-
+  stats = {}
+  for i in RATINGS:
+    stats[i] = d[d['ToGrade'] == i].shape[0]
+  stats["total"] = len(d)
+  stats['up'] = d[d['Action'] == "up"].shape[0]
+  stats['down'] = d[d['Action'] == "down"].shape[0]
+  return stats
 
 
 def get_historic_price(ticker, price_field = "Close"):
