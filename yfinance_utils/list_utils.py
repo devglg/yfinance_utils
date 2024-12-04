@@ -11,11 +11,15 @@ from yfinance_utils.lists.snp500 import snp500
 from yfinance_utils.lists.aero_def import aero_def
 from yfinance_utils.lists.nasdaq import nasdaq
 from yfinance_utils.lists.nyse import nyse
+from yfinance_utils.lists.rus2000 import rus2000
 from yfinance_utils.lists.remove import remove
 
 def get_all_tickers():
-    all = mag7 + nasdaq100 + snp500 + aero_def + nasdaq + nyse
+    all = mag7 + nasdaq100 + snp500 + aero_def + nasdaq + nyse + rus2000
     return list(set(all) - set(remove))
+
+def get_rus2000():
+    return list(set(rus2000) - set(remove))
 
 def get_aero_def():
     return list(set(aero_def) - set(remove))
