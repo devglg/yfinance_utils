@@ -1,9 +1,6 @@
 import time, os
 from datetime import date
 
-import requests_cache
-requests_cache.install_cache('api_cache')
-
 start_time = time.time()
 import pandas as pd
 import statistics
@@ -33,6 +30,7 @@ for tick in filenames:
     try:
         data = pd.read_csv(f"datasets/{tick}")
         d_rsi = rsi_utils.get_rsi(data, window_length=14)
+        print(tick, d_rsi)
         if d_rsi["Close"].iloc[-1] <  MINIMUM_PRICE:
             continue
 
@@ -58,7 +56,6 @@ for tick in filenames:
         rsi = d_rsi["rsi"].iloc[-1]
         price = d_rsi["Close"].iloc[-1]
     except Exception as e:
-        print(e)
         rem.append(tick)
         continue
     

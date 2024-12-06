@@ -1,15 +1,11 @@
 import time
 from datetime import date
-import requests_cache
-requests_cache.install_cache('api_cache')
-
-start_time = time.time()
-
 import pandas as pd
 pd.options.display.max_rows = 100000
 
-import statistics
+start_time = time.time()
 
+import statistics
 from yfinance import Tickers
 from yfinance_utils import list_utils
 from yfinance_utils import rsi_utils
@@ -17,7 +13,7 @@ from yfinance_utils import financials_utils
 
 COLUMNS = ["TICK", 'RSI', 'PRICE', 'UP', 'NEUTRAL', 'DOWN', 'TOTAL', 'AVERAGE UP']
 
-FILE_NAME = "zzz_upgrades_up"
+FILE_NAME = "upgrades_up"
 
 dfups = pd.DataFrame(columns=COLUMNS)
 
@@ -54,7 +50,7 @@ for tick in ts.tickers:
         dfups = pd.concat([dfups, tmpups], ignore_index=True)
 
 print("CREATING FILE")
-dfups.round(0).to_csv(f'{str(date.today())}_{FILE_NAME}_{str(date.today())}.csv', columns=COLUMNS)
+dfups.round(0).to_csv(f'{str(date.today())}_{FILE_NAME}.csv', columns=COLUMNS)
 print(rem)
 
 print("TIMING")

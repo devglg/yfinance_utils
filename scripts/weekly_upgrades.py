@@ -1,10 +1,9 @@
-import time, os, requests_cache
+import time, os
 from datetime import date
 import pandas as pd
 from yfinance import Ticker, Tickers
 from yfinance_utils import financials_utils
 
-requests_cache.install_cache('api_cache')
 pd.options.display.max_rows = 100000
 
 COLUMNS = ["TICK", 'UP', 'GOOD', 'NEUTRAL', 'BAD', 'DOWN', 'TOTAL', 'AVERAGE UP']
