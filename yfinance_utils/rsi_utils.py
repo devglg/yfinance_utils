@@ -11,20 +11,15 @@ warnings.filterwarnings("ignore")
 
 import pandas as pd
 
-def get_rsi(ticker, window_length=14, period="1mo", interval="1d"):
+def get_rsi(data, window_length=14):
     """
     get rsi from the data
     lookback = number of days to use to calculate the rsi
     returns data frame with price history including rsi
     """
     df = pd.DataFrame()
-    try:
-        data = ticker.history(period=period, interval=interval)
-    except Exception:
-        return None
 
     if window_length > len(data):
-        print(f"{ticker.info['symbol']} does not have enough data. window length {window_length} data items {len(data)}")
         return None
 
     df['diff'] = data["Close"].diff(1)

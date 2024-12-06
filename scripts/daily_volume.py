@@ -30,7 +30,6 @@ for tick in filenames:
     try:
         data = pd.read_csv(f"datasets/{tick}")
         d_rsi = rsi_utils.get_rsi(data, window_length=14)
-        print(tick, d_rsi)
         if d_rsi["Close"].iloc[-1] <  MINIMUM_PRICE:
             continue
 

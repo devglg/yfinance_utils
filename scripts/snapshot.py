@@ -23,6 +23,7 @@ for symbol in t_list:
         if symbol in filenames: continue
         data = yf.download(symbol, start=oneyearago, end=today)
         data.columns = COLUMNS
+        if data.empty: continue
         data.to_csv(f"datasets/{symbol}", mode='w')
     except Exception as e:
         print(e)
