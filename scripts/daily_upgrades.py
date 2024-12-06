@@ -5,7 +5,6 @@ pd.options.display.max_rows = 100000
 
 start_time = time.time()
 
-import statistics
 from yfinance import Tickers
 from yfinance_utils import list_utils
 from yfinance_utils import rsi_utils
@@ -28,7 +27,9 @@ rem = []
 for tick in ts.tickers:
     try:
         t = ts.tickers[tick]
-        df_rsi = rsi_utils.get_rsi(t)
+        data = pd.read_csv(f"datasets/{tick}")
+
+        df_rsi = rsi_utils.get_rsi(data)
         tmp = financials_utils.get_ratings(t)
 
         rsi = df_rsi['rsi'].iloc[-1]
@@ -42,6 +43,7 @@ for tick in ts.tickers:
         avg = up / total * 100
 
     except Exception as e:
+        print(e)
         rem.append(tick)
         continue
     
