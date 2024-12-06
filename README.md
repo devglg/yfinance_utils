@@ -9,6 +9,11 @@ Just adding some utilities to the yfinance library to make it easier to do techn
 > and FINTA to create models instead of having to re-write everything from scratch. However, I think it is beneficial to do it manually until you understand 
 > it before you start using someone else's libraries.
 
+
+> [!NOTE]
+> added the scripts i'm testing this with. Use at your own peril :/ you will need to create the folders `datasets` and `out`. datasets will hold the
+> downloaded data from yfinance and out will hold the output of the scripts
+
 ## install
 `git clone https://github.com/devglg/yfinance_utils.git`
 
