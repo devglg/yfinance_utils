@@ -13,6 +13,7 @@ from yfinance_utils.lists.nasdaq import nasdaq
 from yfinance_utils.lists.nyse import nyse
 from yfinance_utils.lists.rus2000 import rus2000
 from yfinance_utils.lists.remove import remove
+from yfinance_utils.lists.adhoc import adhoc
 
 def get_all_tickers():
     all = mag7 + nasdaq100 + snp500 + aero_def + nasdaq + nyse + rus2000
@@ -36,5 +37,5 @@ def get_nasdaq100():
 def get_nasdaq():
     return list(set(nasdaq) - set(remove))
 
-def get_nyse():
-    return list(set(nyse) - set(remove))
+def get_adhoc():
+    return list(set(adhoc) - set(remove))
