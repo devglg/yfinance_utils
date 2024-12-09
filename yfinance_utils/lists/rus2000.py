@@ -1959,10 +1959,8 @@ rus2000 = [
     "MGX",
     "WLLBW",
     "ADRO",
-    "2513469D",
     "GTXI",
     "CAD",
     "PDLI",
-    "P5N994",
     "RTYZ4"
 ]
