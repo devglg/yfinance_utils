@@ -1,9 +1,6 @@
-import os, pandas
+import os
 
 for filename in os.listdir('datasets'):
     print(filename)
-    df = pandas.read_csv('datasets/{}'.format(filename))
-    if df.empty:
-        continue
-    df = df.iloc[3:]
-    df.to_csv(f'datasets/{filename}')
+    if os.path.isfile(filename) or os.path.islink(filename):
+        os.unlink(filename)

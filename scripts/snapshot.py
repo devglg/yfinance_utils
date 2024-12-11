@@ -1,4 +1,5 @@
 import os
+import time
 from datetime import date, timedelta
 import yfinance as yf
 from yfinance_utils import list_utils
@@ -17,16 +18,17 @@ print(f"getting {len(t_list)} tickers")
 
 filenames = os.listdir('datasets')
 failed = []
+t_list = list(set(t_list + filenames))
 
 for symbol in t_list:
     try:
         if symbol in filenames: continue
-        data = yf.download(symbol, start=oneyearago, end=today)
+        # data = yf.download(symbol, start=oneyearago, end=today)
+        data = yf.download(symbol)
         data.columns = COLUMNS
         if data.empty: continue
         data.to_csv(f"datasets/{symbol}", mode='w')
     except Exception as e:
-        print(e)
         failed.append(symbol)
 
 print("Failed:------")

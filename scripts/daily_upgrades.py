@@ -43,7 +43,6 @@ for tick in ts.tickers:
         avg = up / total * 100
 
     except Exception as e:
-        print(e)
         rem.append(tick)
         continue
     
