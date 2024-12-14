@@ -15,7 +15,7 @@ def get_rsi(data, window_length=14):
     """
     get rsi from the data
     lookback = number of days to use to calculate the rsi
-    returns data frame with price history including rsi
+    returns data frame with price OHLC including rsi
     """
     df = pd.DataFrame()
 
