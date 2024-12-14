@@ -1,19 +1,18 @@
 import warnings
 warnings.filterwarnings("ignore")
 
-import time, os, yfinance, config
+import time, os, yfinance
 from datetime import date
 import pandas as pd
 from finta import TA
 
 FILENAME=f'{str(date.today())}_daily_TTM_squeeze'
 COLUMNS=['TICK', 'PRICE', 'VOLUME', 'VOLUME pct of AVG', 'BB -3', 'KC -3', 'BB -1', 'KC -1']
+MIN_PRICE = 10.00
 MIN_VOL = 1000000
+
 df_up = pd.DataFrame(columns=COLUMNS)
 df_down = pd.DataFrame(columns=COLUMNS)
-
-c = config.get_constants()
-
 
 filenames = os.listdir('datasets')
 print(f"scrubbing {len(filenames)} companies.")
@@ -31,7 +30,7 @@ for tick in filenames:
         if bb['BB_UPPER'].iloc[-3] < kc['KC_UPPER'].iloc[-3] and \
             bb['BB_UPPER'].iloc[-1]>kc['KC_UPPER'].iloc[-1] and \
             data['Close'].iloc[-1] > bb['BB_UPPER'].iloc[-1] and \
-            data['Close'].iloc[-1] > c.MINIMUM_PRICE:
+            data['Close'].iloc[-1] > MIN_PRICE:
             print(tick,"<<<---------------------- HIGH ")     
 
             tmp = pd.DataFrame([[tick, data['Close'].iloc[-1], data['Volume'].iloc[-1], vol_avg, bb['BB_UPPER'].iloc[-3], kc['KC_UPPER'].iloc[-3], bb['BB_UPPER'].iloc[-1], kc['KC_UPPER'].iloc[-1] ]], columns=COLUMNS)  
@@ -40,7 +39,7 @@ for tick in filenames:
         if bb['BB_LOWER'].iloc[-3] > kc['KC_LOWER'].iloc[-3] and \
             bb['BB_LOWER'].iloc[-1] < kc['KC_LOWER'].iloc[-1] and \
             data['Close'].iloc[-1] < bb['BB_LOWER'].iloc[-1] and \
-            data['Close'].iloc[-1] > c.MINIMUM_PRICE:
+            data['Close'].iloc[-1] > MIN_PRICE:
             print(tick,"<<<---------------------- LOW ")     
 
             tmp = pd.DataFrame([[tick, data['Close'].iloc[-1], data['Close'].iloc[-1], vol_avg, bb['BB_LOWER'].iloc[-3], kc['KC_LOWER'].iloc[-3], bb['BB_LOWER'].iloc[-1], kc['KC_LOWER'].iloc[-1] ]], columns=COLUMNS)  
