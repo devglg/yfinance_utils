@@ -1,5 +1,9 @@
 # yfinance_utils
 Just adding some utilities to the yfinance library to make it easier to do technical analysis on any stock. maybe run models and do ad-hoc scenarios.
+This is mostly in response to a request from my friend Chris that I had a discussion with about fundamental and technical analysis being part of 
+Finance not Accounting. This is not Accounting, Chris, we're not closing books, or creating financial statements, this is analysis of data, so definitely 
+not Accounting. There is no class in Accounting about this type of analysis. I don't know if Finance has courses about this, but I did not get a Finance
+degree so I could not say.
 
 > [!IMPORTANT]
 > Some files still have the old apache 2 license text. they are not, this whole project is GPL3 licensed, not apache 2. Could have used a little more planning.
