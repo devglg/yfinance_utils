@@ -12,7 +12,7 @@ from yfinance_utils import financials_utils
 
 COLUMNS = ["TICK", 'RSI', 'PRICE', 'UP', 'NEUTRAL', 'DOWN', 'TOTAL', 'AVERAGE UP']
 
-FILE_NAME = "upgrades_up"
+FILE_NAME = f'out/{str(date.today())}_upgrades_up.csv'
 MIN_PRICE = 10.00
 MIN_VOL = 1000000
 
@@ -32,7 +32,7 @@ for tick in ts.tickers:
         data = pd.read_csv(f"datasets/{tick}")
         if data['Close'].iloc[-1] < MIN_PRICE or data['Volume'].iloc[-1] < MIN_VOL:
             continue
-        
+
         df_rsi = rsi_utils.get_rsi(data)
         tmp = financials_utils.get_ratings(t)
 
@@ -55,7 +55,7 @@ for tick in ts.tickers:
         dfups = pd.concat([dfups, tmpups], ignore_index=True)
 
 print("CREATING FILE")
-dfups.round(0).to_csv(f'out/{str(date.today())}_{FILE_NAME}.csv', columns=COLUMNS)
+dfups.round(0).to_csv(FILE_NAME, columns=COLUMNS)
 print(rem)
 
 print("TIMING")
