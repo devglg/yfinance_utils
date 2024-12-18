@@ -22,9 +22,10 @@ t_list = list(set(t_list + filenames))
 
 for symbol in t_list:
     try:
+        time.sleep(.5)
         if symbol in filenames: continue
         data = yf.download(symbol, start=oneyearago, end=today)
-        # data = yf.download(symbol)
+        # data = yf.download(symbol) # downloads all history
         data.columns = COLUMNS
         if data.empty: continue
         data.to_csv(f"datasets/{symbol}", mode='w')

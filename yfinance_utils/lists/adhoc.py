@@ -10,5 +10,14 @@ adhoc = [
     "SML",
     "TSM",
     "ONTO",
-    
+    "QBTS",
+    "NNE",
+    "LUNR",
+    "QUBT",
+    "ACHR",
+    "ALAB",
+    "SYM",
+    "RR",
+    "IONQ",
+    "SMR"
 ]
