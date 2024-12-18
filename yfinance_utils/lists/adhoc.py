@@ -19,5 +19,6 @@ adhoc = [
     "SYM",
     "RR",
     "IONQ",
-    "SMR"
+    "SMR",
+    "SERV"
 ]
