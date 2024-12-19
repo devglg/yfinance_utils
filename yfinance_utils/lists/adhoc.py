@@ -20,5 +20,11 @@ adhoc = [
     "RR",
     "IONQ",
     "SMR",
-    "SERV"
+    "SERV",
+    "WOR",
+    "WULF",
+    "IONQ",
+    "JBL",
+    "RIOT",
+    "FIX"
 ]
