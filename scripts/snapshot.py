@@ -11,7 +11,8 @@ print(f"today: {today}")
 oneyearago = str(date.today() - timedelta(days=365))
 print(f"one year ago: {oneyearago}")
 
-t_list = list_utils.get_nasdaq() + list_utils.get_rus2000() + list_utils.get_snp500() + list_utils.get_adhoc() + list_utils.get_aero_def()
+t_list = list_utils.get_nasdaq100() + list_utils.get_adhoc() 
+# t_list = list_utils.get_nasdaq() + list_utils.get_rus2000() + list_utils.get_snp500() + list_utils.get_adhoc() + list_utils.get_aero_def()
 t_list = list(set(t_list))
 
 print(f"getting {len(t_list)} tickers")
