@@ -4,8 +4,8 @@ from yfinance_utils import mfi_utils, file_utils, constants, timing_utils
 
 COLUMNS = ["TICK", 'PRICE', 'MFI', 'MFI_AVERAGE', 'VOLUME']
 
-FILE_NAME_MIN = "daily_lowest_yr_mfi"
-FILE_NAME_MAX = "daily_highest_yr_mfi"
+FILE_NAME_MIN = "daily_mfi_year_lowest"
+FILE_NAME_MAX = "daily_mfi_year_highest"
 
 dfmfimin = pd.DataFrame(columns=COLUMNS)
 dfmfimax = pd.DataFrame(columns=COLUMNS)

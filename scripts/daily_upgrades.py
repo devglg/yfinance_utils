@@ -4,7 +4,7 @@ from yfinance import Tickers
 from yfinance_utils import rsi_utils, financials_utils, file_utils, constants, timing_utils
 
 COLUMNS = ["TICK", 'RSI', 'PRICE', 'UP', 'NEUTRAL', 'DOWN', 'TOTAL', 'AVERAGE UP']
-FILE_NAME = 'upgrades_up'
+FILE_NAME = 'daily_upgrades_up'
 
 dfups = pd.DataFrame(columns=COLUMNS)
 
