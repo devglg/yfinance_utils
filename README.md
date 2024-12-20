@@ -3,8 +3,7 @@ Just adding some utilities to the yfinance library to make it easier to do techn
 This is mostly in response to a request from my friend Chris that I had a discussion with about fundamental and technical analysis being part of 
 Finance not Accounting. This is not Accounting, Chris, we're not closing books, or creating financial statements, this is analysis of data, so definitely 
 not Accounting. There is no class in Accounting about this type of analysis. *And if it is, then, there should be a class in the accounting program that teaches this.*
-I don't know if Finance has courses about this, but I did not get a Finance
-degree so I could not say.
+I mean, anyone can learn anything if they are taught it.
 
 > [!IMPORTANT]
 > Some files still have the old apache 2 license text. they are not, this whole project is GPL3 licensed, not apache 2. Could have used a little more planning.
