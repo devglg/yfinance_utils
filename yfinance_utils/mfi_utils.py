@@ -5,6 +5,7 @@
 # This code was mostly written by zack west and I added the volume part of mfi to the rsi calc.
 # https://www.alpharithms.com/relative-strength-index-rsi-in-python-470209/
 #
+# Just use TA instead
 
 import warnings
 warnings.filterwarnings("ignore")
