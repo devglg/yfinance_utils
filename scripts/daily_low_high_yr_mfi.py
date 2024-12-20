@@ -1,6 +1,6 @@
 import math, os
 import pandas as pd
-from yfinance_utils import mfi_utils, file_utils, constants, timing_utils
+from yfinance_utils import mfi_utils, file_utils, timing_utils
 
 COLUMNS = ["TICK", 'PRICE', 'MFI', 'MFI_AVERAGE', 'VOLUME']
 
@@ -17,8 +17,6 @@ start_time = timing_utils.start(filenames)
 for tick in filenames:
     try:
         data = file_utils.read_historic_data(tick)
-        if data['Close'].iloc[-1] < constants.MINIMUM_PRICE or data['Volume'].iloc[-1] < constants.MINIMUM_VOLUME:
-            continue
         df_mfi = mfi_utils.get_mfi(data)
 
         mfi = df_mfi['mfi'].iloc[-1]

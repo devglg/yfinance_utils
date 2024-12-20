@@ -1,37 +1,36 @@
 import os
 import pandas as pd
-from yfinance_utils import rsi_utils, file_utils, constants, timing_utils
+from yfinance_utils import file_utils, constants, timing_utils
 
-COLUMNS = ["TICK", 'CLOSE', 'PERCENTAGE JUMP', 'VOLUME', 'PERCENT_VOLUME -2', 'PERCENT_VOLUME-1', 'RSI-2', 'RSI-1']
+COLUMNS = ["TICK", 'CLOSE', '% PRICE JUMP', 'VOLUME', '% VOLUME -1', '% VOLUME -2']
 
-FILENAME = 'daily_price_jump'
+FILENAME_UP = 'daily_price_jump_up'
+FILENAME_DOWN = 'daily_price_jump_down'
 
-dfjump = pd.DataFrame(columns=COLUMNS)
+dfjumpup = pd.DataFrame(columns=COLUMNS)
+dfjumpdown = pd.DataFrame(columns=COLUMNS)
 filenames = os.listdir('datasets')
 
 start_time = timing_utils.start(filenames)
 
-jumps = []
 for tick in filenames:
     try:
         data = file_utils.read_historic_data(tick)
-        if data["Close"].iloc[-1] < constants.MINIMUM_PRICE: continue
-        if data["Volume"].iloc[-1] < constants.MINIMUM_VOLUME: continue
         pctjump = (data["Close"].iloc[-1] - data["Close"].iloc[-2]) / data["Close"].iloc[-2] * 100
         
-        if pctjump < constants.PERCENTAGE_MOVE: continue
+        if pctjump < constants.PERCENTAGE_MOVE and pctjump > -(constants.PERCENTAGE_MOVE): continue
         
-        rsi = rsi_utils.get_rsi(data)
-        rsijump = rsi['rsi'].iloc[-2]
-        rsijump2 = rsi['rsi'].iloc[-3]
-        pctvol = (data["Volume"].iloc[-2] - data["Volume"].iloc[-3]) / data["Volume"].iloc[-3] * 100
-        pctvol2 = (data["Volume"].iloc[-3] - data["Volume"].iloc[-4]) / data["Volume"].iloc[-4] * 100
-        jumps.append(tick)
+        pctvol = (data["Volume"].iloc[-1] - data["Volume"].iloc[-2]) / data["Volume"].iloc[-2] * 100
+        pctvol2 = (data["Volume"].iloc[-2] - data["Volume"].iloc[-3]) / data["Volume"].iloc[-3] * 100
     except Exception as e:
         continue
     
-    tmpjump =  pd.DataFrame([[tick, data['Close'].iloc[-1], pctjump, data['Volume'].iloc[-1], pctvol2, pctvol, rsijump2 ,rsijump]], columns=COLUMNS)
-    dfjump = pd.concat([dfjump, tmpjump], ignore_index=True)
+    tmpjump =  pd.DataFrame([[tick, data['Close'].iloc[-1], pctjump, data['Volume'].iloc[-1], pctvol, pctvol2]], columns=COLUMNS)
+    if pctjump > 0:
+        dfjumpup = pd.concat([dfjumpup, tmpjump], ignore_index=True)
+    else:
+        dfjumpdown = pd.concat([dfjumpdown, tmpjump], ignore_index=True)
 
-file_utils.save_output_file(dfjump,FILENAME)
+file_utils.save_output_file(dfjumpup,FILENAME_UP)
+file_utils.save_output_file(dfjumpdown,FILENAME_DOWN)
 timing_utils.end(start_time)

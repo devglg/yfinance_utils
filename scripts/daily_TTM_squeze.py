@@ -19,9 +19,7 @@ start_time = timing_utils.start(filenames)
 
 for tick in filenames:
     try:
-        data = file_utils.read_historic_data(tick)
-        if data['Volume'].iloc[-1] < constants.MINIMUM_VOLUME: continue
-        
+        data = file_utils.read_historic_data(tick)        
         vol_avg = data['Volume'].iloc[-1] / data['Volume'].mean() * 100
         bb = TA.BBANDS(data)
         kc = TA.KC(data, kc_mult=1.5)

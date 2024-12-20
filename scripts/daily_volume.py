@@ -14,12 +14,6 @@ start_time = timing_utils.start(filenames)
 for tick in filenames:
     try:
         data = file_utils.read_historic_data(tick)
-        if data["Close"].iloc[-1] <  constants.MINIMUM_PRICE:
-            continue
-
-        if data["Volume"].iloc[-1] < constants.MINIMUM_VOLUME:
-            continue
-
         d_rsi = rsi_utils.get_rsi(data, window_length=14)
         if d_rsi["rsi"].iloc[-1] < constants.MINIMUM_RSI:
             continue
