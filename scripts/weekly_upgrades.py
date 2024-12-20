@@ -1,9 +1,9 @@
-import os
+import os, datetime
 import pandas as pd
 from yfinance import Tickers
 from yfinance_utils import financials_utils, file_utils, timing_utils
 
-COLUMNS = ["TICK", 'UP', 'GOOD', 'NEUTRAL', 'BAD', 'DOWN', 'TOTAL', 'AVERAGE UP']
+COLUMNS = ["DATE", "TICK", 'UP', 'GOOD', 'NEUTRAL', 'BAD', 'DOWN', 'TOTAL', 'AVERAGE UP']
 FILENAME='weekly_upgrades'
 
 dfups = pd.DataFrame(columns=COLUMNS)
@@ -29,7 +29,7 @@ for tick in filenames:
         continue
     
     if up > down and good > bad:
-        tmpups =  pd.DataFrame([[tick, up, good, neutral, bad, down, total, avg_good]], columns=COLUMNS)
+        tmpups =  pd.DataFrame([[datetime.date.today(), tick, up, good, neutral, bad, down, total, avg_good]], columns=COLUMNS)
         dfups = pd.concat([dfups, tmpups], ignore_index=True)
 
 file_utils.save_output_file(dfups,FILENAME)

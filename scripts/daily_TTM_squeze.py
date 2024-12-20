@@ -1,7 +1,7 @@
 import warnings
 warnings.filterwarnings("ignore")
 
-import os
+import os, datetime
 import pandas as pd
 from finta import TA
 from yfinance_utils import file_utils, constants, timing_utils
@@ -9,7 +9,7 @@ from yfinance_utils import file_utils, constants, timing_utils
 FILENAME_UP = 'daily_TTM_squeeze_up'
 FILENAME_DOWN = 'daily_TTM_squeeze_down'
 
-COLUMNS=['TICK', 'PRICE', 'VOLUME', 'VOLUME pct of AVG', 'BB -3', 'KC -3', 'BB -1', 'KC -1']
+COLUMNS=['DATE', 'TICK', 'PRICE', 'VOLUME', 'VOLUME pct of AVG', 'BB -3', 'KC -3', 'BB -1', 'KC -1']
 
 df_up = pd.DataFrame(columns=COLUMNS)
 df_down = pd.DataFrame(columns=COLUMNS)
@@ -30,7 +30,7 @@ for tick in filenames:
             data['Close'].iloc[-1] > bb['BB_UPPER'].iloc[-1]:
             print(f"{tick:6}<<<----- HIGH ")     
 
-            tmp = pd.DataFrame([[tick, data['Close'].iloc[-1], data['Volume'].iloc[-1], vol_avg, bb['BB_UPPER'].iloc[-3], kc['KC_UPPER'].iloc[-3], bb['BB_UPPER'].iloc[-1], kc['KC_UPPER'].iloc[-1] ]], columns=COLUMNS)  
+            tmp = pd.DataFrame([[data['Date'].iloc[-1], tick, data['Close'].iloc[-1], data['Volume'].iloc[-1], vol_avg, bb['BB_UPPER'].iloc[-3], kc['KC_UPPER'].iloc[-3], bb['BB_UPPER'].iloc[-1], kc['KC_UPPER'].iloc[-1] ]], columns=COLUMNS)  
             df_up = pd.concat([df_up,tmp], ignore_index=True)
 
         if bb['BB_LOWER'].iloc[-3] > kc['KC_LOWER'].iloc[-3] and \
@@ -38,7 +38,7 @@ for tick in filenames:
             data['Close'].iloc[-1] < bb['BB_LOWER'].iloc[-1]:
             print(f"{tick:6}<<<----- LOW ")     
 
-            tmp = pd.DataFrame([[tick, data['Close'].iloc[-1], data['Volume'].iloc[-1], vol_avg, bb['BB_LOWER'].iloc[-3], kc['KC_LOWER'].iloc[-3], bb['BB_LOWER'].iloc[-1], kc['KC_LOWER'].iloc[-1] ]], columns=COLUMNS)  
+            tmp = pd.DataFrame([[datetime.date.today(), tick, data['Close'].iloc[-1], data['Volume'].iloc[-1], vol_avg, bb['BB_LOWER'].iloc[-3], kc['KC_LOWER'].iloc[-3], bb['BB_LOWER'].iloc[-1], kc['KC_LOWER'].iloc[-1] ]], columns=COLUMNS)  
             df_down = pd.concat([df_down,tmp], ignore_index=True)
         
     except Exception as e:

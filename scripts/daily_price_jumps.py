@@ -1,8 +1,8 @@
-import os
+import os, datetime
 import pandas as pd
 from yfinance_utils import file_utils, constants, timing_utils
 
-COLUMNS = ["TICK", 'CLOSE', '% PRICE JUMP', 'VOLUME', '% VOLUME -1', '% VOLUME -2']
+COLUMNS = ["DATE", "TICK", 'CLOSE', '% PRICE JUMP', 'VOLUME', '% VOLUME -1', '% VOLUME -2']
 
 FILENAME_UP = 'daily_price_jump_up'
 FILENAME_DOWN = 'daily_price_jump_down'
@@ -25,7 +25,7 @@ for tick in filenames:
     except Exception as e:
         continue
     
-    tmpjump =  pd.DataFrame([[tick, data['Close'].iloc[-1], pctjump, data['Volume'].iloc[-1], pctvol, pctvol2]], columns=COLUMNS)
+    tmpjump =  pd.DataFrame([[datetime.date.today(), tick, data['Close'].iloc[-1], pctjump, data['Volume'].iloc[-1], pctvol, pctvol2]], columns=COLUMNS)
     if pctjump > 0:
         dfjumpup = pd.concat([dfjumpup, tmpjump], ignore_index=True)
     else:

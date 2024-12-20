@@ -1,9 +1,9 @@
-import os
+import os, datetime
 import pandas as pd
 from yfinance import Tickers
 from yfinance_utils import financials_utils, file_utils, timing_utils, constants
 
-COLUMNS = ["TICK", 'GOOD', 'BAD', 'NEUTRAL', 'TOTAL', 'AVG', 'UP/-DOWN']
+COLUMNS = ["DATE", "TICK", 'GOOD', 'BAD', 'NEUTRAL', 'TOTAL', 'AVG', 'UP/-DOWN']
 FILE_NAME_UP = 'daily_analysts_up'
 FILE_NAME_DOWN = 'daily_analysts_down'
 
@@ -35,11 +35,11 @@ for tick in ts.tickers:
     
     if avg > constants.PERCENTAGE_GOOD_RATING:
         if up > down:
-            tmp =  pd.DataFrame([[tick, good, bad, neutral, total, avg, up - down]], columns=COLUMNS)
+            tmp =  pd.DataFrame([[datetime.date.today(), tick, good, bad, neutral, total, avg, up - down]], columns=COLUMNS)
             dfups = pd.concat([dfups, tmp], ignore_index=True)
 
         if up < down:
-            tmp =  pd.DataFrame([[tick, good, bad, neutral, total, avg, up - down]], columns=COLUMNS)
+            tmp =  pd.DataFrame([[datetime.date.today(), tick, good, bad, neutral, total, avg, up - down]], columns=COLUMNS)
             dfdowns = pd.concat([dfdowns, tmp], ignore_index=True)
 
 file_utils.save_output_file(dfups,FILE_NAME_UP)

@@ -1,9 +1,9 @@
-import os
+import os, datetime
 import pandas as pd
 import statistics
 from yfinance_utils import rsi_utils, file_utils, constants, timing_utils
 
-COLUMNS = ["TICK", 'RSI', 'AVERAGE', 'PRICE -1', 'VOLUME -1', 'VOL % -1', 'PRICE', 'VOLUME', 'VOL %']
+COLUMNS = ["DATE", "TICK", 'RSI', 'AVERAGE', 'PRICE -1', 'VOLUME -1', 'VOL % -1', 'PRICE', 'VOLUME', 'VOL %']
 FILENAME = 'daily_volume_up'
 
 dfvol = pd.DataFrame(columns=COLUMNS)
@@ -33,7 +33,7 @@ for tick in filenames:
         continue
     
     if volume_0_pct > 150 and volume_1_pct < 110:
-        tmpvol =  pd.DataFrame([[tick, rsi, avg, price_1, volume_1, volume_1_pct, price_0, volume_0, volume_0_pct]], columns=COLUMNS)
+        tmpvol =  pd.DataFrame([[datetime.date.today(), tick, rsi, avg, price_1, volume_1, volume_1_pct, price_0, volume_0, volume_0_pct]], columns=COLUMNS)
         dfvol = pd.concat([dfvol, tmpvol], ignore_index=True)
 
 file_utils.save_output_file(dfvol,FILENAME)

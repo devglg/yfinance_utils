@@ -1,8 +1,8 @@
-import math, os
+import math, os, datetime
 import pandas as pd
 from yfinance_utils import rsi_utils, file_utils, timing_utils
 
-COLUMNS = ["TICK", 'PRICE', 'RSI', 'RSI_AVERAGE', 'VOLUME']
+COLUMNS = ["DATE", "TICK", 'PRICE', 'RSI', 'RSI_AVERAGE', 'VOLUME']
 
 FILE_NAME_MIN = "daily_rsi_year_lowest"
 FILE_NAME_MAX = "daily_rsi_year_highest"
@@ -28,7 +28,7 @@ for tick in filenames:
     except Exception as e:
         continue
     
-    tmprsi =  pd.DataFrame([[tick, price, rsi, rsiavg, vol]], columns=COLUMNS)
+    tmprsi =  pd.DataFrame([[datetime.date.today(), tick, price, rsi, rsiavg, vol]], columns=COLUMNS)
     if math.isclose(rsi,rsimin, abs_tol=2):
         dfrsimin = pd.concat([dfrsimin, tmprsi], ignore_index=True)
     elif math.isclose(rsi,rsimax, abs_tol=2):

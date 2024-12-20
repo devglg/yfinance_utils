@@ -1,8 +1,8 @@
-import math, os
+import math, os, datetime
 import pandas as pd
 from yfinance_utils import mfi_utils, file_utils, timing_utils
 
-COLUMNS = ["TICK", 'PRICE', 'MFI', 'MFI_AVERAGE', 'VOLUME']
+COLUMNS = ["DATE", "TICK", 'PRICE', 'MFI', 'MFI_AVERAGE', 'VOLUME']
 
 FILE_NAME_MIN = "daily_mfi_year_lowest"
 FILE_NAME_MAX = "daily_mfi_year_highest"
@@ -29,7 +29,7 @@ for tick in filenames:
     except Exception as e:
         continue
     
-    tmpmfi =  pd.DataFrame([[tick, price, mfi, mfiavg, vol]], columns=COLUMNS)
+    tmpmfi =  pd.DataFrame([[datetime.date.today(), tick, price, mfi, mfiavg, vol]], columns=COLUMNS)
 
     if math.isclose(mfi,mfimin, abs_tol=2):
         dfmfimin = pd.concat([dfmfimin, tmpmfi], ignore_index=True)
