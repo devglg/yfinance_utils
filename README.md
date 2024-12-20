@@ -5,6 +5,13 @@ Finance not Accounting. This is not Accounting, Chris, we're not closing books, 
 not Accounting. There is no class in Accounting about this type of analysis. *And if it is, then, there should be a class in the accounting program that teaches this.*
 I mean, anyone can learn anything if they are taught it.
 
+- **Investors be like: "Fundamental Analysis is the only way"**
+
+- **Traders be like: "Technical Analysis is the only way"**
+
+- **Real life be like: "Trump won with Elon financing..."**
+![tesla](https://github.com/devglg/yfinance_utils/blob/main/assets/images/tsla.png)
+
 > [!IMPORTANT]
 > Some files still have the old apache 2 license text. they are not, this whole project is GPL3 licensed, not apache 2. Could have used a little more planning.
 
