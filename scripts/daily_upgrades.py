@@ -4,8 +4,8 @@ from yfinance import Tickers
 from yfinance_utils import financials_utils, file_utils, timing_utils, constants
 
 COLUMNS = ["TICK", 'GOOD', 'BAD', 'NEUTRAL', 'TOTAL', 'AVG', 'UP/-DOWN']
-FILE_NAME_UP = 'daily_upgrades_up'
-FILE_NAME_DOWN = 'daily_upgrades_down'
+FILE_NAME_UP = 'daily_analysts_up'
+FILE_NAME_DOWN = 'daily_analysts_down'
 
 dfups = pd.DataFrame(columns=COLUMNS)
 dfdowns = pd.DataFrame(columns=COLUMNS)

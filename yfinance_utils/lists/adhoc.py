@@ -26,5 +26,13 @@ adhoc = [
     "IONQ",
     "JBL",
     "RIOT",
-    "FIX"
+    "OKLO",
+    "VKTX",
+    "MNDY",
+    "IBP",
+    "FIX",
+    "SOUN",
+    "ET",
+    "LAUR",
+    "KGC"
 ]
