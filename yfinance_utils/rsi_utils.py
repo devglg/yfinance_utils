@@ -5,6 +5,7 @@
 # This code was written by zack west and can be found here:
 # https://www.alpharithms.com/relative-strength-index-rsi-in-python-470209/
 #
+# Just use TA instead
 
 import warnings
 warnings.filterwarnings("ignore")
