@@ -46,7 +46,7 @@ degree so I could not say.
 ## does it work?
 
 If you've worked with R you may find it very similar. It may even be the using the same libraries but I just touched R for a couple of weeks
-and I didn't find much about it other than plotting and data extraction.
+and I didn't do much with it other than plotting and data extraction.
 
 ### open the command line
 ```
