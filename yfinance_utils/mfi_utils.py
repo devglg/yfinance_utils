@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2024 Zack West
-# This code was written by zack west and can be found here:
+# Copyright 2024 Zack West and me
+# This code was mostly written by zack west and I added the volume part of mfi to the rsi calc.
 # https://www.alpharithms.com/relative-strength-index-rsi-in-python-470209/
 #
 
