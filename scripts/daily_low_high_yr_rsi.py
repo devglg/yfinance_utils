@@ -1,33 +1,21 @@
-import time,math,os
-from datetime import date
+import math, os
 import pandas as pd
-pd.options.display.max_rows = 100000
-
-start_time = time.time()
-
-from yfinance import Tickers
-from yfinance_utils import list_utils
-from yfinance_utils import rsi_utils
+from yfinance_utils import rsi_utils, file_utils, timing_utils
 
 COLUMNS = ["TICK", 'PRICE', 'RSI', 'RSI_AVERAGE', 'VOLUME']
 
-FILE_NAME_MIN = f"out/{str(date.today())}_daily_lowest_yr_rsi.csv"
-FILE_NAME_MAX = f"out/{str(date.today())}_daily_highest_yr_rsi.csv"
+FILE_NAME_MIN = "daily_lowest_yr_rsi"
+FILE_NAME_MAX = "daily_highest_yr_rsi"
 
 dfrsimin = pd.DataFrame(columns=COLUMNS)
 dfrsimax = pd.DataFrame(columns=COLUMNS)
 
 filenames = os.listdir('datasets')
-
-
-print(f"scrubbing {len(filenames)} companies.")
-print("-------------------------------------------------------------------------------------------------")
-rem = []
+start_time = timing_utils.start(filenames)
 
 for tick in filenames:
     try:
-        data = pd.read_csv(f"datasets/{tick}")
-
+        data = file_utils.read_historic_data(tick)
         df_rsi = rsi_utils.get_rsi(data)
 
         rsi = df_rsi['rsi'].iloc[-1]
@@ -38,7 +26,6 @@ for tick in filenames:
         vol = df_rsi['Volume'].iloc[-1]
 
     except Exception as e:
-        rem.append(tick)
         continue
     
     tmprsi =  pd.DataFrame([[tick, price, rsi, rsiavg, vol]], columns=COLUMNS)
@@ -49,11 +36,6 @@ for tick in filenames:
     else:
         continue
         
-print("CREATING FILE")
-dfrsimin.round(2).to_csv(FILE_NAME_MIN, columns=COLUMNS)
-dfrsimax.round(2).to_csv(FILE_NAME_MAX, columns=COLUMNS)
-print(rem)
-
-print("TIMING")
-end_time = time.time()
-print(f"time: {(end_time - start_time)/60} minutes")
+file_utils.save_output_file(dfrsimin,FILE_NAME_MIN)
+file_utils.save_output_file(dfrsimax,FILE_NAME_MAX)
+timing_utils.end(start_time)

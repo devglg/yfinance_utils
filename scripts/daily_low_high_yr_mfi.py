@@ -1,33 +1,23 @@
-import time,math,os
-from datetime import date
+import math, os
 import pandas as pd
-pd.options.display.max_rows = 100000
+from yfinance_utils import mfi_utils, file_utils, constants, timing_utils
 
-start_time = time.time()
-
-from yfinance_utils import mfi_utils
-
-MIN_PRICE = 10.00
-MIN_VOLUME = 1000000
 COLUMNS = ["TICK", 'PRICE', 'MFI', 'MFI_AVERAGE', 'VOLUME']
 
-FILE_NAME_MIN = f"out/{str(date.today())}_daily_lowest_yr_mfi.csv"
-FILE_NAME_MAX = f"out/{str(date.today())}_daily_highest_yr_mfi.csv"
+FILE_NAME_MIN = "daily_lowest_yr_mfi"
+FILE_NAME_MAX = "daily_highest_yr_mfi"
 
 dfmfimin = pd.DataFrame(columns=COLUMNS)
 dfmfimax = pd.DataFrame(columns=COLUMNS)
 
 filenames = os.listdir('datasets')
 
-
-print(f"scrubbing {len(filenames)} companies.")
-print("-------------------------------------------------------------------------------------------------")
-rem = []
+start_time = timing_utils.start(filenames)
 
 for tick in filenames:
     try:
-        data = pd.read_csv(f"datasets/{tick}")
-        if data['Close'].iloc[-1] < MIN_PRICE or data['Volume'].iloc[-1] < MIN_VOLUME:
+        data = file_utils.read_historic_data(tick)
+        if data['Close'].iloc[-1] < constants.MINIMUM_PRICE or data['Volume'].iloc[-1] < constants.MINIMUM_VOLUME:
             continue
         df_mfi = mfi_utils.get_mfi(data)
 
@@ -39,7 +29,6 @@ for tick in filenames:
         vol = df_mfi['Volume'].iloc[-1]
 
     except Exception as e:
-        rem.append(tick)
         continue
     
     tmpmfi =  pd.DataFrame([[tick, price, mfi, mfiavg, vol]], columns=COLUMNS)
@@ -53,11 +42,6 @@ for tick in filenames:
     else:
         continue
         
-print("CREATING FILE")
-dfmfimin.round(2).to_csv(FILE_NAME_MIN, columns=COLUMNS)
-dfmfimax.round(2).to_csv(FILE_NAME_MAX, columns=COLUMNS)
-print(rem)
-
-print("TIMING")
-end_time = time.time()
-print(f"time: {(end_time - start_time)/60} minutes")
+file_utils.save_output_file(dfmfimin, FILE_NAME_MIN)
+file_utils.save_output_file(dfmfimax, FILE_NAME_MAX)
+timing_utils.end(start_time)

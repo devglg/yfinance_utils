@@ -1,39 +1,27 @@
-import time, os
-from datetime import date
-
-start_time = time.time()
+import os
 import pandas as pd
 import statistics
-
-from yfinance_utils import rsi_utils
+from yfinance_utils import rsi_utils, file_utils, constants, timing_utils
 
 COLUMNS = ["TICK", 'RSI', 'AVERAGE', 'PRICE -1', 'VOLUME -1', 'VOL % -1', 'PRICE', 'VOLUME', 'VOL %']
-
-MINIMUM_RSI = 50.0
-MINIMUM_PRICE = 10.0
-MINIMUM_VOLUME = 1000000
-
-FILENAME=f'out/{str(date.today())}_daily_volume_up.csv'
+FILENAME = 'daily_volume_up'
 
 dfvol = pd.DataFrame(columns=COLUMNS)
 
 filenames = os.listdir('datasets')
-
-print(f"scrubbing {len(filenames)} companies.")
-print("-------------------------------------------------------------------------------------------------")
-rem = []
+start_time = timing_utils.start(filenames)
 
 for tick in filenames:
     try:
-        data = pd.read_csv(f"datasets/{tick}")
-        if data["Close"].iloc[-1] <  MINIMUM_PRICE:
+        data = file_utils.read_historic_data(tick)
+        if data["Close"].iloc[-1] <  constants.MINIMUM_PRICE:
             continue
 
-        if data["Volume"].iloc[-1] < MINIMUM_VOLUME:
+        if data["Volume"].iloc[-1] < constants.MINIMUM_VOLUME:
             continue
 
         d_rsi = rsi_utils.get_rsi(data, window_length=14)
-        if d_rsi["rsi"].iloc[-1] < MINIMUM_RSI:
+        if d_rsi["rsi"].iloc[-1] < constants.MINIMUM_RSI:
             continue
 
         avg = int(statistics.mean(d_rsi["Volume"]))
@@ -48,18 +36,11 @@ for tick in filenames:
         rsi = d_rsi["rsi"].iloc[-1]
         price = d_rsi["Close"].iloc[-1]
     except Exception as e:
-        rem.append(tick)
         continue
     
     if volume_0_pct > 150 and volume_1_pct < 110:
         tmpvol =  pd.DataFrame([[tick, rsi, avg, price_1, volume_1, volume_1_pct, price_0, volume_0, volume_0_pct]], columns=COLUMNS)
         dfvol = pd.concat([dfvol, tmpvol], ignore_index=True)
 
-
-print("CREATING FILE")
-dfvol.round(0).to_csv(FILENAME, columns=COLUMNS)
-print(rem)
-
-print("TIMING")
-end_time = time.time()
-print(f"time: {(end_time - start_time)/60} minutes")
+file_utils.save_output_file(dfvol,FILENAME)
+timing_utils.end(start_time)

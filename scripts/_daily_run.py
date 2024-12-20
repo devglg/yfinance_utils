@@ -8,5 +8,5 @@ subprocess.call([f"./.venv/bin/python3", f"./scripts/snapshot.py"])
 
 for f in filenames:
     if f.startswith('daily'):
-        print(f)
+        print(f'Running script: {f}')
         subprocess.call([f"./.venv/bin/python3", f"./scripts/{f}"])
