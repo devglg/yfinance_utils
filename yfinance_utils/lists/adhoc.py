@@ -34,5 +34,11 @@ adhoc = [
     "SOUN",
     "ET",
     "LAUR",
-    "KGC"
+    "KGC",
+    "X",
+    "NVO",
+    "SIRI",
+    "FDX",
+    "XPO",
+    "ASAN"
 ]
