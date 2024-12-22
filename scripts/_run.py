@@ -1,9 +1,12 @@
 import subprocess
-import os
+import os, sys
 import datetime
+from yfinance_utils import constants
 
 dirname = os.path.dirname(__file__)
-filenames = os.listdir("scripts")
+filenames = os.listdir(constants.SCRIPTS_FOLDER)
+output = os.listdir(constants.OUTPUT_FOLDER)
+
 today = datetime.date.today()
 
 if today.strftime('%A') in ['Saturday', 'Sunday']:
@@ -21,8 +24,8 @@ for f in filenames:
     if today.strftime('%A') in ['Saturday', 'Sunday']:
         if f.startswith('weekly'):
             print(f'Running script: {f}')
-            subprocess.call([f"./.venv/bin/python3", f"./scripts/{f}"])
+            subprocess.call([f"./.venv/bin/python3", f"./{constants.SCRIPTS_FOLDER_WEEKLY}/{f}"])
     else:
         if f.startswith('daily'):
             print(f'Running script: {f}')
-            subprocess.call([f"./.venv/bin/python3", f"./scripts/{f}"])
+            subprocess.call([f"./.venv/bin/python3", f"./{constants.SCRIPTS_FOLDER_DAILY}/{f}"])
