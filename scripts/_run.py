@@ -1,5 +1,5 @@
 import subprocess
-import os, sys
+import os
 import datetime
 from yfinance_utils import constants
 
