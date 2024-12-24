@@ -31,3 +31,9 @@ def save_historic_data(df, name):
     except Exception as e:
         pass
     return df.to_csv(name)
+
+def get_scripts_folder(t):
+    if t == 'weekly':
+        return constants.SCRIPTS_FOLDER_WEEKLY
+    else:
+        return constants.SCRIPTS_FOLDER_DAILY

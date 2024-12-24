@@ -7,5 +7,5 @@ DATA_FOLDER = "datasets"
 OUTPUT_FOLDER = "out"
 QUOTE_BASE_URL = 'https://finance.yahoo.com/quote'
 WEEKS_RISING_MIN = 5
-SCRIPTS_FOLDER_DAILY = "scripts"
-SCRIPTS_FOLDER_WEEKLY = "scripts"
+SCRIPTS_FOLDER_DAILY = "scripts/daily"
+SCRIPTS_FOLDER_WEEKLY = "scripts/weekly"
