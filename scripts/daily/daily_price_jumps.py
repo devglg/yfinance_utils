@@ -9,7 +9,7 @@ FILENAME_DOWN = 'daily_price_jump_down'
 
 dfjumpup = pd.DataFrame(columns=COLUMNS)
 dfjumpdown = pd.DataFrame(columns=COLUMNS)
-filenames = os.listdir('datasets')
+filenames = file_utils.get_datasets_list()
 
 start_time = timing_utils.start(filenames)
 

@@ -1,4 +1,3 @@
-import os, datetime
 import pandas as pd
 import statistics
 from yfinance_utils import rsi_utils, file_utils, constants, timing_utils
@@ -8,7 +7,7 @@ FILENAME = 'daily_volume_up'
 
 dfvol = pd.DataFrame(columns=COLUMNS)
 
-filenames = os.listdir('datasets')
+filenames = file_utils.get_datasets_list()
 start_time = timing_utils.start(filenames)
 
 for tick in filenames:

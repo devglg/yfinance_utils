@@ -1,4 +1,4 @@
-import math, os, datetime
+import math
 import pandas as pd
 from yfinance_utils import mfi_utils, file_utils, timing_utils
 
@@ -10,7 +10,7 @@ FILE_NAME_MAX = "daily_mfi_year_highest"
 dfmfimin = pd.DataFrame(columns=COLUMNS)
 dfmfimax = pd.DataFrame(columns=COLUMNS)
 
-filenames = os.listdir('datasets')
+filenames = file_utils.get_datasets_list()
 
 start_time = timing_utils.start(filenames)
 

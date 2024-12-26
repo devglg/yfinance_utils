@@ -1,7 +1,6 @@
 import warnings
 warnings.filterwarnings("ignore")
 
-import os, datetime
 import pandas as pd
 from finta import TA
 from yfinance_utils import file_utils, constants, timing_utils
@@ -14,7 +13,7 @@ COLUMNS=['DATE', 'TICK', 'PRICE', 'VOLUME', 'VOLUME pct of AVG', 'BB -3', 'KC -3
 df_up = pd.DataFrame(columns=COLUMNS)
 df_down = pd.DataFrame(columns=COLUMNS)
 
-filenames = os.listdir('datasets')
+filenames = file_utils.get_datasets_list()
 start_time = timing_utils.start(filenames)
 
 for tick in filenames:

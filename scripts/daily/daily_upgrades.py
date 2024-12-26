@@ -1,4 +1,3 @@
-import os, datetime
 import pandas as pd
 from yfinance import Tickers
 from yfinance_utils import financials_utils, file_utils, timing_utils, constants
@@ -10,7 +9,7 @@ FILE_NAME_DOWN = 'daily_analysts_down'
 dfups = pd.DataFrame(columns=COLUMNS)
 dfdowns = pd.DataFrame(columns=COLUMNS)
 
-t_list = os.listdir('datasets')
+t_list = file_utils.get_datasets_list()
 start_time = timing_utils.start(t_list)
 
 ts = Tickers(t_list)

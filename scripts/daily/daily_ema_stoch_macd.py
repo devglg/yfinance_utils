@@ -1,4 +1,3 @@
-import os
 import pandas as pd
 from yfinance_utils import file_utils, timing_utils, signals_utils
 
@@ -7,7 +6,7 @@ FILENAME = 'daily_EMA_STOCH_MACD'
 
 df = pd.DataFrame(columns=COLUMNS)
 
-filenames = os.listdir('datasets')
+filenames = file_utils.get_datasets_list()
 start_time = timing_utils.start(filenames)
 
 for tick in filenames:

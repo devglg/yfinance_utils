@@ -3,7 +3,7 @@ import pandas as pd
 from yfinance_utils import constants, timing_utils, file_utils
 
 FILENAME = 'weekly_price_rising'
-filenames = os.listdir('datasets')
+filenames = file_utils.get_datasets_list()
 start_time = timing_utils.start(filenames)
 
 df = pd.DataFrame()

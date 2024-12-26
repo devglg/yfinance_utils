@@ -1,4 +1,3 @@
-import os, datetime
 import pandas as pd
 import math
 from yfinance_utils import file_utils, timing_utils
@@ -8,7 +7,7 @@ FILENAME = 'daily_GAP_UP_CLOSE_HIGH'
 
 df = pd.DataFrame(columns=COLUMNS)
 
-filenames = os.listdir('datasets')
+filenames = file_utils.get_datasets_list()
 start_time = timing_utils.start(filenames)
 
 for tick in filenames:

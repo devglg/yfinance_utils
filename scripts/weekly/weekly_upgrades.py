@@ -1,4 +1,4 @@
-import os, datetime
+import datetime
 import pandas as pd
 from yfinance import Tickers
 from yfinance_utils import financials_utils, file_utils, timing_utils
@@ -7,7 +7,7 @@ COLUMNS = ["DATE", "TICK", 'UP', 'GOOD', 'NEUTRAL', 'BAD', 'DOWN', 'TOTAL', 'AVE
 FILENAME='weekly_upgrades'
 
 dfups = pd.DataFrame(columns=COLUMNS)
-filenames = os.listdir('datasets')
+filenames = file_utils.get_datasets_list()
 start_time = timing_utils.start(filenames)
 
 t = Tickers(filenames)
