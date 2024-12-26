@@ -23,12 +23,12 @@ for tick in filenames:
 
         def macd_cross(data):
             return data['MACD'].iloc[-1] > macd['SIGNAL'].iloc[-1] and \
-                   data['MACD'].iloc[-3] > macd['SIGNAL'].iloc[-3]
+                   data['MACD'].iloc[-5] < macd['SIGNAL'].iloc[-5]
         
         def stoch_cross(k, d):
             return k.iloc[-1] > d.iloc[-1] and \
-                   k.iloc[-3] < d.iloc[-3] and \
-                   k.iloc[-1] > 20
+                   k.iloc[-5] < d.iloc[-5] and \
+                   k.iloc[-1] > 20 and k.iloc[-5] < 20
 
         if data['Close'].iloc[-1] > ema200.iloc[-1] and \
                 stoch_cross(stochk, stochd) and \
