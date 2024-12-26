@@ -7,7 +7,9 @@ from yfinance_utils import list_utils, constants, timing_utils, file_utils
 COLUMNS = ['Adj Close','Close','High','Low','Open','Volume']
 
 today=str(date.today())
-oneyearago = str(date.today() - timedelta(days=365))
+oneyearago = str(date.today() - timedelta(weeks=52))
+twoyearsago = str(date.today() - timedelta(weeks=104))
+
 print(f"getting historic data from: {oneyearago}, to: {today}")
 
 t_list = list_utils.get_nasdaq100() + list_utils.get_adhoc() + list_utils.get_snp500() + list_utils.get_aero_def()
@@ -20,7 +22,7 @@ t_list = list(set(t_list) - set(filenames))
 
 for symbol in t_list:
     try:
-        data = yf.download(symbol, start=oneyearago, end=today)
+        data = yf.download(symbol, start=twoyearsago, end=today)
         # data = yf.download(symbol) # downloads all history
         data.columns = COLUMNS
         
