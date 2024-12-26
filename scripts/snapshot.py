@@ -9,8 +9,9 @@ COLUMNS = ['Adj Close','Close','High','Low','Open','Volume']
 today=str(date.today())
 oneyearago = str(date.today() - timedelta(weeks=52))
 twoyearsago = str(date.today() - timedelta(weeks=104))
+start_date = twoyearsago
 
-print(f"getting historic data from: {oneyearago}, to: {today}")
+print(f"getting historic data from: {start_date}, to: {today}")
 
 t_list = list_utils.get_nasdaq100() + list_utils.get_adhoc() + list_utils.get_snp500() + list_utils.get_aero_def()
 t_list = list(set(t_list))
@@ -22,7 +23,7 @@ t_list = list(set(t_list) - set(filenames))
 
 for symbol in t_list:
     try:
-        data = yf.download(symbol, start=twoyearsago, end=today)
+        data = yf.download(symbol, start=start_date, end=today)
         # data = yf.download(symbol) # downloads all history
         data.columns = COLUMNS
         
