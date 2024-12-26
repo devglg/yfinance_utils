@@ -16,17 +16,14 @@ t_list = list(set(t_list))
 start_time = timing_utils.start(t_list)
 
 filenames = os.listdir(constants.DATA_FOLDER)
-t_list = list(set(t_list + filenames))
+t_list = list(set(t_list) - set(filenames))
 
 for symbol in t_list:
     try:
-        # time.sleep(.5)
-        if symbol in filenames: continue
         data = yf.download(symbol, start=oneyearago, end=today)
         # data = yf.download(symbol) # downloads all history
         data.columns = COLUMNS
         
-        if data.empty: continue  # remove empty
         if data['Close'].iloc[-1] < constants.MINIMUM_PRICE: continue  # remove penny stocks
         file_utils.save_historic_data(data, symbol)
     except Exception as e:

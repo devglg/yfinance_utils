@@ -6,6 +6,6 @@ PERCENTAGE_GOOD_RATING = 65.00
 DATA_FOLDER = "datasets"
 OUTPUT_FOLDER = "out"
 QUOTE_BASE_URL = 'https://finance.yahoo.com/quote'
-WEEKS_RISING_MIN = 5
+WEEKS_RISING_MIN = 4
 SCRIPTS_FOLDER_DAILY = "scripts/daily"
 SCRIPTS_FOLDER_WEEKLY = "scripts/weekly"
