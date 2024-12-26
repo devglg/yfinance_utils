@@ -28,7 +28,7 @@ for tick in filenames:
     except Exception as e:
         continue
     
-    tmprsi =  pd.DataFrame([[datetime.date.today(), tick, price, rsi, rsiavg, vol]], columns=COLUMNS)
+    tmprsi =  pd.DataFrame([[data['Date'].iloc[-1], tick, price, rsi, rsiavg, vol]], columns=COLUMNS)
     if math.isclose(rsi,rsimin, abs_tol=2):
         dfrsimin = pd.concat([dfrsimin, tmprsi], ignore_index=True)
     elif math.isclose(rsi,rsimax, abs_tol=2):

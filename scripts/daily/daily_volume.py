@@ -33,7 +33,7 @@ for tick in filenames:
         continue
     
     if volume_0_pct > 150 and volume_1_pct < 110:
-        tmpvol =  pd.DataFrame([[datetime.date.today(), tick, rsi, avg, price_1, volume_1, volume_1_pct, price_0, volume_0, volume_0_pct]], columns=COLUMNS)
+        tmpvol =  pd.DataFrame([[data['Date'].iloc[-1], tick, rsi, avg, price_1, volume_1, volume_1_pct, price_0, volume_0, volume_0_pct]], columns=COLUMNS)
         dfvol = pd.concat([dfvol, tmpvol], ignore_index=True)
 
 file_utils.save_output_file(dfvol,FILENAME)

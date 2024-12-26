@@ -29,7 +29,7 @@ for tick in filenames:
                    data['Volume'].iloc[-3] > vol_avg
 
         if gap_up() and close_high() and vol_up():
-            tmp =  pd.DataFrame([[datetime.date.today(), 
+            tmp =  pd.DataFrame([[data['Date'].iloc[-1], 
                                   tick, 
                                   data['Close'].iloc[-1],
                                   data['Close'].iloc[-2],

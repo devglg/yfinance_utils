@@ -34,7 +34,7 @@ for tick in filenames:
                 stoch_cross(stochk, stochd) and \
                 macd_cross(macd):
             
-            tmp =  pd.DataFrame([[datetime.date.today(), 
+            tmp =  pd.DataFrame([[data['Date'].iloc[-1], 
                                   tick, 
                                   data['Close'].iloc[-1],
                                   ema200.iloc[-1],

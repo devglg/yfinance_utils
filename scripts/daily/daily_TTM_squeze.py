@@ -38,7 +38,7 @@ for tick in filenames:
             data['Close'].iloc[-1] < bb['BB_LOWER'].iloc[-1]:
             print(f"{tick:6}<<<----- LOW ")     
 
-            tmp = pd.DataFrame([[datetime.date.today(), tick, data['Close'].iloc[-1], data['Volume'].iloc[-1], vol_avg, bb['BB_LOWER'].iloc[-3], kc['KC_LOWER'].iloc[-3], bb['BB_LOWER'].iloc[-1], kc['KC_LOWER'].iloc[-1] ]], columns=COLUMNS)  
+            tmp = pd.DataFrame([[data['Date'].iloc[-1], tick, data['Close'].iloc[-1], data['Volume'].iloc[-1], vol_avg, bb['BB_LOWER'].iloc[-3], kc['KC_LOWER'].iloc[-3], bb['BB_LOWER'].iloc[-1], kc['KC_LOWER'].iloc[-1] ]], columns=COLUMNS)  
             df_down = pd.concat([df_down,tmp], ignore_index=True)
         
     except Exception as e:
