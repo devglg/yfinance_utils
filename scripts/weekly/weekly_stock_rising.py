@@ -22,7 +22,7 @@ for tick in filenames:
             if close[i] > close[i-5]:
                 continue
             else:
-                if (counter) > constants.WEEKS_RISING_MIN:
+                if (counter) > constants.MINIMUM_WEEKS_RISING:
                     ticker_list.append(tick)
                     weeks_list.append(counter)
                     rise_pct.append((close[len(close)-1] / close[counter]) * 100)
