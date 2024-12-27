@@ -1,12 +1,9 @@
-import subprocess
 import os
+import subprocess
 import datetime
-from yfinance_utils import constants, file_utils, timing_utils, log_utils
+from yfinance_utils import file_utils, timing_utils, log_utils
 
-# dirname = os.path.dirname(__file__)
-# output = os.listdir(constants.OUTPUT_FOLDER)
 today = datetime.date.today()
-
 start_time = timing_utils.start([])
 
 subprocess.call([f"./.venv/bin/python3", f"./scripts/snapshot.py"])
@@ -22,6 +19,7 @@ if today.strftime('%A') in ['Saturday', 'Sunday']:
         print(f'Running script: {f}')
         subprocess.call([f"./.venv/bin/python3", f"./{file_utils.get_scripts_folder('weekly')}/{f}"])
         log_utils.log(f'{f} script completed.')
+    log_utils.log(f'Ending weekly run.')
 
 else:
     filenames = os.listdir(file_utils.get_scripts_folder('daily'))
@@ -34,5 +32,6 @@ else:
         print(f'Running script: {f}')
         subprocess.call([f"./.venv/bin/python3", f"./{file_utils.get_scripts_folder('daily')}/{f}"])
         log_utils.log(f'{f} script completed.')
+    log_utils.log(f'Ending daily run.')
 
 timing_utils.end(start_time)
