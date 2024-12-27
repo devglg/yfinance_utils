@@ -7,6 +7,7 @@
 # https://corporatefinanceinstitute.com/resources/accounting/financial-ratios/
 
 from yfinance_utils import financials_utils as fu
+import math
 
 ###
 ### GENERAL
@@ -165,21 +166,23 @@ def get_dividend_yield_ratio(tick):
 ### amount of net income earned for each share outstanding###
 def get_earnings_per_share(tick, period = 0):
     ist = fu.get_is(tick, period=period)
-    return ist["DilutedEPS"]
+    deps = ist["DilutedEPS"]
+    return deps or math.nan
 
-def get_income_per_share(tick, period = 0):
+def get_revenue_per_share(tick, period = 0):
     ist = fu.get_is(tick, period=period)
-    netincome = ist['NetIncome']
+    revenue = ist['TotalRevenue']
     shares = ist['DilutedAverageShares']
-    return netincome / shares
+    rps = revenue / shares
+    return rps or math.nan
 
 ### share price to its earnings per share###
 def get_price_to_earnings(tick):
     earnings = get_earnings_per_share(tick)
-    return tick.info["currentPrice"] / earnings
+    return tick.info["currentPrice"] / earnings or math.nan
 
 ### how much investors are willing to pay per dollar of sales for a stock
 def get_price_to_sales(tick):
-    income_per_share = get_income_per_share(tick)
-    return tick.info["currentPrice"] / income_per_share
+    revenue_per_share = get_revenue_per_share(tick)
+    return tick.info["currentPrice"] / revenue_per_share or math.nan
 

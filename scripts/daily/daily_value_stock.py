@@ -1,5 +1,5 @@
 import pandas as pd
-import yfinance
+import yfinance, math
 from yfinance_utils import file_utils, timing_utils, constants, ratio_utils
 
 COLUMNS = ["DATE", "TICK", 'PRICE', 'PRICE TO EARNINGS', 'PRICE TO SALES']
@@ -17,11 +17,11 @@ for tick in filenames:
         last_price = data['Close'].iloc[-1]
 
         price_to_earnings = ratio_utils.get_price_to_earnings(t)
-        if price_to_earnings > constants.MAXIMUM_PRICE_TO_EARNINGS or price_to_earnings < 0.00:
+        if math.isnan(price_to_earnings) or price_to_earnings > constants.MAXIMUM_PRICE_TO_EARNINGS or price_to_earnings < 0.00:
             continue
 
         price_to_sales = ratio_utils.get_price_to_sales(t)
-        if price_to_sales < constants.MAXIMUM_PRICE_TO_SALES:
+        if math.isnan(price_to_sales) or price_to_sales < constants.MAXIMUM_PRICE_TO_SALES:
             continue
 
         tmp = pd.DataFrame([[data['Date'].iloc[-1],tick, last_price, price_to_earnings, price_to_sales]], columns=df.columns)
