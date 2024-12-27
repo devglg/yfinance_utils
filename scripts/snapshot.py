@@ -27,7 +27,8 @@ for symbol in t_list:
         tdata = pd.DataFrame()
         tdata = data.loc[:,(slice(None),symbol)]
         tdata.columns = COLUMNS
-        file_utils.save_historic_data(tdata, symbol)
+        if tdata['Close'].iloc[-1]:
+            file_utils.save_historic_data(tdata, symbol)
     except Exception as e:
         continue
 
