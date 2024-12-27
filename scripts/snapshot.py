@@ -21,7 +21,7 @@ start_time = timing_utils.start(t_list)
 filenames = file_utils.get_datasets_list()
 t_list = list(set(t_list) - set(filenames))
 
-if t_list:
+if len(t_list) > 0:
     data = yf.download(t_list, start=start_date, end=today)
 
 for symbol in t_list:
