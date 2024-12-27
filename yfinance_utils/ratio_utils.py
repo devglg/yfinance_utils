@@ -17,7 +17,7 @@ import math
 ## TODO: COR should be changed to COGS
 def get_net_revenue(tick, period = 0):
     ist = fu.get_is(tick, period = period)
-    return ist["TotalRevenue"] - ist["CostOfRevenue"]
+    return ist["NetIncome"]
 
 def get_net_income(tick, period = 0):
     return get_net_revenue(tick, period)
@@ -25,13 +25,13 @@ def get_net_income(tick, period = 0):
 
 def get_net_sales(tick, period = 0):
     ist = fu.get_is(tick, period = period)
-    COGS = ist["CostOfRevenue"] \
+    sales_expenses = ist["CostOfRevenue"] \
             - ist["SellingGeneralAndAdministration"] \
             - ist["SellingAndMarketingExpense"] \
             - ist["GeneralAndAdministrativeExpense"] \
             - ist["OtherGandA"] \
             - ist['ResearchAndDevelopment']
-    return ist["TotalRevenue"] - COGS
+    return ist["TotalRevenue"] - sales_expenses
 
 
 def get_avg_assets(tick, period = 0):
@@ -140,15 +140,15 @@ def get_operating_margin_ratio(tick, period = 0):
 
 ### how efficiently a company is using its assets to generate profi###
 def get_return_on_assets_ratio(tick, period = 0):
-    ist = fu.get_is(tick, period = period)
+    ni = get_net_income(tick, period)
     bs = fu.get_bs(tick, period = period)
-    return ist["NetIncome"] / bs["TotalAssets"]
+    return ni / bs["TotalAssets"]
     
 ### how efficiently a company is using its equity###
 def get_return_on_equity(tick, period = 0):
-    ist = fu.get_is(tick, period = period)
+    ni = get_net_income(tick, period)
     bs = fu.get_bs(tick, period = period)
-    return ist["NetIncome"] / bs["StockholdersEquity"]
+    return ni / bs["StockholdersEquity"]
 
 
 ###

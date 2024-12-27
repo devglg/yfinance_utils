@@ -10,13 +10,13 @@ def save_output_file(df, name):
     except Exception as e:
         pass
 
-    name = f"{constants.OUTPUT_FOLDER}/{name}/{str(date.today())}_{name}.csv"
+    filepath = f"{constants.OUTPUT_FOLDER}/{name}/{str(date.today())}_{name}.csv"
     ticks = df['TICK']
     url = []
     for i in ticks:
         url.append(f"{constants.QUOTE_BASE_URL}/{i}/")
     df['URL'] = url
-    df.round(2).to_csv(name, index=False)
+    df.round(2).to_csv(filepath, index=False)
 
 
 def read_historic_data(name):
@@ -33,8 +33,8 @@ def save_historic_data(df, name):
     return df.to_csv(name)
 
 
-def get_scripts_folder(t):
-    if t == 'weekly':
+def get_scripts_folder(t='daily'):
+    if 'W' in t.upper():
         return constants.SCRIPTS_FOLDER_WEEKLY
     else:
         return constants.SCRIPTS_FOLDER_DAILY
