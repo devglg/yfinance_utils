@@ -6,7 +6,7 @@
 
 # https://corporatefinanceinstitute.com/resources/accounting/financial-ratios/
 
-import financials_utils as fu
+from yfinance_utils import financials_utils as fu
 
 ###
 ### GENERAL

@@ -1,8 +1,8 @@
 import os
-import time
+import pandas as pd
 from datetime import date, timedelta
 import yfinance as yf
-from yfinance_utils import list_utils, constants, timing_utils, file_utils
+from yfinance_utils import list_utils, timing_utils, file_utils
 
 COLUMNS = ['Adj Close','Close','High','Low','Open','Volume']
 
@@ -18,17 +18,16 @@ t_list = list(set(t_list))
 
 start_time = timing_utils.start(t_list)
 
-filenames = os.listdir(constants.DATA_FOLDER)
+filenames = file_utils.get_datasets_list()
 t_list = list(set(t_list) - set(filenames))
 
+data = yf.download(t_list, start=start_date, end=today)
 for symbol in t_list:
     try:
-        data = yf.download(symbol, start=start_date, end=today)
-        # data = yf.download(symbol) # downloads all history
-        data.columns = COLUMNS
-        
-        if data['Close'].iloc[-1] < constants.MINIMUM_PRICE: continue  # remove penny stocks
-        file_utils.save_historic_data(data, symbol)
+        tdata = pd.DataFrame()
+        tdata = data.loc[:,(slice(None),symbol)]
+        tdata.columns = COLUMNS
+        file_utils.save_historic_data(tdata, symbol)
     except Exception as e:
         continue
 
