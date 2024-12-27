@@ -10,6 +10,7 @@ subprocess.call([f"./.venv/bin/python3", f"./scripts/snapshot.py"])
 
 if today.strftime('%A') in ['Saturday', 'Sunday']:
     filenames = os.listdir(file_utils.get_scripts_folder('weekly'))
+    log_utils.log(f'************************************************************')
     log_utils.log(f'Starting weekly run.')
     print('')
     print('***  WEEKLY  ***  WEEKLY  ***  WEEKLY  ***  WEEKLY  ***  WEEKLY  ***  WEEKLY  ***  WEEKLY  ***')
@@ -20,9 +21,11 @@ if today.strftime('%A') in ['Saturday', 'Sunday']:
         subprocess.call([f"./.venv/bin/python3", f"./{file_utils.get_scripts_folder('weekly')}/{f}"])
         log_utils.log(f'{f} script completed.')
     log_utils.log(f'Ending weekly run.')
+    log_utils.log(f'^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
 
 else:
     filenames = os.listdir(file_utils.get_scripts_folder('daily'))
+    log_utils.log(f'************************************************************')
     log_utils.log(f'Starting daily run.')
     print('')
     print('***  DAILY  ***  DAILY  ***  DAILY  ***  DAILY  ***  DAILY  ***  DAILY  ***  DAILY  ***')
@@ -33,5 +36,6 @@ else:
         subprocess.call([f"./.venv/bin/python3", f"./{file_utils.get_scripts_folder('daily')}/{f}"])
         log_utils.log(f'{f} script completed.')
     log_utils.log(f'Ending daily run.')
+    log_utils.log(f'^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
 
 timing_utils.end(start_time)
