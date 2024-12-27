@@ -21,7 +21,9 @@ start_time = timing_utils.start(t_list)
 filenames = file_utils.get_datasets_list()
 t_list = list(set(t_list) - set(filenames))
 
-data = yf.download(t_list, start=start_date, end=today)
+if t_list:
+    data = yf.download(t_list, start=start_date, end=today)
+
 for symbol in t_list:
     try:
         tdata = pd.DataFrame()

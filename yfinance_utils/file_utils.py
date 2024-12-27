@@ -4,13 +4,13 @@ from datetime import date
 from yfinance_utils import constants
 
 def save_output_file(df, name):
-    folder_path = f"{constants.OUTPUT_FOLDER}/{str(date.today())}"
+    folder_path = f"{constants.OUTPUT_FOLDER}/{name}"
     try:
         os.mkdir(folder_path)
     except Exception as e:
         pass
 
-    name = f"{constants.OUTPUT_FOLDER}/{str(date.today())}/{name}.csv"
+    name = f"{constants.OUTPUT_FOLDER}/{name}/{str(date.today())}_{name}.csv"
     ticks = df['TICK']
     url = []
     for i in ticks:
