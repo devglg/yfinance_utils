@@ -167,8 +167,11 @@ def get_earnings_per_share(tick, period = 0):
     ist = fu.get_is(tick, period=period)
     return ist["DilutedEPS"]
 
-def get_income_per_share(tick):
-    return get_earnings_per_share(tick)
+def get_income_per_share(tick, period = 0):
+    ist = fu.get_is(tick, period=period)
+    netincome = ist['NetIncome']
+    shares = ist['DilutedAverageShares']
+    return netincome / shares
 
 ### share price to its earnings per share###
 def get_price_to_earnings(tick):
