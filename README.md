@@ -5,7 +5,6 @@ Finance not Accounting. This is not Accounting, Chris, we're not closing books, 
 not Accounting. There is no class in Accounting about this type of analysis. *And if it is, then, there should be a class in the accounting program that teaches this.*
 I mean, anyone can learn anything if they are taught it.
 
-> [!#1589F0]
 > - **Investors be like: "Fundamental Analysis is the only way"**
 > - **Traders be like: "Technical Analysis is the only way"**
 > - **Real life be like: "Trump won with Elon financing..."**
