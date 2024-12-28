@@ -19,4 +19,4 @@ for folder in script_folders:
         print(f'Running script: {file}')
         subprocess.call([f'./.venv/bin/python3', f'./{folder}/{file}'])
 
-timing_utils.end(start_time, 'run', f'completed, {today.strftime("%A")} run: ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^')
+timing_utils.end(start_time, 'run', f'{today.strftime("%A")} run: ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^')
