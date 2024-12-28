@@ -6,7 +6,7 @@
 
 # https://corporatefinanceinstitute.com/resources/accounting/financial-ratios/
 
-from yfinance_utils import financials_utils as fu
+from yfinance_utils import financials_utils as fu, options_utils
 import math
 
 ###
@@ -185,4 +185,12 @@ def get_price_to_earnings(tick):
 def get_price_to_sales(tick):
     revenue_per_share = get_revenue_per_share(tick)
     return tick.info["currentPrice"] / revenue_per_share or math.nan
+
+### puts over calls show the sentiment from whales ###
+def get_put_call_ratio(tick):
+    calls = options_utils.get_calls_volume(tick)
+    puts = options_utils.get_puts_volume(tick)
+    if math.isnan(calls) or math.isnan(puts):
+        return math.nan 
+    return round(puts/calls,2)
 

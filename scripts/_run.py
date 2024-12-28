@@ -4,24 +4,21 @@ import datetime
 from yfinance_utils import file_utils, timing_utils, log_utils
 
 today = datetime.date.today()
-start_time = timing_utils.start([])
-script_folder = ''
+start_time = timing_utils.start([], f'start {today.strftime("%A")} run: *** *** *** *** *** *** *** *** *** *** ***')
+script_folders = []
 
 subprocess.call([f"./.venv/bin/python3", f"./scripts/snapshot.py"])
 
+script_folders.append(file_utils.get_scripts_folder('daily'))
 if today.strftime('%A') in ['Saturday', 'Sunday']:
-    script_folder = file_utils.get_scripts_folder('weekly')
-else:
-    script_folder = file_utils.get_scripts_folder('daily')
+    script_folders.append(file_utils.get_scripts_folder('weekly'))
 
-log_utils.log(f'Starting run from {script_folder} *** *** *** *** *** *** *** *** *** *** ***')
-filenames = os.listdir(script_folder)
+for folder in script_folders:
+    filenames = os.listdir(folder)
+    for f in filenames:
+        log_utils.log(f'{f} starting.')
+        print(f'Running script: {f}')
+        subprocess.call([f"./.venv/bin/python3", f"./{folder}/{f}"])
+        log_utils.log(f'{f} completed.')
 
-for f in filenames:
-    log_utils.log(f'{f} starting.')
-    print(f'Running script: {f}')
-    subprocess.call([f"./.venv/bin/python3", f"./{script_folder}/{f}"])
-    log_utils.log(f'{f} completed.')
-
-log_utils.log('END RUN ^^^   ^^^   ^^^   ^^^   ^^^   ^^^   ^^^   ^^^   ^^^   ^^^   ^^^   ^^^   ^^^   ^^^')
-timing_utils.end(start_time)
+timing_utils.end(start_time, f'complete {today.strftime("%A")} run: ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^')

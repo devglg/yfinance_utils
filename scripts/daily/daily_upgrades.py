@@ -3,14 +3,14 @@ from yfinance import Tickers
 from yfinance_utils import financials_utils, file_utils, timing_utils, constants
 
 COLUMNS = ["DATE", "TICK", 'GOOD', 'BAD', 'NEUTRAL', 'TOTAL', 'AVG', 'UP/-DOWN']
-FILE_NAME_UP = 'daily_analysts_up'
-FILE_NAME_DOWN = 'daily_analysts_down'
+FILENAME_UP = 'daily_analysts_up'
+FILENAME_DOWN = 'daily_analysts_down'
 
 dfups = pd.DataFrame(columns=COLUMNS)
 dfdowns = pd.DataFrame(columns=COLUMNS)
 
 t_list = file_utils.get_datasets_list()
-start_time = timing_utils.start(t_list)
+start_time = timing_utils.start(t_list, f'{FILENAME_UP}-{FILENAME_DOWN}')
 
 ts = Tickers(t_list)
 
@@ -34,13 +34,13 @@ for tick in ts.tickers:
     
     if avg > constants.PERCENTAGE_GOOD_RATING:
         if up > down:
-            tmp =  pd.DataFrame([[data['Date'].iloc[-1], tick, good, bad, neutral, total, avg, up - down]], columns=COLUMNS)
+            tmp =  pd.DataFrame([[data.index[-1], tick, good, bad, neutral, total, avg, up - down]], columns=COLUMNS)
             dfups = pd.concat([dfups, tmp], ignore_index=True)
 
         if up < down:
-            tmp =  pd.DataFrame([[data['Date'].iloc[-1], tick, good, bad, neutral, total, avg, up - down]], columns=COLUMNS)
+            tmp =  pd.DataFrame([[data.index[-1], tick, good, bad, neutral, total, avg, up - down]], columns=COLUMNS)
             dfdowns = pd.concat([dfdowns, tmp], ignore_index=True)
 
-file_utils.save_output_file(dfups,FILE_NAME_UP)
-file_utils.save_output_file(dfdowns,FILE_NAME_DOWN)
-timing_utils.end(start_time)
+file_utils.save_output_file(dfups,FILENAME_UP)
+file_utils.save_output_file(dfdowns,FILENAME_DOWN)
+timing_utils.end(start_time, f'{FILENAME_UP}-{FILENAME_DOWN}')

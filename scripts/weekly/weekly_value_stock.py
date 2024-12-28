@@ -8,7 +8,7 @@ FILENAME = 'daily_value_stock'
 df = pd.DataFrame(columns=COLUMNS)
 
 filenames = file_utils.get_datasets_list()
-start_time = timing_utils.start(filenames)
+start_time = timing_utils.start(filenames, f'{FILENAME}')
 
 for tick in filenames:
     try:
@@ -24,10 +24,10 @@ for tick in filenames:
         if math.isnan(price_to_sales) or price_to_sales < constants.MAXIMUM_PRICE_TO_SALES:
             continue
 
-        tmp = pd.DataFrame([[data['Date'].iloc[-1],tick, last_price, price_to_earnings, price_to_sales]], columns=df.columns)
+        tmp = pd.DataFrame([[data.index[-1],tick, last_price, price_to_earnings, price_to_sales]], columns=df.columns)
         df = pd.concat([tmp, df], ignore_index=True)
     except Exception as e:
         continue
     
 file_utils.save_output_file(df,FILENAME)
-timing_utils.end(start_time)
+timing_utils.end(start_time, f'{FILENAME}')

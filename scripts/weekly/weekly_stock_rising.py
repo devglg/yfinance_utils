@@ -4,7 +4,7 @@ from yfinance_utils import constants, timing_utils, file_utils
 
 FILENAME = 'weekly_price_rising'
 filenames = file_utils.get_datasets_list()
-start_time = timing_utils.start(filenames)
+start_time = timing_utils.start(filenames, f'{FILENAME}')
 
 df = pd.DataFrame()
 ticker_list = []
@@ -35,5 +35,5 @@ df["WEEKS"] = weeks_list
 df["RISE PCT"] = rise_pct
 
 file_utils.save_output_file(df,FILENAME)
-timing_utils.end(start_time)
+timing_utils.end(start_time, f'{FILENAME}')
 

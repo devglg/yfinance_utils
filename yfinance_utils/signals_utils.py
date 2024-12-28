@@ -1,4 +1,5 @@
 from finta import TA
+import math
 
 
 def is_macd_cross_up(data, days_back = 5, line = 10):
@@ -35,3 +36,11 @@ def is_upward_trend(data):
 def is_downward_trend(data):
     ema200 = TA.EMA(data, 200)
     return data['Close'].iloc[-1] < ema200.iloc[-1]
+
+def is_52wk_low(data, pct_diff = 2):
+    low = data['Close'].min()
+    return math.isclose(low, data['Close'].iloc[-1], abs_tol=(low * pct_diff / 100))
+
+def is_52wk_high(data, pct_diff = 2):
+    high = data['Close'].max()
+    return math.isclose(high, data['Close'].iloc[-1], abs_tol=(high * pct_diff / 100))

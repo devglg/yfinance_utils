@@ -4,14 +4,14 @@ from yfinance_utils import rsi_utils, file_utils, timing_utils
 
 COLUMNS = ["DATE", "TICK", 'PRICE', 'RSI', 'RSI_AVERAGE', 'VOLUME']
 
-FILE_NAME_MIN = "daily_rsi_year_lowest"
-FILE_NAME_MAX = "daily_rsi_year_highest"
+FILENAME_MIN = "daily_rsi_year_lowest"
+FILENAME_MAX = "daily_rsi_year_highest"
 
 dfrsimin = pd.DataFrame(columns=COLUMNS)
 dfrsimax = pd.DataFrame(columns=COLUMNS)
 
 filenames = file_utils.get_datasets_list()
-start_time = timing_utils.start(filenames)
+start_time = timing_utils.start(filenames, f'{FILENAME_MIN}-{FILENAME_MAX}')
 
 for tick in filenames:
     try:
@@ -28,7 +28,7 @@ for tick in filenames:
     except Exception as e:
         continue
     
-    tmprsi =  pd.DataFrame([[data['Date'].iloc[-1], tick, price, rsi, rsiavg, vol]], columns=COLUMNS)
+    tmprsi =  pd.DataFrame([[data.index[-1], tick, price, rsi, rsiavg, vol]], columns=COLUMNS)
     if math.isclose(rsi,rsimin, abs_tol=2):
         dfrsimin = pd.concat([dfrsimin, tmprsi], ignore_index=True)
     elif math.isclose(rsi,rsimax, abs_tol=2):
@@ -36,6 +36,6 @@ for tick in filenames:
     else:
         continue
         
-file_utils.save_output_file(dfrsimin,FILE_NAME_MIN)
-file_utils.save_output_file(dfrsimax,FILE_NAME_MAX)
-timing_utils.end(start_time)
+file_utils.save_output_file(dfrsimin,FILENAME_MIN)
+file_utils.save_output_file(dfrsimax,FILENAME_MAX)
+timing_utils.end(start_time, f'{FILENAME_MIN}-{FILENAME_MAX}')

@@ -14,7 +14,7 @@ df_up = pd.DataFrame(columns=COLUMNS)
 df_down = pd.DataFrame(columns=COLUMNS)
 
 filenames = file_utils.get_datasets_list()
-start_time = timing_utils.start(filenames)
+start_time = timing_utils.start(filenames, f'{FILENAME_UP}-{FILENAME_DOWN}')
 
 for tick in filenames:
     try:
@@ -29,7 +29,7 @@ for tick in filenames:
             data['Close'].iloc[-1] > bb['BB_UPPER'].iloc[-1]:
             print(f"{tick:6}<<<----- HIGH ")     
 
-            tmp = pd.DataFrame([[data['Date'].iloc[-1], tick, data['Close'].iloc[-1], data['Volume'].iloc[-1], vol_avg, bb['BB_UPPER'].iloc[-3], kc['KC_UPPER'].iloc[-3], bb['BB_UPPER'].iloc[-1], kc['KC_UPPER'].iloc[-1] ]], columns=COLUMNS)  
+            tmp = pd.DataFrame([[data.index[-1], tick, data['Close'].iloc[-1], data['Volume'].iloc[-1], vol_avg, bb['BB_UPPER'].iloc[-3], kc['KC_UPPER'].iloc[-3], bb['BB_UPPER'].iloc[-1], kc['KC_UPPER'].iloc[-1] ]], columns=COLUMNS)  
             df_up = pd.concat([df_up,tmp], ignore_index=True)
 
         if bb['BB_LOWER'].iloc[-3] > kc['KC_LOWER'].iloc[-3] and \
@@ -37,7 +37,7 @@ for tick in filenames:
             data['Close'].iloc[-1] < bb['BB_LOWER'].iloc[-1]:
             print(f"{tick:6}<<<----- LOW ")     
 
-            tmp = pd.DataFrame([[data['Date'].iloc[-1], tick, data['Close'].iloc[-1], data['Volume'].iloc[-1], vol_avg, bb['BB_LOWER'].iloc[-3], kc['KC_LOWER'].iloc[-3], bb['BB_LOWER'].iloc[-1], kc['KC_LOWER'].iloc[-1] ]], columns=COLUMNS)  
+            tmp = pd.DataFrame([[data.index[-1], tick, data['Close'].iloc[-1], data['Volume'].iloc[-1], vol_avg, bb['BB_LOWER'].iloc[-3], kc['KC_LOWER'].iloc[-3], bb['BB_LOWER'].iloc[-1], kc['KC_LOWER'].iloc[-1] ]], columns=COLUMNS)  
             df_down = pd.concat([df_down,tmp], ignore_index=True)
         
     except Exception as e:
@@ -45,4 +45,4 @@ for tick in filenames:
 
 file_utils.save_output_file(df_up,FILENAME_UP)
 file_utils.save_output_file(df_down,FILENAME_DOWN)
-timing_utils.end(start_time)
+timing_utils.end(start_time, f'{FILENAME_UP}-{FILENAME_DOWN}')

@@ -8,7 +8,7 @@ FILENAME = 'daily_volume_up'
 dfvol = pd.DataFrame(columns=COLUMNS)
 
 filenames = file_utils.get_datasets_list()
-start_time = timing_utils.start(filenames)
+start_time = timing_utils.start(filenames, f'{FILENAME}')
 
 for tick in filenames:
     try:
@@ -32,8 +32,8 @@ for tick in filenames:
         continue
     
     if volume_0_pct > 150 and volume_1_pct < 110:
-        tmpvol =  pd.DataFrame([[data['Date'].iloc[-1], tick, rsi, avg, price_1, volume_1, volume_1_pct, price_0, volume_0, volume_0_pct]], columns=COLUMNS)
+        tmpvol =  pd.DataFrame([[data.index[-1], tick, rsi, avg, price_1, volume_1, volume_1_pct, price_0, volume_0, volume_0_pct]], columns=COLUMNS)
         dfvol = pd.concat([dfvol, tmpvol], ignore_index=True)
 
 file_utils.save_output_file(dfvol,FILENAME)
-timing_utils.end(start_time)
+timing_utils.end(start_time, f'{FILENAME}')

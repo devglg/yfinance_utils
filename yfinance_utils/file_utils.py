@@ -21,7 +21,7 @@ def save_output_file(df, name):
 
 def read_historic_data(name):
     name = f"{constants.DATA_FOLDER}/{name}"
-    return pd.read_csv(name)
+    return pd.read_csv(name, index_col=0)
 
 
 def save_historic_data(df, name):

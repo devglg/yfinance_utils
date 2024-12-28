@@ -11,7 +11,7 @@ dfjumpup = pd.DataFrame(columns=COLUMNS)
 dfjumpdown = pd.DataFrame(columns=COLUMNS)
 filenames = file_utils.get_datasets_list()
 
-start_time = timing_utils.start(filenames)
+start_time = timing_utils.start(filenames, f'{FILENAME_UP}-{FILENAME_DOWN}')
 
 for tick in filenames:
     try:
@@ -25,7 +25,7 @@ for tick in filenames:
     except Exception as e:
         continue
     
-    tmpjump =  pd.DataFrame([[data['Date'].iloc[-1], tick, data['Close'].iloc[-1], pctjump, data['Volume'].iloc[-1], pctvol, pctvol2]], columns=COLUMNS)
+    tmpjump =  pd.DataFrame([[data.index[-1], tick, data['Close'].iloc[-1], pctjump, data['Volume'].iloc[-1], pctvol, pctvol2]], columns=COLUMNS)
     if pctjump > 0:
         dfjumpup = pd.concat([dfjumpup, tmpjump], ignore_index=True)
     else:
@@ -33,4 +33,4 @@ for tick in filenames:
 
 file_utils.save_output_file(dfjumpup,FILENAME_UP)
 file_utils.save_output_file(dfjumpdown,FILENAME_DOWN)
-timing_utils.end(start_time)
+timing_utils.end(start_time, f'{FILENAME_UP}-{FILENAME_DOWN}')
