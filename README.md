@@ -12,6 +12,8 @@ I mean, anyone can learn anything if they are taught it.
 - **Real life be like: "Trump won with Elon financing..."**
 ![tesla](https://github.com/devglg/yfinance_utils/blob/main/assets/images/tsla.png)
 
+> "There are two methods in software design. One is to make the program make the program so complicated, there are no obvious errors. The other is to do it so simple, there are obviously no errors". This is meant to be the latter.
+
 > [!IMPORTANT]
 > Some files still have the old apache 2 license text. they are not, this whole project is GPL3 licensed, not apache 2. Could have used a little more planning.
 
