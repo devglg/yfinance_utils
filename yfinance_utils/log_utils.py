@@ -8,10 +8,10 @@ def create_folder():
     except Exception as e:
         pass
 
-def log(msg):
+def log(file, msg):
     create_folder()
     filename = f"{constants.OUTPUT_FOLDER}/{constants.LOG_FOLDER}/{constants.LOG_FILENAME}"
     ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open(filename, 'a') as f:
-        f.write(f'{ts}: {msg}\n')
+        f.write(f'{ts}, {file}, {msg}\n')
     f.close()
