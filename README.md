@@ -7,7 +7,7 @@ I mean, anyone can learn anything if they are taught it.
 
 > - **Investors be like: "Fundamental Analysis is the only way"**
 > - **Traders be like: "Technical Analysis is the only way"**
-> - **Real life be like: "Trump won with Elon financing..."**
+> - **Real life be like: "Trump won with Elon's financing..."**
 > ![tesla](https://github.com/devglg/yfinance_utils/blob/main/assets/images/tsla.png)
 
 > [!TIP]
@@ -17,14 +17,11 @@ I mean, anyone can learn anything if they are taught it.
 > Some files still have the old apache 2 license text. they are not, this whole project is GPL3 licensed, not apache 2. Could have used a little more planning.
 
 > [!NOTE]
-> After learnings enough about dataframes, matplotlib, pandas, and technical analysis, I would say that you're probably better off using yfinance, plotly, 
-> and FINTA to create models instead of having to re-write everything from scratch. However, I think it is beneficial to do it manually until you understand 
-> it before you start using someone else's libraries.
+> After learnings enough about dataframes, matplotlib, pandas, and technical analysis, I would say that you're probably better off using yfinance, plotly, and FINTA to create models instead of having to re-write everything from scratch. However, I think it is beneficial to do it manually until you understand it before you start using someone else's libraries.
 
 
 > [!NOTE]
-> added the scripts i'm testing this with. Use at your own peril :/ you will need to create the folders `datasets` and `out`. datasets will hold the
-> downloaded data from yfinance and out will hold the output of the scripts
+> added the scripts i'm testing this with. Use at your own peril :/ you will need to create the folders `datasets` and `out`. datasets will hold the downloaded data from yfinance and out will hold the output of the scripts
 
 ## install
 `git clone https://github.com/devglg/yfinance_utils.git`
@@ -121,6 +118,6 @@ Date
 2024-11-29 00:00:00-05:00  136.240005  138.589996  135.779999  137.179993  16085700        0.0           0.0  38.368962
 ```
 
->[!CAUTION] 
->TODO: I uploaded this manually, the paths may be wrong, need to update as soon as I can.
->Some stuff may be working but if it is not, just post some message or you can fix it and send me the pull requrest.
+> [!CAUTION] 
+> TODO: I uploaded this manually, the paths may be wrong, need to update as soon as I can.
+> Some stuff may be working but if it is not, just post some message or you can fix it and send me the pull requrest.
