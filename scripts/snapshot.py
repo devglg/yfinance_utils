@@ -2,27 +2,26 @@ import os
 import pandas as pd
 from datetime import date, timedelta
 import yfinance as yf
-from yfinance_utils import list_utils, timing_utils, file_utils
+from yfinance_utils import list_utils, timing_utils, file_utils, log_utils
 
 COLUMNS = ['Adj Close','Close','High','Low','Open','Volume']
 
-today=str(date.today())
-oneyearago = str(date.today() - timedelta(weeks=52))
 twoyearsago = str(date.today() - timedelta(weeks=104))
-start_date = twoyearsago
+oneyearago = str(date.today() - timedelta(weeks=52))
+today=str(date.today())
+tomorrow=str(date.today() + timedelta(days=1))
 
-print(f"getting historic data from: {start_date}, to: {today}")
+start_date = twoyearsago
+end_date = tomorrow
+
+log_utils.log(f"getting historic data from: {start_date}, to: {end_date}")
 
 t_list = list_utils.get_nasdaq100() + list_utils.get_adhoc() + list_utils.get_snp500() + list_utils.get_aero_def()
 t_list = list(set(t_list))
 
 start_time = timing_utils.start(t_list)
 
-filenames = file_utils.get_datasets_list()
-t_list = list(set(t_list) - set(filenames))
-
-if len(t_list) > 0:
-    data = yf.download(t_list, start=start_date, end=today)
+data = yf.download(t_list, start=start_date, end=end_date, rounding=True)
 
 for symbol in t_list:
     try:
