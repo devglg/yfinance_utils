@@ -3,7 +3,7 @@ import pandas as pd
 from yfinance import Tickers
 from yfinance_utils import financials_utils, file_utils, timing_utils
 
-COLUMNS = ["DATE", "TICK", 'UP', 'GOOD', 'NEUTRAL', 'BAD', 'DOWN', 'TOTAL', 'AVERAGE UP']
+COLUMNS = ['DATE', 'TICK', 'UP', 'GOOD', 'NEUTRAL', 'BAD', 'DOWN', 'TOTAL', 'AVERAGE UP']
 FILENAME='weekly_upgrades'
 
 dfups = pd.DataFrame(columns=COLUMNS)

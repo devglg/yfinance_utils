@@ -2,7 +2,7 @@ import pandas as pd
 import yfinance, math
 from yfinance_utils import file_utils, timing_utils, constants, ratio_utils
 
-COLUMNS = ["DATE", "TICK", 'PRICE', 'PRICE TO EARNINGS', 'PRICE TO SALES']
+COLUMNS = ['DATE', 'TICK', 'PRICE', 'PRICE TO EARNINGS', 'PRICE TO SALES']
 FILENAME = 'daily_value_stock'
 
 df = pd.DataFrame(columns=COLUMNS)

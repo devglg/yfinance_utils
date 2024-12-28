@@ -2,7 +2,7 @@ import math
 import pandas as pd
 from yfinance_utils import file_utils, timing_utils, signals_utils
 
-COLUMNS = ["DATE", "TICK", 'PRICE', 'VOL', 'VOL AVG']
+COLUMNS = ['DATE', 'TICK', 'PRICE', 'VOL', 'VOL AVG']
 FILENAME_UP = 'daily_EMA_STOCH_MACD_UP'
 FILENAME_DOWN = 'daily_EMA_STOCH_MACD_DOWN'
 

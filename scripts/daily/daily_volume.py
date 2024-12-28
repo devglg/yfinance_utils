@@ -2,7 +2,7 @@ import pandas as pd
 import statistics
 from yfinance_utils import rsi_utils, file_utils, constants, timing_utils
 
-COLUMNS = ["DATE", "TICK", 'RSI', 'AVERAGE', 'PRICE -1', 'VOLUME -1', 'VOL % -1', 'PRICE', 'VOLUME', 'VOL %']
+COLUMNS = ['DATE', 'TICK', 'RSI', 'AVERAGE', 'PRICE -1', 'VOLUME -1', 'VOL % -1', 'PRICE', 'VOLUME', 'VOL %']
 FILENAME = 'daily_volume_up'
 
 dfvol = pd.DataFrame(columns=COLUMNS)
@@ -14,20 +14,20 @@ for tick in filenames:
     try:
         data = file_utils.read_historic_data(tick)
         d_rsi = rsi_utils.get_rsi(data, window_length=14)
-        if d_rsi["rsi"].iloc[-1] < constants.MINIMUM_RSI:
+        if d_rsi['rsi'].iloc[-1] < constants.MINIMUM_RSI:
             continue
 
-        avg = int(statistics.mean(d_rsi["Volume"]))
-        volume_0 = d_rsi["Volume"].iloc[-1]
+        avg = int(statistics.mean(d_rsi['Volume']))
+        volume_0 = d_rsi['Volume'].iloc[-1]
         volume_0_pct = volume_0/avg*100
-        volume_1 = d_rsi["Volume"].iloc[-2]
+        volume_1 = d_rsi['Volume'].iloc[-2]
         volume_1_pct = volume_1/avg*100
 
-        price_0 = d_rsi["Close"].iloc[-1]
-        price_1 = d_rsi["Close"].iloc[-2]
+        price_0 = d_rsi['Close'].iloc[-1]
+        price_1 = d_rsi['Close'].iloc[-2]
 
-        rsi = d_rsi["rsi"].iloc[-1]
-        price = d_rsi["Close"].iloc[-1]
+        rsi = d_rsi['rsi'].iloc[-1]
+        price = d_rsi['Close'].iloc[-1]
     except Exception as e:
         continue
     

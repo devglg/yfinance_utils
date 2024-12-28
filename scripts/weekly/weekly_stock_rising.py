@@ -30,9 +30,9 @@ for tick in filenames:
     except Exception as e:
         continue
 
-df["TICK"] = ticker_list
-df["WEEKS"] = weeks_list
-df["RISE PCT"] = rise_pct
+df['TICK'] = ticker_list
+df['WEEKS'] = weeks_list
+df['RISE PCT'] = rise_pct
 
 file_utils.save_output_file(df,FILENAME)
 timing_utils.end(start_time, f'{FILENAME}')

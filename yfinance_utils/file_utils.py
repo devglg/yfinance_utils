@@ -4,23 +4,23 @@ from datetime import date
 from yfinance_utils import constants
 
 def save_output_file(df, name):
-    folder_path = f"{constants.OUTPUT_FOLDER}/{name}"
+    folder_path = f'{constants.OUTPUT_FOLDER}/{name}'
     try:
         os.mkdir(folder_path)
     except Exception as e:
         pass
 
-    filepath = f"{constants.OUTPUT_FOLDER}/{name}/{str(date.today())}_{name}.csv"
+    filepath = f'{constants.OUTPUT_FOLDER}/{name}/{str(date.today())}_{name}.csv'
     ticks = df['TICK']
     url = []
     for i in ticks:
-        url.append(f"{constants.QUOTE_BASE_URL}/{i}/")
+        url.append(f'{constants.QUOTE_BASE_URL}/{i}/')
     df['URL'] = url
     df.round(2).to_csv(filepath, index=False)
 
 
 def read_historic_data(name):
-    name = f"{constants.DATA_FOLDER}/{name}"
+    name = f'{constants.DATA_FOLDER}/{name}'
     return pd.read_csv(name, index_col=0)
 
 

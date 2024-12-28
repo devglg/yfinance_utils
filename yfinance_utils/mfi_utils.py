@@ -8,7 +8,7 @@
 # Just use TA instead
 
 import warnings
-warnings.filterwarnings("ignore")
+warnings.filterwarnings('ignore')
 
 import pandas as pd
 
@@ -23,10 +23,10 @@ def get_mfi(data, window_length=14):
     if window_length > len(data):
         return None
 
-    df["typical"] = (data["High"] + data["Low"] + data["Close"]) / 3
+    df['typical'] = (data['High'] + data['Low'] + data['Close']) / 3
     df['raw'] = df['typical'] * data['Volume']
     
-    df['diff'] = df["raw"].diff(1)
+    df['diff'] = df['raw'].diff(1)
     df['pos'] = df['diff'].clip(lower=0).round(2)
     df['neg'] = df['diff'].clip(upper=0).abs().round(2)
 

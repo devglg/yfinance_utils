@@ -30,13 +30,13 @@ def get_ratings(ticker):
   stats = {}
   for i in RATINGS:
     stats[i] = d[d['ToGrade'] == i].shape[0]
-  stats["total"] = len(d)
-  stats['up'] = d[d['Action'] == "up"].shape[0]
-  stats['down'] = d[d['Action'] == "down"].shape[0]
+  stats['total'] = len(d)
+  stats['up'] = d[d['Action'] == 'up'].shape[0]
+  stats['down'] = d[d['Action'] == 'down'].shape[0]
   return stats
 
 
-def get_historic_price(ticker, price_field = "Close"):
+def get_historic_price(ticker, price_field = 'Close'):
   d = ticker.history()
   return list(d[price_field])
 

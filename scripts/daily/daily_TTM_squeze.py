@@ -1,5 +1,5 @@
 import warnings
-warnings.filterwarnings("ignore")
+warnings.filterwarnings('ignore')
 
 import pandas as pd
 from finta import TA
@@ -27,7 +27,7 @@ for tick in filenames:
         if bb['BB_UPPER'].iloc[-3] < kc['KC_UPPER'].iloc[-3] and \
             bb['BB_UPPER'].iloc[-1] > kc['KC_UPPER'].iloc[-1] and \
             data['Close'].iloc[-1] > bb['BB_UPPER'].iloc[-1]:
-            print(f"{tick:6}<<<----- HIGH ")     
+            print(f'{tick:6}<<<----- HIGH ')     
 
             tmp = pd.DataFrame([[data.index[-1], tick, data['Close'].iloc[-1], data['Volume'].iloc[-1], vol_avg, bb['BB_UPPER'].iloc[-3], kc['KC_UPPER'].iloc[-3], bb['BB_UPPER'].iloc[-1], kc['KC_UPPER'].iloc[-1] ]], columns=COLUMNS)  
             df_up = pd.concat([df_up,tmp], ignore_index=True)
@@ -35,7 +35,7 @@ for tick in filenames:
         if bb['BB_LOWER'].iloc[-3] > kc['KC_LOWER'].iloc[-3] and \
             bb['BB_LOWER'].iloc[-1] < kc['KC_LOWER'].iloc[-1] and \
             data['Close'].iloc[-1] < bb['BB_LOWER'].iloc[-1]:
-            print(f"{tick:6}<<<----- LOW ")     
+            print(f'{tick:6}<<<----- LOW ')     
 
             tmp = pd.DataFrame([[data.index[-1], tick, data['Close'].iloc[-1], data['Volume'].iloc[-1], vol_avg, bb['BB_LOWER'].iloc[-3], kc['KC_LOWER'].iloc[-3], bb['BB_LOWER'].iloc[-1], kc['KC_LOWER'].iloc[-1] ]], columns=COLUMNS)  
             df_down = pd.concat([df_down,tmp], ignore_index=True)

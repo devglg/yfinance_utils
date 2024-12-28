@@ -2,10 +2,10 @@ import math
 import pandas as pd
 from yfinance_utils import mfi_utils, file_utils, timing_utils
 
-COLUMNS = ["DATE", "TICK", 'PRICE', 'MFI', 'MFI_AVERAGE', 'VOLUME']
+COLUMNS = ['DATE', 'TICK', 'PRICE', 'MFI', 'MFI_AVERAGE', 'VOLUME']
 
-FILENAME_MIN = "daily_mfi_year_lowest"
-FILENAME_MAX = "daily_mfi_year_highest"
+FILENAME_MIN = 'daily_mfi_year_lowest'
+FILENAME_MAX = 'daily_mfi_year_highest'
 
 dfmfimin = pd.DataFrame(columns=COLUMNS)
 dfmfimax = pd.DataFrame(columns=COLUMNS)

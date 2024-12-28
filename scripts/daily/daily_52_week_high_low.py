@@ -1,7 +1,7 @@
 import pandas as pd
 from yfinance_utils import file_utils, timing_utils, signals_utils
 
-COLUMNS = ["DATE", "TICK", 'PRICE', 'VOLUME']
+COLUMNS = ['DATE', 'TICK', 'PRICE', 'VOLUME']
 FILENAME_HIGH = 'daily_52_week_high'
 FILENAME_LOW = 'daily_52_week_low'
 

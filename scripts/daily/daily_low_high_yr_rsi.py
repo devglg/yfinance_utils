@@ -2,10 +2,10 @@ import math
 import pandas as pd
 from yfinance_utils import rsi_utils, file_utils, timing_utils
 
-COLUMNS = ["DATE", "TICK", 'PRICE', 'RSI', 'RSI_AVERAGE', 'VOLUME']
+COLUMNS = ['DATE', 'TICK', 'PRICE', 'RSI', 'RSI_AVERAGE', 'VOLUME']
 
-FILENAME_MIN = "daily_rsi_year_lowest"
-FILENAME_MAX = "daily_rsi_year_highest"
+FILENAME_MIN = 'daily_rsi_year_lowest'
+FILENAME_MAX = 'daily_rsi_year_highest'
 
 dfrsimin = pd.DataFrame(columns=COLUMNS)
 dfrsimax = pd.DataFrame(columns=COLUMNS)

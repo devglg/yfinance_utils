@@ -16,7 +16,7 @@ end_date = tomorrow
 t_list = list_utils.get_nasdaq100() + list_utils.get_adhoc() + list_utils.get_snp500() + list_utils.get_aero_def()
 t_list = list(set(t_list))
 
-start_time = timing_utils.start(t_list, 'snapshot', f"getting historic data from: {start_date} to: {end_date}")
+start_time = timing_utils.start(t_list, 'snapshot', f'getting historic data from: {start_date} to: {end_date}')
 
 data = yf.download(t_list, start=start_date, end=end_date, rounding=True)
 for symbol in t_list:
@@ -29,5 +29,5 @@ for symbol in t_list:
     except Exception as e:
         continue
 
-timing_utils.end(start_time, 'snapshot', f"data downloaded and saved")
+timing_utils.end(start_time, 'snapshot', f'data downloaded and saved')
     

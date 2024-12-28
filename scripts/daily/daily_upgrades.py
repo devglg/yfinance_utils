@@ -2,7 +2,7 @@ import pandas as pd
 from yfinance import Tickers
 from yfinance_utils import financials_utils, file_utils, timing_utils, constants
 
-COLUMNS = ["DATE", "TICK", 'GOOD', 'BAD', 'NEUTRAL', 'TOTAL', 'AVG', 'UP/-DOWN']
+COLUMNS = ['DATE', 'TICK', 'GOOD', 'BAD', 'NEUTRAL', 'TOTAL', 'AVG', 'UP/-DOWN']
 FILENAME_UP = 'daily_analysts_up'
 FILENAME_DOWN = 'daily_analysts_down'
 

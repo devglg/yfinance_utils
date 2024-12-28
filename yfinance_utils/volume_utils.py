@@ -17,8 +17,8 @@ def get_percent_volume(ticker, period='1mo', days_back=0):
     """
 
     data = ticker.history(period = period)
-    volume = data["Volume"].iloc[len(data)-days_back]
-    average = statistics.mean(data["Volume"])
-    median = statistics.median(data["Volume"])
+    volume = data['Volume'].iloc[len(data)-days_back]
+    average = statistics.mean(data['Volume'])
+    median = statistics.median(data['Volume'])
     percentage = int(((volume/average)-1)*100)
-    return {"volume":volume, "percentage":percentage, "average":average, "median": median}
+    return {'volume':volume, 'percentage':percentage, 'average':average, 'median': median}

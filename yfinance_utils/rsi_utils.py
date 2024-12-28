@@ -8,7 +8,7 @@
 # Just use TA instead
 
 import warnings
-warnings.filterwarnings("ignore")
+warnings.filterwarnings('ignore')
 
 import pandas as pd
 
@@ -23,7 +23,7 @@ def get_rsi(data, window_length=14):
     if window_length > len(data):
         return None
 
-    df['diff'] = data["Close"].diff(1)
+    df['diff'] = data['Close'].diff(1)
     df['gain'] = df['diff'].clip(lower=0).round(2)
     df['loss'] = df['diff'].clip(upper=0).abs().round(2)
 
