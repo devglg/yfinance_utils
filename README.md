@@ -12,6 +12,7 @@ I mean, anyone can learn anything if they are taught it.
 - **Real life be like: "Trump won with Elon financing..."**
 ![tesla](https://github.com/devglg/yfinance_utils/blob/main/assets/images/tsla.png)
 
+> [!TIP]
 > "There are two methods in software design. One is to make the program so complicated that there are no obvious errors. The other is to do it so simple that there are obviously no errors". This is meant to be the latter.
 
 > [!IMPORTANT]
