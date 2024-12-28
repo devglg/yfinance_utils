@@ -5,12 +5,11 @@ Finance not Accounting. This is not Accounting, Chris, we're not closing books, 
 not Accounting. There is no class in Accounting about this type of analysis. *And if it is, then, there should be a class in the accounting program that teaches this.*
 I mean, anyone can learn anything if they are taught it.
 
-- **Investors be like: "Fundamental Analysis is the only way"**
-
-- **Traders be like: "Technical Analysis is the only way"**
-
-- **Real life be like: "Trump won with Elon financing..."**
-![tesla](https://github.com/devglg/yfinance_utils/blob/main/assets/images/tsla.png)
+> [#1589F0]
+> - **Investors be like: "Fundamental Analysis is the only way"**
+> - **Traders be like: "Technical Analysis is the only way"**
+> - **Real life be like: "Trump won with Elon financing..."**
+> ![tesla](https://github.com/devglg/yfinance_utils/blob/main/assets/images/tsla.png)
 
 > [!TIP]
 > "There are two methods in software design. One is to make the program so complicated that there are no obvious errors. The other is to do it so simple that there are obviously no errors". This is meant to be the latter.
