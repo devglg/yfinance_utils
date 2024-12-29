@@ -2,7 +2,7 @@ import pandas as pd
 import math
 from yfinance_utils import file_utils, timing_utils
 
-COLUMNS = ['DATE', 'TICK', 'PRICE 1', 'PRICE 2', 'PPRICE 3']
+COLUMNS = ['DATE', 'TICK', 'PRICE 1', 'PRICE 2', 'PRICE 3']
 FILENAME = 'daily_GAP_UP_CLOSE_HIGH'
 
 df = pd.DataFrame(columns=COLUMNS)

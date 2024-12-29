@@ -47,7 +47,13 @@ def get_datasets_list():
 def save_to_mongo(data, name):
     client = MongoClient('mongodb://localhost:27017/')
     db = client['market']
-    collection = db[name]
+    collection = db['bigdata']
     recs = data.to_dict('records')
-    recs['timestamp'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    
+    def update_dicts_in_list(list_of_dicts, key, value):
+        for d in list_of_dicts:
+            d[key] = value
+
+    update_dicts_in_list(recs, "timestamp", datetime.now())
+    update_dicts_in_list(recs, "script", name)
     collection.insert_many(recs)
