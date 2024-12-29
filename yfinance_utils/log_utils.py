@@ -21,6 +21,7 @@ def log(file, msg):
 
 def log_to_mongo(file, msg):
     client = MongoClient('mongodb://localhost:27017/')
-    db = client['log']
-    collection = db[file]
-    collection.insert_one(msg)
+    ts = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    db = client['market']
+    collection = db['log']
+    collection.insert_one({'timestamp':ts, 'script':file, 'log':msg})

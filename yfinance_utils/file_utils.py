@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 import pandas as pd
 from pymongo import MongoClient
 from datetime import date
@@ -48,4 +49,5 @@ def save_to_mongo(data, name):
     db = client['market']
     collection = db[name]
     recs = data.to_dict('records')
+    recs['timestamp'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     collection.insert_many(recs)
