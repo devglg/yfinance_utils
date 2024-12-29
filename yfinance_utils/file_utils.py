@@ -1,9 +1,13 @@
 import os
 import pandas as pd
+from pymongo import MongoClient
 from datetime import date
 from yfinance_utils import constants
 
 def save_output_file(df, name):
+    # temp to mongo
+    save_to_mongo(df, name)
+    
     folder_path = f'{constants.OUTPUT_FOLDER}/{name}'
     try:
         os.mkdir(folder_path)
@@ -18,11 +22,9 @@ def save_output_file(df, name):
     df['URL'] = url
     df.round(2).to_csv(filepath, index=False)
 
-
 def read_historic_data(name):
     name = f'{constants.DATA_FOLDER}/{name}'
     return pd.read_csv(name, index_col=0)
-
 
 def save_historic_data(df, name):
     name = f'{constants.DATA_FOLDER}/{name}'
@@ -32,7 +34,6 @@ def save_historic_data(df, name):
         pass
     return df.to_csv(name)
 
-
 def get_scripts_folder(t='daily'):
     if 'W' in t.upper():
         return constants.SCRIPTS_FOLDER_WEEKLY
@@ -41,3 +42,11 @@ def get_scripts_folder(t='daily'):
     
 def get_datasets_list():
     return os.listdir(constants.DATA_FOLDER)
+
+def save_to_mongo(data, name):
+    client = MongoClient('mongodb://localhost:27017/')
+    db = client['market']
+    collection = db[name]
+    recs = data.to_dict('records')
+    collection.insert_many(recs)
+    pass
