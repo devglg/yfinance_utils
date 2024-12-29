@@ -167,3 +167,4 @@ datasets/*
 *.DS_Store
 out/*
 market/*
+scripts/_playgrounds/*
