@@ -49,4 +49,3 @@ def save_to_mongo(data, name):
     collection = db[name]
     recs = data.to_dict('records')
     collection.insert_many(recs)
-    pass
