@@ -1,5 +1,4 @@
-import os, shlex
-from pprint import pprint
+import os
 import subprocess
 import datetime
 from yfinance_utils import file_utils, timing_utils
@@ -25,4 +24,4 @@ for folder in script_folders:
         subprocess.call([f'./.venv/bin/python3', f'./{folder}/{file}'])
 
 timing_utils.end(start_time, 'run', f'{today.strftime("%A")} run: ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^')
-subprocess.run(['mongod', '--shutdown'])
+subprocess.run(['killall', 'mongod'])
