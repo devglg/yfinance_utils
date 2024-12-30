@@ -3,7 +3,7 @@ import math
 import yfinance
 from yfinance_utils import file_utils, timing_utils, ratio_utils, options_utils
 
-COLUMNS = ['DATE', 'TICK', 'PRICE', 'VOLUME', 'CALLS', 'PUTS', 'C/P RATIO', 'SENTIMENT']
+COLUMNS = ['DATE', 'TICK', 'PRICE', 'VOLUME', 'CALLS', 'PUTS', 'PCR', 'SENTIMENT']
 FILENAME = 'daily_put_call_ratio'
 
 df = pd.DataFrame(columns=COLUMNS)
