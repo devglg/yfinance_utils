@@ -1,7 +1,12 @@
-import os
+import os, shlex
+from pprint import pprint
 import subprocess
 import datetime
-from yfinance_utils import file_utils, timing_utils, log_utils
+from yfinance_utils import file_utils, timing_utils
+
+mongod = subprocess.Popen(
+    ['mongod', '--dbpath', os.path.expanduser(os.getenv('MONGODB_PATH')), '--logpath', os.path.expanduser(os.getenv('MONGODB_LOG'))]
+)
 
 today = datetime.date.today()
 start_time = timing_utils.start([], 'run', f'{today.strftime("%A")} run: *** *** *** *** *** *** *** *** *** *** ***')
@@ -20,3 +25,4 @@ for folder in script_folders:
         subprocess.call([f'./.venv/bin/python3', f'./{folder}/{file}'])
 
 timing_utils.end(start_time, 'run', f'{today.strftime("%A")} run: ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^')
+subprocess.run(['mongod', '--shutdown'])
