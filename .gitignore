@@ -168,5 +168,4 @@ datasets/*
 out/*
 market/*
 scripts/_playgrounds/*
-startdb.sh
-stopdb.sh
+scripts/_bash/*
