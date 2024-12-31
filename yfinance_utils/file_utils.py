@@ -6,7 +6,6 @@ from datetime import date
 from yfinance_utils import constants
 
 def save_output_file(df, name):
-    # temp to mongo
     save_to_mongo(df, name)
     
     folder_path = f'{constants.OUTPUT_FOLDER}/{name}'
@@ -16,11 +15,12 @@ def save_output_file(df, name):
         pass
 
     filepath = f'{constants.OUTPUT_FOLDER}/{name}/{str(date.today())}_{name}.csv'
-    ticks = df['TICK']
-    url = []
-    for i in ticks:
-        url.append(f'{constants.QUOTE_BASE_URL}/{i}/')
-    df['URL'] = url
+    if 'TICK'in df.columns:
+        ticks = df['TICK']
+        url = []
+        for i in ticks:
+            url.append(f'{constants.QUOTE_BASE_URL}/{i}/')
+        df['URL'] = url
     df.round(2).to_csv(filepath, index=False)
 
 def read_historic_data(name):
@@ -53,7 +53,7 @@ def save_to_mongo(data, name):
     def update_dicts_in_list(list_of_dicts, key, value):
         for d in list_of_dicts:
             d[key] = value
-
-    update_dicts_in_list(recs, "timestamp", datetime.now())
-    update_dicts_in_list(recs, "script", name)
-    collection.insert_many(recs)
+    if recs:
+        update_dicts_in_list(recs, "timestamp", datetime.now())
+        update_dicts_in_list(recs, "script", name)
+        collection.insert_many(recs)
