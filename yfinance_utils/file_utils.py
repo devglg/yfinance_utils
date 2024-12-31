@@ -54,6 +54,6 @@ def save_to_mongo(data, name):
         for d in list_of_dicts:
             d[key] = value
     if recs:
-        update_dicts_in_list(recs, "timestamp", datetime.now())
+        update_dicts_in_list(recs, "timestamp", datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         update_dicts_in_list(recs, "script", name)
         collection.insert_many(recs)
