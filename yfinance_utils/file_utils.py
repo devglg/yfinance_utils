@@ -47,7 +47,7 @@ def get_datasets_list():
 def save_to_mongo(data, name):
     client = MongoClient('mongodb://localhost:27017/')
     db = client['market']
-    collection = db['bigdata']
+    collection = db[name]
     recs = data.to_dict('records')
     
     def update_dicts_in_list(list_of_dicts, key, value):
