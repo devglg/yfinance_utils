@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# Copyright 2024 Lehi Gracia
+#
+
 import time, datetime
 from yfinance_utils import log_utils
 

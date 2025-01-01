@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# Copyright 2024 Lehi Gracia
+#
+
 import pandas as pd
 from yfinance_utils import file_utils, timing_utils, signals_utils
 
