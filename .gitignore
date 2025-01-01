@@ -167,5 +167,4 @@ datasets/*
 *.DS_Store
 out/*
 market/*
-scripts/_playgrounds/*
 scripts/_bash/*
