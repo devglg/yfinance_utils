@@ -4,7 +4,6 @@
 # Copyright 2024 Lehi Gracia
 #
 
-
 import os
 import subprocess
 import datetime
@@ -15,14 +14,15 @@ mongod = subprocess.Popen(
 )
 
 today = datetime.date.today()
-start_time = timing_utils.start([], 'run', f'{today.strftime("%A")} run: *** *** *** *** *** *** *** *** *** *** ***')
 script_folders = []
-
-subprocess.call([f'./.venv/bin/python3', f'./scripts/snapshot.py'])
 
 script_folders.append(file_utils.get_scripts_folder('daily'))
 if today.strftime('%A') in ['Saturday', 'Sunday']:
     script_folders.append(file_utils.get_scripts_folder('weekly'))
+
+start_time = timing_utils.start(script_folders, 'run', f'{today.strftime("%A")} run: *** *** *** *** *** *** *** *** *** *** ***')
+
+subprocess.call([f'./.venv/bin/python3', f'./scripts/snapshot.py'])
 
 for folder in script_folders:
     filenames = os.listdir(folder)

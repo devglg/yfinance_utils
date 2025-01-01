@@ -16,7 +16,7 @@ from yfinance_utils.lists.remove import remove
 from yfinance_utils.lists.adhoc import adhoc
 
 def get_all_tickers():
-    all = mag7 + nasdaq100 + snp500 + aero_def + nasdaq + nyse + rus2000
+    all = mag7 + nasdaq100 + snp500 + aero_def + nasdaq + nyse + rus2000 + adhoc
     return list(set(all) - set(remove))
 
 def get_rus2000():

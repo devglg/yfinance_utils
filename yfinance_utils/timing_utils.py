@@ -11,7 +11,7 @@ def start(lst, filename, log=' '):
     print('***************************************************************************************')
     print('***  START  ***  START  ***  START  ***  START  ***  START  ***  START  ***  START  ***')
     print('')
-    print(f'Working with {len(lst)} companies. started at {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
+    print(f'Processing {len(lst)} files. started at {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
     print('***************************************************************************************')
     print('')
     log_utils.log(filename, f'started, {log}')
