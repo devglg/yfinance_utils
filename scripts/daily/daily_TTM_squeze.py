@@ -29,7 +29,7 @@ for tick in filenames:
 
         vol_avg = data['Volume'].iloc[-1] / data['Volume'].mean() * 100
         bb = TA.BBANDS(data)
-        kc = TA.KC(data, kc_mult=1.5)
+        kc = TA.KC(data, kc_mult=2)
         if bb['BB_UPPER'].iloc[-3] < kc['KC_UPPER'].iloc[-3] and \
             bb['BB_UPPER'].iloc[-1] > kc['KC_UPPER'].iloc[-1] and \
             data['Close'].iloc[-1] > bb['BB_UPPER'].iloc[-1]:
