@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# Copyright 2024 Lehi Gracia
+#
+
 import pandas as pd
 from pprint import pprint
 from pymongo import MongoClient

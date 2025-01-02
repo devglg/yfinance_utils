@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# Copyright 2024 Lehi Gracia
+#
+
 import plotly.graph_objects as go
 import pandas as pd
 from pymongo import MongoClient

@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# Copyright 2024 Lehi Gracia
+#
+
 from pymongo import MongoClient
 from pprint import pprint
 import datetime
