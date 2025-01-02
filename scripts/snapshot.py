@@ -11,7 +11,7 @@ import yfinance
 from yfinance import Ticker
 from yfinance_utils import list_utils, timing_utils, file_utils, constants
 
-COLUMNS = ['Adj Close','Close','High','Low','Open','Volume']
+COLUMNS = ['Open','High','Low','Close','Volume']
 
 twoyearsago = str(date.today() - timedelta(weeks=104))
 oneyearago = str(date.today() - timedelta(weeks=52))
@@ -26,7 +26,7 @@ symbol_list = []
 if date.today().strftime('%A') in ['Saturday', 'Sunday']:
     symbol_list = list_utils.get_all_tickers()
 else:
-    symbol_list = list_utils.get_nasdaq100() + list_utils.get_adhoc() + list_utils.get_snp500()
+    symbol_list = list_utils.get_nasdaq100() + list_utils.get_adhoc() + list_utils.get_snp500() + list_utils.get_ab()
 
 # remove dups
 symbol_list = list(set(symbol_list))
@@ -39,7 +39,7 @@ if date.today().strftime('%A') in ['Saturday', 'Sunday']:
     for symbol in symbol_list:
         try:
             tmp = Ticker(symbol)
-            data = tmp.history(start=start_date, end=end_date, rounding=True, timeout=20)
+            data = tmp.history(start=start_date, end=end_date, rounding=True, timeout=20, actions=False)
             data.columns = COLUMNS
             if data['Close'].iloc[-1] > constants.MINIMUM_PRICE:
                 file_utils.save_historic_data(data, symbol)  
