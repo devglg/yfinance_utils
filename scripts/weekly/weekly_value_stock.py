@@ -2,7 +2,7 @@ import pandas as pd
 import yfinance, math
 from yfinance_utils import file_utils, timing_utils, constants, ratio_utils
 
-COLUMNS = ['DATE', 'TICK', 'PRICE', 'PRICE TO EARNINGS', 'PRICE TO SALES']
+COLUMNS = ['DATE', 'TICK', 'PRICE', 'PRICE_TO_EARNINGS', 'PRICE_TO_SALES']
 FILENAME = 'daily_value_stock'
 
 df = pd.DataFrame(columns=COLUMNS)
@@ -30,4 +30,4 @@ for tick in filenames:
         continue
     
 file_utils.save_output_file(df,FILENAME)
-timing_utils.end(start_time, f'{FILENAME}')
+timing_utils.end(start_time, FILENAME)

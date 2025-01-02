@@ -29,4 +29,4 @@ dfvol['TOTAL'] = dfvol.sum(axis=1)
 dfvol.reset_index(inplace=True)
 
 file_utils.save_output_file(dfvol, FILENAME)
-timing_utils.end(start_time, f'{FILENAME}')
+timing_utils.end(start_time, FILENAME)

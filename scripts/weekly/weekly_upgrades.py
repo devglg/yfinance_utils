@@ -8,7 +8,7 @@ FILENAME='weekly_upgrades'
 
 dfups = pd.DataFrame(columns=COLUMNS)
 filenames = file_utils.get_datasets_list()
-start_time = timing_utils.start(filenames, f'{FILENAME}')
+start_time = timing_utils.start(filenames, FILENAME)
 
 t = Tickers(filenames)
 
@@ -33,4 +33,4 @@ for tick in filenames:
         dfups = pd.concat([dfups, tmpups], ignore_index=True)
 
 file_utils.save_output_file(dfups,FILENAME)
-timing_utils.end(start_time, f'{FILENAME}')
+timing_utils.end(start_time, FILENAME)

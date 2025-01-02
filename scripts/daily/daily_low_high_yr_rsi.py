@@ -15,7 +15,7 @@ FILENAME = 'daily_rsi_year_extremes'
 dfrsi = pd.DataFrame(columns=COLUMNS)
 
 filenames = file_utils.get_datasets_list()
-start_time = timing_utils.start(filenames, f'{FILENAME}')
+start_time = timing_utils.start(filenames, FILENAME)
 
 for tick in filenames:
     try:
@@ -39,4 +39,4 @@ for tick in filenames:
         continue
         
 file_utils.save_output_file(dfrsi,FILENAME)
-timing_utils.end(start_time, f'{FILENAME}')
+timing_utils.end(start_time, FILENAME)
