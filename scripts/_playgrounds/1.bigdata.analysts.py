@@ -28,7 +28,7 @@ fig = make_subplots(rows=2, cols=1)
 
 fig.append_trace(go.Scatter(x=df['TICK'], y=df['BAD'], mode='markers', marker=dict(size=5, color='red'), name='BAD'), row=1, col=1)
 fig.append_trace(go.Scatter(x=df['TICK'], y=df['GOOD'], mode='markers', marker=dict(size=5, color='blue'), name='GOOD'), row=1, col=1)
-fig.append_trace(go.Scatter( x=df['TICK'], y=df['NEUTRAL'], mode='markers', marker=dict(size=5, color='red'), name='NEUTRAL'), row=1, col=1)
+fig.append_trace(go.Scatter( x=df['TICK'], y=df['NEUTRAL'], mode='markers', marker=dict(size=5, color='black'), name='NEUTRAL'), row=1, col=1)
 
 for i, row in df.iterrows():
     if row["NEUTRAL"]!=row["GOOD"]:
@@ -60,7 +60,7 @@ for i, row in df.iterrows():
 
 fig.append_trace(go.Scatter(x=df2['TICK'], y=df2['BAD'], mode='markers', marker=dict(size=5, color='red'), name='BAD'), row=2, col=1)
 fig.append_trace(go.Scatter(x=df2['TICK'], y=df2['GOOD'], mode='markers', marker=dict(size=5, color='blue'), name='GOOD'), row=2, col=1)
-fig.append_trace(go.Scatter( x=df2['TICK'], y=df2['NEUTRAL'], mode='markers', marker=dict(size=5, color='red'), name='NEUTRAL'), row=2, col=1)
+fig.append_trace(go.Scatter( x=df2['TICK'], y=df2['NEUTRAL'], mode='markers', marker=dict(size=5, color='black'), name='NEUTRAL'), row=2, col=1)
 
 for i, row in df2.iterrows():
     if row["NEUTRAL"]!=row["GOOD"]:
