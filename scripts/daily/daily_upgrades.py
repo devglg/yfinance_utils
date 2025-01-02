@@ -42,8 +42,7 @@ for tick in ts.tickers:
         if up > down:
             tmp =  pd.DataFrame([[data.index[-1], tick, good, bad, neutral, total, avg, up - down]], columns=COLUMNS)
             dfups = pd.concat([dfups, tmp], ignore_index=True)
-
-        if up < down:
+        else:
             tmp =  pd.DataFrame([[data.index[-1], tick, good, bad, neutral, total, avg, up - down]], columns=COLUMNS)
             dfdowns = pd.concat([dfdowns, tmp], ignore_index=True)
 

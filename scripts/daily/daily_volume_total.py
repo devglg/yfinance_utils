@@ -11,7 +11,7 @@ FILENAME = 'daily_volume_total'
 dfvol = pd.DataFrame()
 
 filenames = file_utils.get_datasets_list()
-start_time = timing_utils.start(filenames, f'{FILENAME}')
+start_time = timing_utils.start(filenames, FILENAME)
 
 for tick in filenames:
     try:
@@ -27,5 +27,6 @@ for tick in filenames:
 
 dfvol['TOTAL'] = dfvol.sum(axis=1)
 dfvol.reset_index(inplace=True)
+
 file_utils.save_output_file(dfvol, FILENAME)
 timing_utils.end(start_time, f'{FILENAME}')

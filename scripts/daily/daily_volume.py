@@ -14,7 +14,7 @@ FILENAME = 'daily_volume_up'
 dfvol = pd.DataFrame(columns=COLUMNS)
 
 filenames = file_utils.get_datasets_list()
-start_time = timing_utils.start(filenames, f'{FILENAME}')
+start_time = timing_utils.start(filenames, FILENAME)
 
 for tick in filenames:
     try:
@@ -23,7 +23,7 @@ for tick in filenames:
         if d_rsi['rsi'].iloc[-1] < constants.MINIMUM_RSI:
             continue
 
-        avg = int(statistics.mean(d_rsi['Volume']))
+        avg = d_rsi['Volume'].rolling(10).mean().iloc[-1]
         volume_0 = d_rsi['Volume'].iloc[-1]
         volume_0_pct = volume_0/avg*100
         volume_1 = d_rsi['Volume'].iloc[-2]
@@ -33,7 +33,6 @@ for tick in filenames:
         price_1 = d_rsi['Close'].iloc[-2]
 
         rsi = d_rsi['rsi'].iloc[-1]
-        price = d_rsi['Close'].iloc[-1]
     except Exception as e:
         continue
     
@@ -42,4 +41,4 @@ for tick in filenames:
         dfvol = pd.concat([dfvol, tmpvol], ignore_index=True)
 
 file_utils.save_output_file(dfvol,FILENAME)
-timing_utils.end(start_time, f'{FILENAME}')
+timing_utils.end(start_time, FILENAME)
