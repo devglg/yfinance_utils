@@ -22,7 +22,7 @@ res2 = get_all_data_from_script('daily_analysts_down',
 df = pd.DataFrame(res)
 df = df.sort_values(by='GOOD', ascending=False)
 df2 = pd.DataFrame(res2)
-df2 = df.sort_values(by='GOOD', ascending=False)
+df2 = df2.sort_values(by='GOOD', ascending=False)
 
 fig = make_subplots(rows=2, cols=1)
 
