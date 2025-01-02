@@ -24,25 +24,24 @@ df = df.sort_values(by='GOOD', ascending=False)
 df2 = pd.DataFrame(res2)
 df2 = df2.sort_values(by='GOOD', ascending=False)
 
-fig = make_subplots(rows=2, cols=1)
+fig = make_subplots(rows=2, cols=1, subplot_titles=("UPGRADES", "DOWNGRADES"))
 
-fig.append_trace(go.Scatter(x=df['TICK'], y=df['BAD'], mode='markers', marker=dict(size=5, color='red'), name='BAD'), row=1, col=1)
-fig.append_trace(go.Scatter(x=df['TICK'], y=df['GOOD'], mode='markers', marker=dict(size=5, color='blue'), name='GOOD'), row=1, col=1)
-fig.append_trace(go.Scatter( x=df['TICK'], y=df['NEUTRAL'], mode='markers', marker=dict(size=5, color='black'), name='NEUTRAL'), row=1, col=1)
+fig.append_trace(go.Scatter(x=df['TICK'], y=df['BAD'], mode='markers', marker=dict(size=5, color='red'), name='UPGRADE SALE'), row=1, col=1)
+fig.append_trace(go.Scatter( x=df['TICK'], y=df['NEUTRAL'], mode='markers', marker=dict(size=5, color='black'), name='UPGRADE HOLD'), row=1, col=1)
+fig.append_trace(go.Scatter(x=df['TICK'], y=df['GOOD'], mode='markers', marker=dict(size=5, color='blue'), name='UPGRADE BUY'), row=1, col=1)
 
 for i, row in df.iterrows():
-    if row["NEUTRAL"]!=row["GOOD"]:
-        fig.add_shape(
-            dict(type="line",
-                 x0=row["TICK"],
-                 x1=row["TICK"],
-                 y0=row["NEUTRAL"],
-                 y1=row["GOOD"],
-                 line=dict(
-                   color="blue",
-                   width=2)
-                ),row=1, col=1
-        )
+    fig.add_shape(
+        dict(type="line",
+                x0=row["TICK"],
+                x1=row["TICK"],
+                y0=0,
+                y1=row["BAD"],
+                line=dict(
+                color="red",
+                width=2)
+            ),row=1, col=1
+    )
 
 for i, row in df.iterrows():
     if row["BAD"]!=row["NEUTRAL"]:
@@ -53,16 +52,12 @@ for i, row in df.iterrows():
                  y0=row["BAD"],
                  y1=row["NEUTRAL"],
                  line=dict(
-                   color="red",
+                   color="black",
                    width=2)
                 ),row=1, col=1
         )
 
-fig.append_trace(go.Scatter(x=df2['TICK'], y=df2['BAD'], mode='markers', marker=dict(size=5, color='red'), name='BAD'), row=2, col=1)
-fig.append_trace(go.Scatter(x=df2['TICK'], y=df2['GOOD'], mode='markers', marker=dict(size=5, color='blue'), name='GOOD'), row=2, col=1)
-fig.append_trace(go.Scatter( x=df2['TICK'], y=df2['NEUTRAL'], mode='markers', marker=dict(size=5, color='black'), name='NEUTRAL'), row=2, col=1)
-
-for i, row in df2.iterrows():
+for i, row in df.iterrows():
     if row["NEUTRAL"]!=row["GOOD"]:
         fig.add_shape(
             dict(type="line",
@@ -72,20 +67,52 @@ for i, row in df2.iterrows():
                  y1=row["GOOD"],
                  line=dict(
                    color="blue",
+                   width=2)
+                ),row=1, col=1
+        )
+
+
+fig.append_trace(go.Scatter(x=df2['TICK'], y=df2['BAD'], mode='markers', marker=dict(size=5, color='red'), name='DOWNGRADE SALE'), row=2, col=1)
+fig.append_trace(go.Scatter( x=df2['TICK'], y=df2['NEUTRAL'], mode='markers', marker=dict(size=5, color='black'), name='DOWNGRADE HOLD'), row=2, col=1)
+fig.append_trace(go.Scatter(x=df2['TICK'], y=df2['GOOD'], mode='markers', marker=dict(size=5, color='blue'), name='DOWNGRADE BUY'), row=2, col=1)
+
+for i, row in df2.iterrows():
+    fig.add_shape(
+        dict(type="line",
+                x0=row["TICK"],
+                x1=row["TICK"],
+                y0=0,
+                y1=row["BAD"],
+                line=dict(
+                color="red",
+                width=2)
+            ),row=2, col=1
+    )
+
+for i, row in df2.iterrows():
+    if row["BAD"]!=row["NEUTRAL"]:
+        fig.add_shape(
+            dict(type="line",
+                 x0=row["TICK"],
+                 x1=row["TICK"],
+                 y0=row["BAD"],
+                 y1=row["NEUTRAL"],
+                 line=dict(
+                   color="black",
                    width=2)
                 ),row=2, col=1
         )
 
 for i, row in df2.iterrows():
-    if row["BAD"]!=row["NEUTRAL"]:
+    if row["NEUTRAL"]!=row["GOOD"]:
         fig.add_shape(
             dict(type="line",
                  x0=row["TICK"],
                  x1=row["TICK"],
-                 y0=row["BAD"],
-                 y1=row["NEUTRAL"],
+                 y0=row["NEUTRAL"],
+                 y1=row["GOOD"],
                  line=dict(
-                   color="red",
+                   color="blue",
                    width=2)
                 ),row=2, col=1
         )
