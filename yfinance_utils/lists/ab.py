@@ -58,5 +58,6 @@ ab = [
     "DRI",
     "OKLO",
     "SMMT",
-    "VKTX"
+    "VKTX",
+    "CAVA"
 ]

@@ -163,7 +163,7 @@ cython_debug/
 *.csv
 *.sqlite
 test/*
-datasets/*
+datasets*/*
 *.DS_Store
 out/*
 market/*

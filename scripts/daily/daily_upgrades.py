@@ -4,6 +4,18 @@
 # Copyright 2024 Lehi Gracia
 #
 
+# TODO: change to recommentations_summary
+'''
+>>> t.recommendations
+  period  strongBuy  buy  hold  sell  strongSell
+0     0m          8   24    12     1           2
+1    -1m          8   24    12     1           2
+2    -2m          8   24    12     1           2
+3    -3m          8   23    12     1           2
+>>> 
+'''
+
+
 import pandas as pd
 from yfinance import Tickers
 from yfinance_utils import financials_utils, file_utils, timing_utils, constants

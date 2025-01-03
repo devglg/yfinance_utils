@@ -9,7 +9,7 @@ import pandas as pd
 from yfinance_utils import file_utils, timing_utils, signals_utils
 
 COLUMNS = ['DATE', 'TICK', 'PRICE', 'VOL']
-FILENAME = 'daily_ema_stoch_macd'
+FILENAME = 'daily_stoch'
 
 df = pd.DataFrame(columns=COLUMNS)
 filenames = file_utils.get_datasets_list()
