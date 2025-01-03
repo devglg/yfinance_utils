@@ -34,15 +34,6 @@ def get_ratings(ticker):
   stats = {'up':up, 'down': down, 'total': total, 'hold':hold}
   return stats
 
-def get_historic_price(ticker, price_field = 'Close'):
-  d = ticker.history()
-  return list(d[price_field])
-
-def get_last_price(tick):
-  d = get_historic_price(tick)
-  if len(d) < 1:
-    return None
-  return d[-1]
 
 
 
