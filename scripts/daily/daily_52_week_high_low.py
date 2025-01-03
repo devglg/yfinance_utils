@@ -5,9 +5,9 @@
 #
 
 import pandas as pd
-from yfinance_utils import file_utils, timing_utils, signals_utils
+from yfinance_utils import file_utils, timing_utils, signals_utils, constants
 
-COLUMNS = ['DATE', 'TICK', 'PRICE', 'VOLUME']
+COLUMNS = ['DATE', 'TICK', 'PRICE', 'HIGH', 'LOW', 'VOLUME']
 FILENAME = 'daily_52_week_extremes'
 
 df = pd.DataFrame(columns=COLUMNS)
@@ -22,6 +22,8 @@ for tick in filenames:
             tmp =  pd.DataFrame([[data.index[-1], 
                                   tick, 
                                   data['Close'].iloc[-1],
+                                  signals_utils.get_price_year_high(data),
+                                  signals_utils.get_price_year_low(data),
                                   data['Volume'].iloc[-1]
                                   ]], columns=COLUMNS)
 

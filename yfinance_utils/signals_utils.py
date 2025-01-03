@@ -94,12 +94,18 @@ def is_ma_price_cross_up(data, sma=30, ema=10, day=1):
 # 52 week indicators     #
 ##########################
 
+def get_price_year_low(data):
+    return data['Close'].iloc[-constants.TRADING_DAYS_IN_YEAR:].min()
+
 def is_price_year_low(data, pct_diff = 2):
-    low = data['Close'].iloc[-constants.TRADING_DAYS_IN_YEAR:].min()
+    low = get_price_year_low(data)
     return math.isclose(low, data['Close'].iloc[-1], abs_tol=(low * pct_diff / 100))
 
+def get_price_year_high(data):
+    return data['Close'].iloc[-constants.TRADING_DAYS_IN_YEAR:].max()
+
 def is_price_year_high(data, pct_diff = 2):
-    high = data['Close'].iloc[-constants.TRADING_DAYS_IN_YEAR:].max()
+    high = get_price_year_high(data)
     return math.isclose(high, data['Close'].iloc[-1], abs_tol=(high * pct_diff / 100))
 
 ##########################
