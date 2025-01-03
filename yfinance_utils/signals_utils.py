@@ -35,11 +35,11 @@ def is_stoch_cross_down(data, days_back = 5, line = 50):
            and stochk.iloc[-1] < line and stochk.iloc[-days_back] > line
 
 def is_upward_trend(data, days = 50):
-    ma = TA.SMA(data, days)
+    ma = TA.EMA(data, days)
     return data['Close'].iloc[-1] > ma.iloc[-1]
 
 def is_downward_trend(data, days = 50):
-    ma = TA.SMA(data, days)
+    ma = TA.EMA(data, days)
     return data['Close'].iloc[-1] < ma.iloc[-1]
 
 def is_52wk_low(data, pct_diff = 2):
