@@ -26,7 +26,7 @@ for tick in filenames:
         continue
     
     if up > down:
-        tmpups =  pd.DataFrame([[datetime.date.today(), tick, up, down, hold, avg_up, total]], columns=COLUMNS)
+        tmpups =  pd.DataFrame([[datetime.date.today().strftime('%Y-%m-%d'), tick, up, down, hold, avg_up, total]], columns=COLUMNS)
         dfups = pd.concat([dfups, tmpups], ignore_index=True)
 
 file_utils.save_output_file(dfups,FILENAME)

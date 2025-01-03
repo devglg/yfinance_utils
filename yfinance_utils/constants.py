@@ -15,5 +15,6 @@ QUOTE_BASE_URL = 'https://finance.yahoo.com/quote'
 SCRIPTS_FOLDER_DAILY = "scripts/daily"
 SCRIPTS_FOLDER_WEEKLY = "scripts/weekly"
 TRADING_DAYS_IN_YEAR = 251
+RATINGS = ['Buy', 'Hold', 'Neutral', 'Outperform', 'Overweight', 'Underweight', 'Equal-Weight', 'Underperform', 'Market Perform', 'Sector Weight', 'Sector Perform', 'Gradually Accumulate']
 
 

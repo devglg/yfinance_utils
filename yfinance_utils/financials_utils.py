@@ -4,8 +4,6 @@
 # Copyright 2024 Lehi Gracia
 #
 
-RATINGS = ['Buy', 'Hold', 'Neutral', 'Outperform', 'Overweight', 'Underweight', 'Equal-Weight', 'Underperform', 'Market Perform', 'Sector Weight', 'Sector Perform', 'Gradually Accumulate']
-
 
 """
 GET FINANCIAL STATEMENTS as dictionary
