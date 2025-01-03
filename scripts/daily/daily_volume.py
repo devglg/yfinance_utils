@@ -6,6 +6,7 @@
 
 import pandas as pd
 import statistics
+from finta import TA
 from yfinance_utils import rsi_utils, file_utils, constants, timing_utils
 
 COLUMNS = ['DATE', 'TICK', 'RSI', 'AVERAGE', 'PRICE -1', 'VOLUME -1', 'VOL % -1', 'PRICE', 'VOLUME', 'VOL %']
@@ -19,7 +20,7 @@ start_time = timing_utils.start(filenames, FILENAME)
 for tick in filenames:
     try:
         data = file_utils.read_historic_data(tick)
-        d_rsi = rsi_utils.get_rsi(data, window_length=14)
+        d_rsi = TA.RSI(data.iloc[-constants.TRADING_DAYS_IN_YEAR:], period=14)
         if d_rsi['rsi'].iloc[-1] < constants.MINIMUM_RSI:
             continue
 

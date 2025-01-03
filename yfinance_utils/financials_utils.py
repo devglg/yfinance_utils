@@ -26,21 +26,17 @@ GET OTHER FINANCIAL INFORMATION
 """
 
 def get_ratings(ticker):
-  d = ticker.get_upgrades_downgrades()
-  stats = {}
-  for i in RATINGS:
-    stats[i] = d[d['ToGrade'] == i].shape[0]
-  stats['total'] = len(d)
-  stats['up'] = d[d['Action'] == 'up'].shape[0]
-  stats['down'] = d[d['Action'] == 'down'].shape[0]
+  d = ticker.recommendations.iloc[0]
+  up = d['strongBuy'] + d['buy']
+  down = d['strongSell'] + d['sell']
+  hold = d['hold']
+  total = d['strongBuy'] + d['buy'] + d['strongSell'] + d['sell'] + d['hold']
+  stats = {'up':up, 'down': down, 'total': total, 'hold':hold}
   return stats
-
 
 def get_historic_price(ticker, price_field = 'Close'):
   d = ticker.history()
   return list(d[price_field])
-
-
 
 def get_last_price(tick):
   d = get_historic_price(tick)

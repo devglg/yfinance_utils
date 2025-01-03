@@ -19,11 +19,11 @@ def get_all_data_from_script(script, filter = {}, columns = {}):
 
 res = get_all_data_from_script('daily_analysts_up', 
                                {}, 
-                               {'_id':0, 'TOTAL':1, 'GOOD':1,'BAD':1,'NEUTRAL':1, 'TICK':1,'AVG':1})
+                               {'_id':0, 'TOTAL':1, 'UP':1,'DOWN':1,'HOLD':1, 'TICK':1,'AVG':1})
 
 res2 = get_all_data_from_script('daily_analysts_down', 
                                {}, 
-                               {'_id':0, 'TOTAL':1, 'GOOD':1,'BAD':1,'NEUTRAL':1, 'TICK':1,'AVG':1})
+                               {'_id':0, 'TOTAL':1, 'UP':1,'DOWN':1,'HOLD':1, 'TICK':1,'AVG':1})
 
 df = pd.DataFrame(res)
 df = df.sort_values(by='GOOD', ascending=False)

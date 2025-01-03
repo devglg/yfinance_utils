@@ -18,7 +18,7 @@ start_time = timing_utils.start(filenames, FILENAME)
 for tick in filenames:
     try:
         data = file_utils.read_historic_data(tick)
-        if signals_utils.is_52wk_high(data) or signals_utils.is_52wk_low(data):
+        if signals_utils.is_price_year_high(data) or signals_utils.is_price_year_low(data):
             tmp =  pd.DataFrame([[data.index[-1], 
                                   tick, 
                                   data['Close'].iloc[-1],
