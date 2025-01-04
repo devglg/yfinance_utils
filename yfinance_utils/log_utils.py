@@ -17,7 +17,11 @@ def create_folder():
         pass
 
 def log(file, msg):
-    log_to_mongo(file, msg)
+    try:
+        log_to_mongo(file, msg)
+    except Exception as e:
+        print('Mongo not running. Saving logs to text file only.')
+        
     file_utils.save_to_mongo
     create_folder()
     filename = f'{constants.OUTPUT_FOLDER}/{constants.LOG_FOLDER}/{constants.LOG_FILENAME}'

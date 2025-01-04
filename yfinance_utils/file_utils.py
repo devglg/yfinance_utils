@@ -10,9 +10,16 @@ import pandas as pd
 from pymongo import MongoClient
 from datetime import date
 from yfinance_utils import constants
+from pprint import pprint
 
 def save_output_file(df, name):
-    save_to_mongo(df, name)
+    if os.environ['YFU_PRINT_OUT']:
+        pprint(df)
+
+    try:
+        save_to_mongo(df, name)
+    except Exception as e:
+        print('Mongo not running. Saving to output directory only. This will soon change to only save to the database.')
     
     folder_path = f'{constants.OUTPUT_FOLDER}/{name}'
     try:
