@@ -1,6 +1,6 @@
 # yfinance_utils
 Just adding some utilities to the yfinance library to make it easier to do technical analysis.
-In response to a conversation with a friend X. Can you expect people to know what you didn't taught.
+In response to a conversation with a friend X. Can you expect people to know what you didn't teach.
 
 > - **Investors be like: "Fundamental Analysis is the only way"**
 > - **Traders be like: "Technical Analysis is the only way"**
