@@ -26,10 +26,10 @@ In response to a conversation with a friend X. Can you expect people to know wha
 `.\venv\Scripts\pip.exe install setuptools`
 
 ### install the module
-#### you don't plan to edit the library
+#### if you don't plan to edit the library, run this command
 `.\venv\Scripts\pip.exe install .`
 
-#### you plan to edit the library
+#### if you plan to edit the library, run this one
 `.\venv\Scripts\pip.exe install -e .`
 
 ### install requirements
