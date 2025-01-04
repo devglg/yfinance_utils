@@ -188,9 +188,9 @@ def is_support_breake_down(data, days=14, min_fails = 3, pct_res=0.5, pct_break 
     else:
         return False
     
-#####################
-# CAHOLD indicators #
-#####################
+##########################
+# CAHOLD indicators      #
+##########################
 
 def is_cahold(data, days=5):
     d = data[-days:]
@@ -210,4 +210,12 @@ def is_cblohd(data, days=4):
             return d['Close'].iloc[-1] < d['Low'].iloc[i]
     return False
 
+##########################
+# VOLUME indicators      #
+##########################
 
+def is_high_volume(data, pct_higher = 30):
+    d = data[-constants.TRADING_DAYS_IN_YEAR:]
+    d_avg = d['Volume'].mean()
+    d_high_vol = d_avg + (d_avg * pct_higher / 100)
+    return d['Volume'].iloc[-1] > d_high_vol
