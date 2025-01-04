@@ -148,3 +148,65 @@ def is_vix_cross_down(day=2):
     return hma10.iloc[-day] > hma20.iloc[-day] \
             and hma10.iloc[-1] < hma20.iloc[-1]
 
+#####################################
+# SUPPORT and RESISTANCE indicators #
+#####################################
+
+def is_resistance_breake_up(data, days=14, min_fails = 3, pct_res = 0.5, pct_break = 3):
+    d = data['High'][-days:-2]
+    today = data['Close'][-1]
+
+    d_max = d.max()
+    d_max_pct = d_max * pct_res / 100
+    d_break = d_max + (d_max * pct_break / 100)
+
+    counter = 0
+    for i in d:
+        if math.isclose(i, d_max, abs_tol=d_max_pct):
+            counter = counter + 1
+    
+    if counter > min_fails and today > d_break:
+        return True
+    else:
+        return False
+    
+def is_support_breake_down(data, days=14, min_fails = 3, pct_res=0.5, pct_break = 3):
+    d = data['Low'][-days:-2]
+    today = data['Close'][-1]
+
+    d_min = d.min()
+    d_min_pct = d_min * pct_res / 100
+    d_break = d_min + (d_min * pct_break / 100)
+
+    counter = 0
+    for i in d:
+        if math.isclose(i, d_min, abs_tol=d_min_pct):
+            counter = counter + 1
+    
+    if counter > min_fails and today < d_break:
+        return True
+    else:
+        return False
+    
+#####################
+# CAHOLD indicators #
+#####################
+
+def is_cahold(data, days=5):
+    d = data[-days:]
+    d['IS_GREEN'] = d['Close'] > d['Open']
+    for i in range(-days,-1,-1):
+        if not d['IS_GREEN']:
+            return d['Close'].iloc[-1] > d['High'].iloc[i]
+    return False
+
+def is_cblohd(data, days=4):
+    d = data[-days:]
+    d['IS_RED'] = d['Close'] < d['Open']
+    if d['IS_RED'].iloc[-1]: return False
+    for i in range(-2, -days,-1):
+        if d['IS_RED']:
+            return d['Close'].iloc[-1] > d['High'].iloc[i]
+    return False
+
+
