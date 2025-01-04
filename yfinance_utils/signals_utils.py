@@ -194,19 +194,20 @@ def is_support_breake_down(data, days=14, min_fails = 3, pct_res=0.5, pct_break 
 
 def is_cahold(data, days=5):
     d = data[-days:]
-    d['IS_GREEN'] = d['Close'] > d['Open']
+    d['IS_RED'] = d['Close'] < d['Open']
+    if d['IS_RED'].iloc[-1]: return False
     for i in range(-days,-1,-1):
-        if not d['IS_GREEN']:
+        if not d['IS_RED']:
             return d['Close'].iloc[-1] > d['High'].iloc[i]
     return False
 
 def is_cblohd(data, days=4):
     d = data[-days:]
-    d['IS_RED'] = d['Close'] < d['Open']
-    if d['IS_RED'].iloc[-1]: return False
+    d['IS_GREEN'] = d['Close'] > d['Open']
+    if d['IS_GREEN'].iloc[-1]: return False
     for i in range(-2, -days,-1):
-        if d['IS_RED']:
-            return d['Close'].iloc[-1] > d['High'].iloc[i]
+        if d['IS_GREEN']:
+            return d['Close'].iloc[-1] < d['Low'].iloc[i]
     return False
 
 
