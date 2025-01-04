@@ -25,10 +25,11 @@ In response to a conversation with a friend X. Can you expect people to know wha
 ### install setuptools
 `.\venv\Scripts\pip.exe install setuptools`
 
-### install the module (you don't plan to edit the library)
+### install the module
+#### you don't plan to edit the library
 `.\venv\Scripts\pip.exe install .`
 
-### install the module (you plan to edit the library)
+#### you plan to edit the library
 `.\venv\Scripts\pip.exe install -e .`
 
 ### install requirements
