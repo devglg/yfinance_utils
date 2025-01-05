@@ -16,7 +16,6 @@ filenames = file_utils.get_datasets_list()
 start_time = timing_utils.start(filenames, FILENAME)
 
 for tick in filenames:
-    print(tick)
     try:
         data = file_utils.read_historic_data(tick)
         if math.isnan(data['Close'].iloc[-1]): continue
