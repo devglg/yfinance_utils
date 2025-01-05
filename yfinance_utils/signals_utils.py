@@ -141,16 +141,16 @@ def is_rsi_year_high(data, period=14):
 ##########################
 
 def is_vix_hma_cross_up(day=2):
-    t = yfinance.Ticker('VIX')
-    data = t.download(period="1y")
+    t = yfinance.Ticker('^VIX')
+    data = t.history(period="1y")
     hma10 = TA.HMA(data, period=10) 
     hma20 = TA.HMA(data, period=20) 
     return hma10.iloc[-day] < hma20.iloc[-day] \
             and hma10.iloc[-1] > hma20.iloc[-1]
 
 def is_vix_hma_cross_down(day=2):
-    t = yfinance.Ticker('VIX')
-    data = t.download(period="1y")
+    t = yfinance.Ticker('^VIX')
+    data = t.history(period="1y")
     hma10 = TA.HMA(data, period=10) 
     hma20 = TA.HMA(data, period=20) 
     return hma10.iloc[-day] > hma20.iloc[-day] \
