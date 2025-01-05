@@ -22,7 +22,7 @@ symbol_list = []
 
 # Get the long list of symbols for weekend and shorter list for weekdays
 if date.today().strftime('%A') in ['Saturday', 'Sunday']:
-    symbol_list = list_utils.get_nasdaq100() + list_utils.get_adhoc() + list_utils.get_ab()
+    symbol_list = list_utils.get_nasdaq100() + list_utils.get_adhoc() + list_utils.get_ab() + list_utils.get_snp500() + list_utils.get_dow()
 else:
     symbol_list = list_utils.get_ab()
 
@@ -32,7 +32,7 @@ symbol_list = list(set(symbol_list))
 # start the timer
 start_time = timing_utils.start(symbol_list, 'snapshot', f'getting historic data from: {start_date} to: {end_date}')
 
-if len(symbol_list) > 500:
+if len(symbol_list) > 600:
     COLUMNS = ['Open','High','Low','Close','Volume']
     # long list download one by one and pause in between to it doesn't kill the connection
     for symbol in symbol_list:
