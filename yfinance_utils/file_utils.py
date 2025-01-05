@@ -13,8 +13,11 @@ from yfinance_utils import constants
 from pprint import pprint
 
 def save_output_file(df, name):
-    if os.environ['YFU_PRINT_OUT']:
-        pprint(df)
+    try:
+        if os.environ['YFU_PRINT_OUT']:
+            pprint(df)
+    except Exception as e:
+        pass
 
     try:
         save_to_mongo(df, name)
