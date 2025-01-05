@@ -5,6 +5,7 @@
 #
 from finta import TA
 import math
+import pandas as pd
 import yfinance
 from yfinance_utils import constants
 
@@ -29,14 +30,14 @@ def is_macd_cross_down(data, days_back = 5, line = -10):
 # STOCHASTIC indicators  #
 ##########################
 
-def is_stochastic_cross_up(data, days_back = 5, line = 50):
+def is_stochastic_cross_up(data, days_back = 5, line = 30):
     stochk = TA.STOCH(data)
     stochd = TA.STOCHD(data)
     return stochk.iloc[-1] > stochd.iloc[-1] \
            and stochk.iloc[-days_back] < stochd.iloc[-days_back] \
            and stochk.iloc[-1] > line and stochk.iloc[-days_back] < line
 
-def is_stochastic_cross_down(data, days_back = 5, line = 50):
+def is_stochastic_cross_down(data, days_back = 5, line = 70):
     stochk = TA.STOCH(data)
     stochd = TA.STOCHD(data)
     return stochk.iloc[-1] < stochd.iloc[-1] \
@@ -76,19 +77,26 @@ def is_ma_bearish_trend(data, sma=30, ema=10, day=1):
     ema = TA.EMA(data, ema)
     return data['Close'].iloc[-day] < sma.iloc[-day] and data['Close'].iloc[-day] < ema.iloc[-day]
 
-def is_ma_price_cross_down(data, sma=30, ema=10, day=1):
-    sma = TA.SMA(data, sma)
-    ema = TA.EMA(data, ema)
-    return is_ma_bullish_trend(data, day=2) \
-        and data['Open'].iloc[-day] > ema.iloc[-day] \
-        and data['Close'] < ema.iloc[-day]
+def is_ma_price_cross_down(data, ma='ema', ma_days=10, day=2):
+    xma = pd.DataFrame()
+    if 'e' in ma:
+        xma = TA.EMA(data, ma_days)
+    else:
+        xma = TA.SMA(data, ma_days)
+        
+    return data['Open'].iloc[-1] > xma.iloc[-1] \
+        and data['Close'].iloc[-1] < xma.iloc[-1]
 
-def is_ma_price_cross_up(data, sma=30, ema=10, day=1):
-    sma = TA.SMA(data, sma)
-    ema = TA.EMA(data, ema)
-    return is_ma_bearish_trend(data, day=2) \
-        and data['Open'].iloc[-day] < ema.iloc[-day] \
-        and data['Close'] > ema.iloc[-day]
+def is_ma_price_cross_up(data, ma='ema', ma_days=10, day=2):
+    xma = pd.DataFrame()
+    if 'e' in ma:
+        xma = TA.EMA(data, ma_days)
+    else:
+        xma = TA.SMA(data, ma_days)
+        
+    return data['Open'].iloc[-1] < xma.iloc[-1] \
+        and data['Close'].iloc[-1] > xma.iloc[-1]
+
 
 ##########################
 # 52 week indicators     #
@@ -97,16 +105,16 @@ def is_ma_price_cross_up(data, sma=30, ema=10, day=1):
 def get_price_year_low(data):
     return data['Close'].iloc[-constants.TRADING_DAYS_IN_YEAR:].min()
 
-def is_price_year_low(data, pct_diff = 2):
+def is_price_year_low(data, precision = 2):
     low = get_price_year_low(data)
-    return math.isclose(low, data['Close'].iloc[-1], abs_tol=(low * pct_diff / 100))
+    return math.isclose(low, data['Close'].iloc[-1], abs_tol=(low * precision / 100))
 
 def get_price_year_high(data):
     return data['Close'].iloc[-constants.TRADING_DAYS_IN_YEAR:].max()
 
-def is_price_year_high(data, pct_diff = 2):
+def is_price_year_high(data, precision = 2):
     high = get_price_year_high(data)
-    return math.isclose(high, data['Close'].iloc[-1], abs_tol=(high * pct_diff / 100))
+    return math.isclose(high, data['Close'].iloc[-1], abs_tol=(high * precision / 100))
 
 ##########################
 # RSI indicators         #
@@ -132,7 +140,7 @@ def is_rsi_year_high(data, period=14):
 # IV indicators          #
 ##########################
 
-def is_vix_cross_up(day=2):
+def is_vix_hma_cross_up(day=2):
     t = yfinance.Ticker('VIX')
     data = t.download(period="1y")
     hma10 = TA.HMA(data, period=10) 
@@ -140,7 +148,7 @@ def is_vix_cross_up(day=2):
     return hma10.iloc[-day] < hma20.iloc[-day] \
             and hma10.iloc[-1] > hma20.iloc[-1]
 
-def is_vix_cross_down(day=2):
+def is_vix_hma_cross_down(day=2):
     t = yfinance.Ticker('VIX')
     data = t.download(period="1y")
     hma10 = TA.HMA(data, period=10) 
@@ -195,18 +203,18 @@ def is_support_breake_down(data, days=14, min_fails = 3, pct_res=0.5, pct_break 
 def is_cahold(data, days=5):
     d = data[-days:]
     d['IS_RED'] = d['Close'] < d['Open']
-    if d['IS_RED'].iloc[-1]: return False
+    if bool(d['IS_RED'].iloc[-1]): return False
     for i in range(-days,-1,-1):
-        if not d['IS_RED']:
+        if not bool(d['IS_RED'].iloc[i]):
             return d['Close'].iloc[-1] > d['High'].iloc[i]
     return False
 
 def is_cblohd(data, days=4):
     d = data[-days:]
     d['IS_GREEN'] = d['Close'] > d['Open']
-    if d['IS_GREEN'].iloc[-1]: return False
+    if bool(d['IS_GREEN'].iloc[-1]): return False
     for i in range(-2, -days,-1):
-        if d['IS_GREEN']:
+        if bool(d['IS_GREEN'].iloc[i]):
             return d['Close'].iloc[-1] < d['Low'].iloc[i]
     return False
 

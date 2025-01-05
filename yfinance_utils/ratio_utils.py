@@ -27,10 +27,10 @@ def get_net_sales(tick, period = 0):
     ist = fu.get_is(tick, period = period)
     sales_expenses = ist['CostOfRevenue'] \
             - ist['SellingGeneralAndAdministration'] \
-            - ist['SellingAndMarketingExpense'] \
             - ist['GeneralAndAdministrativeExpense'] \
             - ist['OtherGandA'] \
             - ist['ResearchAndDevelopment']
+            # - ist['SellingAndMarketingExpense'] \
     return ist['TotalRevenue'] - sales_expenses
 
 
@@ -41,8 +41,11 @@ def get_avg_assets(tick, period = 0):
     return avg_assets
 
 def get_avg_inventory(tick, period = 0):
-    bs = fu.get_bs(tick, period=period)
-    bs1 = fu.get_bs(tick, period=period + 1)
+    try:
+        bs = fu.get_bs(tick, period=period)
+        bs1 = fu.get_bs(tick, period=(period + 1))
+    except Exception as e:
+        return 0
     avg_inventory = (bs['Inventory'] + bs1['Inventory']) / 2
     return avg_inventory
 
@@ -113,7 +116,11 @@ def get_asset_turnover_ratio(tick, period = 1):
 def get_inventory_turnover_ratio(tick, period = 0):
     ist = fu.get_is(tick, period = period)
     avg_inventory = get_avg_inventory(tick, period = period + 1)
-    return ist['CostOfRevenue'] / avg_inventory
+    try:
+        ratio = ist['CostOfRevenue'] / avg_inventory
+    except Exception as e:
+        return 0
+    return ratio
 
 ### average number of days that a company holds on to inventory###
 def get_day_sales_in_inventory_ratio(tick, period = 0):
@@ -177,12 +184,12 @@ def get_revenue_per_share(tick, period = 0):
     return rps or math.nan
 
 ### share price to its earnings per share###
-def get_price_to_earnings(tick):
+def get_price_to_earnings(tick, period=0):
     earnings = get_earnings_per_share(tick)
     return tick.info['currentPrice'] / earnings or math.nan
 
 ### how much investors are willing to pay per dollar of sales for a stock
-def get_price_to_sales(tick):
+def get_price_to_sales(tick, period=0):
     revenue_per_share = get_revenue_per_share(tick)
     return tick.info['currentPrice'] / revenue_per_share or math.nan
 

@@ -7,8 +7,7 @@
 import math
 
 def get_all_options(t):
-    options = t.option_chain()
-    return options.calls + options.puts
+    return get_calls(t) + get_puts(t)
 
 def get_calls(t):
     options = t.option_chain()
