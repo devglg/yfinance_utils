@@ -11,7 +11,7 @@ import pandas as pd
 from finta import TA
 from yfinance_utils import file_utils, constants, timing_utils
 
-FILENAME = 'daily_ttm_squeeze_out'
+FILENAME = 'daily_ttm_squeeze'
 COLUMNS=['DATE', 'TICK', 'DAYS']
 
 df = pd.DataFrame(columns=COLUMNS)

@@ -10,7 +10,7 @@ from yfinance_utils import rsi_utils, file_utils, timing_utils, constants
 from finta import TA
 
 COLUMNS = ['DATE', 'TICK', 'PRICE', 'RSI', 'RSI_MINIMUM', 'RSI_MAXIMUM', 'RSI_AVERAGE', 'VOLUME']
-FILENAME = 'daily_rsi_year_extremes'
+FILENAME = 'daily_extremes_52_week_rsi'
 
 dfrsi = pd.DataFrame(columns=COLUMNS)
 

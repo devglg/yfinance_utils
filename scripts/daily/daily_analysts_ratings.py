@@ -10,7 +10,7 @@ from yfinance import Tickers
 from yfinance_utils import financials_utils, file_utils, timing_utils
 
 COLUMNS = ['DATE', 'TICK', 'UP', 'DOWN', 'HOLD', 'AVG', 'TOTAL']
-FILENAME='daily_upgrades'
+FILENAME='daily_analysts_ratings'
 
 dfups = pd.DataFrame(columns=COLUMNS)
 filenames = file_utils.get_datasets_list()

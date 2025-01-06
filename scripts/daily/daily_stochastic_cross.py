@@ -9,7 +9,7 @@ import pandas as pd
 from yfinance_utils import file_utils, timing_utils, signals_utils
 
 COLUMNS = ['DATE', 'TICK', 'PRICE', 'VOL']
-FILENAME = 'daily_stochastic'
+FILENAME = 'daily_stochastic_cross'
 
 df = pd.DataFrame(columns=COLUMNS)
 filenames = file_utils.get_datasets_list()

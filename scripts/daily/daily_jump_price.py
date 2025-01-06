@@ -10,8 +10,8 @@ from yfinance_utils import file_utils, constants, timing_utils
 
 COLUMNS = ['DATE', 'TICK', 'CLOSE', '% PRICE JUMP', 'VOLUME', '% VOLUME -1', '% VOLUME -2']
 
-FILENAME_UP = 'daily_price_jump_up'
-FILENAME_DOWN = 'daily_price_jump_down'
+FILENAME_UP = 'daily_jump_price_up'
+FILENAME_DOWN = 'daily_jump_price_down'
 
 dfjumpup = pd.DataFrame(columns=COLUMNS)
 dfjumpdown = pd.DataFrame(columns=COLUMNS)

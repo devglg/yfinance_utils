@@ -8,7 +8,7 @@ import pandas as pd
 from yfinance_utils import file_utils, timing_utils, signals_utils, constants
 
 COLUMNS = ['DATE', 'TICK', 'PRICE', 'HIGH', 'LOW', 'VOLUME']
-FILENAME = 'daily_52_week_extremes'
+FILENAME = 'daily_extremes_52_week_price'
 
 df = pd.DataFrame(columns=COLUMNS)
 

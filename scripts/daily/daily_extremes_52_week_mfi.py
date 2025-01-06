@@ -10,7 +10,7 @@ from finta import TA
 from yfinance_utils import file_utils, timing_utils
 
 COLUMNS = ['DATE', 'TICK', 'PRICE', 'MFI', 'MFI_MINIMUM', 'MFI_MAXIMUM', 'MFI_AVERAGE', 'VOLUME']
-FILENAME = 'daily_mfi_year_extremes'
+FILENAME = 'daily_extremes_52_week_mfi'
 
 df_mfi = pd.DataFrame(columns=COLUMNS)
 
