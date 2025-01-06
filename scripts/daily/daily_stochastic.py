@@ -22,12 +22,10 @@ for tick in filenames:
 
         if (
             signals_utils.is_ma_bullish_trend(data) and \
-            signals_utils.is_macd_cross_up(data, days_back=3, line=0) and \
-            signals_utils.is_stochastic_cross_up(data, days_back=3, line=20)
+            signals_utils.is_stochastic_cross_down(data, days_back=3, line=20)
             ) or (
             signals_utils.is_ma_bearish_trend(data) and \
-            signals_utils.is_macd_cross_down(data, days_back=3, line=0) and \
-            signals_utils.is_stochastic_cross_down(data, days_back=3, line=80)
+            signals_utils.is_stochastic_cross_up(data, days_back=3, line=80)
             ):
 
             tmp =  pd.DataFrame([[data.index[-1], 

@@ -166,5 +166,5 @@ test/*
 datasets*/*
 *.DS_Store
 out/*
-market/*
+bigdata/*
 scripts/_bash/*

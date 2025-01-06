@@ -5,12 +5,12 @@
 #
 
 import pandas as pd
-from yfinance_utils import file_utils, timing_utils
+from yfinance_utils import file_utils, timing_utils, list_utils
 
 FILENAME = 'daily_volume_total'
 dfvol = pd.DataFrame()
 
-filenames = file_utils.get_datasets_list()
+filenames = list(set(list_utils.get_nasdaq100() + list_utils.get_snp500() + list_utils.get_dow()))
 start_time = timing_utils.start(filenames, FILENAME)
 
 for tick in filenames:

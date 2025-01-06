@@ -9,7 +9,7 @@ import math
 from yfinance_utils import file_utils, timing_utils
 
 COLUMNS = ['DATE', 'TICK', 'PRICE 1', 'PRICE 2', 'PRICE 3']
-FILENAME = 'daily_GAP_UP_CLOSE_HIGH'
+FILENAME = 'daily_gap_up_close_high'
 
 df = pd.DataFrame(columns=COLUMNS)
 
@@ -29,11 +29,7 @@ for tick in filenames:
             return math.isclose(data['Close'].iloc[-2],data['High'].iloc[-2],abs_tol=(data['High'].iloc[-2]*.05)) and \
                    math.isclose(data['Close'].iloc[-3],data['High'].iloc[-3],abs_tol=(data['High'].iloc[-2]*.05))
 
-        def vol_up():
-            return data['Volume'].iloc[-2] > vol_avg and \
-                   data['Volume'].iloc[-3] > vol_avg
-
-        if gap_up() and close_high() and vol_up():
+        if gap_up() and close_high():
             tmp =  pd.DataFrame([[data.index[-1], 
                                   tick, 
                                   data['Close'].iloc[-1],
