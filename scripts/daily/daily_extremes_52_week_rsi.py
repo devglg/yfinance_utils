@@ -6,7 +6,7 @@
 
 import math
 import pandas as pd
-from yfinance_utils import rsi_utils, file_utils, timing_utils, constants
+from yfinance_utils import file_utils, timing_utils, constants
 from finta import TA
 
 COLUMNS = ['DATE', 'TICK', 'PRICE', 'RSI', 'RSI_MINIMUM', 'RSI_MAXIMUM', 'RSI_AVERAGE', 'VOLUME']

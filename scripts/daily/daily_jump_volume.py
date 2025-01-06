@@ -5,9 +5,8 @@
 #
 
 import pandas as pd
-import statistics
 from finta import TA
-from yfinance_utils import rsi_utils, file_utils, constants, timing_utils
+from yfinance_utils import file_utils, constants, timing_utils
 
 COLUMNS = ['DATE', 'TICK', 'RSI', 'AVERAGE', 'PRICE -1', 'VOLUME -1', 'VOL % -1', 'PRICE', 'VOLUME', 'VOL %']
 FILENAME = 'daily_jump_volume'
