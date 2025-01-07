@@ -10,8 +10,8 @@ from pymongo import MongoClient
 from plotly.subplots import make_subplots
 
 client = MongoClient('mongodb://localhost:27017/')
-db = client['market']
-collection = db['bigdata']
+db = client['bigdata']
+collection = db['market']
 
 def get_all_data_from_script(script, filter = {}, columns = {}):
     filter['script']=script

@@ -7,7 +7,7 @@
 import pandas as pd
 import math
 import yfinance
-from yfinance_utils import file_utils, timing_utils, ratio_utils, options_utils
+from yfinance_utils import file_utils, timing_utils, ratio_utils
 
 COLUMNS = ['DATE', 'TICK', 'PRICE', 'VOLUME','PCR']
 FILENAME = 'daily_put_call_ratio'

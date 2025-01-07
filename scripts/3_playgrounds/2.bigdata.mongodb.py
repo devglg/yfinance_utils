@@ -11,8 +11,8 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 client = MongoClient('mongodb://localhost:27017/')
-db = client['market']
-collection = db['bigdata']
+db = client['bigdata']
+collection = db['market']
 
 def get_distinct_scripts():
     return collection.distinct("script")

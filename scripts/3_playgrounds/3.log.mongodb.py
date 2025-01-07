@@ -9,7 +9,7 @@ from pprint import pprint
 import datetime
 
 client = MongoClient('mongodb://localhost:27017/')
-db = client['market']
+db = client['bigdata']
 collection = db['log']
 
 res = collection.find(
