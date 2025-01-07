@@ -1,6 +1,6 @@
 # yfinance_utils
-Just adding some utilities to the yfinance library to make it easier to do technical analysis.
-In response to a conversation with a friend X. Can you expect people to know what you didn't teach.
+Just pounding the streets, adding some utilities to the yfinance library to make it easier for me to do technical analysis and look for trends. 
+This is a pet project of mine, not doing it for school or work, so if you think is not good then ¯\_(ツ)_/¯ don't use it. Marry Christmas ❄️!!
 
 > - **Investors be like: "Fundamental Analysis is the only way"**
 > - **Traders be like: "Technical Analysis is the only way"**
@@ -36,6 +36,8 @@ In response to a conversation with a friend X. Can you expect people to know wha
 `.\venv\Scripts\pip.exe install -r requirements.txt`
 
 ## does it work?
+
+### you will need mongodb, I won't go over that but just install it locally and start it.
 
 ### open the command line
 ```
