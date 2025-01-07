@@ -19,12 +19,15 @@ tomorrow=str(date.today() + timedelta(days=1))
 start_date = twoyearsago
 end_date = tomorrow
 symbol_list = []
+interval = '1d'
 
 # Get the long list of symbols for weekend and shorter list for weekdays
 if date.today().strftime('%A') in ['Saturday', 'Sunday']:
+    interval = '5d'
     symbol_list = list_utils.get_nasdaq100() + list_utils.get_adhoc() + list_utils.get_ab() + list_utils.get_snp500() + list_utils.get_dow()
 else:
-    symbol_list = list_utils.get_ab()
+    symbol_list = list_utils.get_nasdaq100() + list_utils.get_adhoc() + list_utils.get_ab() + list_utils.get_snp500() + list_utils.get_dow()
+    # symbol_list = list_utils.get_ab()
 
 # remove dups
 symbol_list = list(set(symbol_list))
@@ -38,7 +41,7 @@ if len(symbol_list) > 600:
     for symbol in symbol_list:
         try:
             tmp = Ticker(symbol)
-            data = tmp.history(start=start_date, end=end_date, rounding=True, timeout=20, actions=False)
+            data = tmp.history(start=start_date, end=end_date, rounding=True, timeout=20, actions=False, interval=interval)
             data.columns = COLUMNS
             if data['Close'].iloc[-1] > constants.MINIMUM_PRICE:
                 file_utils.save_historic_data(data, symbol)  
@@ -49,7 +52,7 @@ if len(symbol_list) > 600:
 else:
     # shorter list download all at once
     COLUMNS = ['Adj Close', 'Open','High','Low','Close','Volume']
-    data = yfinance.download(symbol_list, start=start_date, end=end_date, rounding=True)
+    data = yfinance.download(symbol_list, start=start_date, end=end_date, rounding=True, interval=interval)
     for symbol in symbol_list:
         try:
             tdata = pd.DataFrame()
