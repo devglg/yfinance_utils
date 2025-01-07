@@ -11,15 +11,16 @@ from plotly.subplots import make_subplots
 
 client = MongoClient('mongodb://localhost:27017/')
 db = client['bigdata']
-collection = db['market']
+collection = db['daily_52_week_extremes']
 
 def get_all_data_from_script(script, filter = {}, columns = {}):
     filter['script']=script
     return collection.find(filter,columns).to_list()
 
-res = get_all_data_from_script('daily_52_week_extremes', 
-                               {}, 
-                               {'_id':0, 'TICK':1, 'PRICE':1,'HIGH':1,'LOW':1, 'VOLUME':1})
+res = collection(
+                {}, 
+                {'_id':0, 'TICK':1, 'PRICE':1,'HIGH':1,'LOW':1, 'VOLUME':1}
+                )
 
 df = pd.DataFrame(res)
 df = df.sort_values(by='PRICE', ascending=True)

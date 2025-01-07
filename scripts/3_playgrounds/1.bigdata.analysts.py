@@ -12,16 +12,13 @@ from plotly.subplots import make_subplots
 
 client = MongoClient('mongodb://localhost:27017/')
 db = client['bigdata']
-collection = db['market']
-
-def get_all_data_from_script(script, filter = {}, columns = {}):
-    filter['script']=script
-    return collection.find(filter,columns).to_list()
+collection = db['daily_analysts_ratings']
 
 today = datetime.today().strftime('%Y-%m-%d')
-res = get_all_data_from_script('daily_analysts_ratings', 
-                               {'DATE':today}, 
-                               {'_id':0, 'TOTAL':1, 'UP':1,'DOWN':1,'HOLD':1, 'TICK':1,'AVG':1})
+res = collection(
+                {'DATE':today}, 
+                {'_id':0, 'TOTAL':1, 'UP':1,'DOWN':1,'HOLD':1, 'TICK':1,'AVG':1}
+                )
 
 df = pd.DataFrame(res)
 df = df.sort_values(by='UP', ascending=False)
