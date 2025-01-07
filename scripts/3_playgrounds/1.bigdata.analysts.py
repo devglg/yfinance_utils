@@ -12,11 +12,11 @@ from plotly.subplots import make_subplots
 
 client = MongoClient('mongodb://localhost:27017/')
 db = client['bigdata']
-collection = db['daily_analysts_ratings']
+collection = db.market
 
 today = datetime.today().strftime('%Y-%m-%d')
 res = collection(
-                {'DATE':today}, 
+                {'DATE':today, 'script':'daily_analysts_ratings'}, 
                 {'_id':0, 'TOTAL':1, 'UP':1,'DOWN':1,'HOLD':1, 'TICK':1,'AVG':1}
                 )
 

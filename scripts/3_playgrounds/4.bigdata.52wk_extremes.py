@@ -11,14 +11,14 @@ from plotly.subplots import make_subplots
 
 client = MongoClient('mongodb://localhost:27017/')
 db = client['bigdata']
-collection = db['daily_52_week_extremes']
+collection = db.market
 
 def get_all_data_from_script(script, filter = {}, columns = {}):
     filter['script']=script
     return collection.find(filter,columns).to_list()
 
 res = collection(
-                {}, 
+                {'daily_52_week_extremes'}, 
                 {'_id':0, 'TICK':1, 'PRICE':1,'HIGH':1,'LOW':1, 'VOLUME':1}
                 )
 
