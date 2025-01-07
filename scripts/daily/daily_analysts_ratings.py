@@ -26,12 +26,12 @@ for tick in filenames:
         down = tmp['down']
         hold = tmp['hold']
         total = tmp['total']
-        avg_up = ((up) / total) * 100
+        avg_up = up / total * 100
 
     except Exception as e:
         continue
     
-    if up > down:
+    if avg_up > 85:
         tmpups =  pd.DataFrame([[datetime.date.today().strftime('%Y-%m-%d'), tick, up, down, hold, avg_up, total]], columns=COLUMNS)
         dfups = pd.concat([dfups, tmpups], ignore_index=True)
 

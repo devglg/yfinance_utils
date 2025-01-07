@@ -9,7 +9,7 @@ import math
 import yfinance
 from yfinance_utils import file_utils, timing_utils, ratio_utils, options_utils
 
-COLUMNS = ['DATE', 'TICK', 'PRICE', 'VOLUME', 'CALLS', 'PUTS', 'PCR', 'SENTIMENT']
+COLUMNS = ['DATE', 'TICK', 'PRICE', 'VOLUME','PCR']
 FILENAME = 'daily_put_call_ratio'
 
 df = pd.DataFrame(columns=COLUMNS)
@@ -21,30 +21,19 @@ for tick in filenames:
     try:
         data = file_utils.read_historic_data(tick)
         t = yfinance.Ticker(tick)
-
-        calls = options_utils.get_calls_volume(t)
-        puts = options_utils.get_puts_volume(t)
         pcr = ratio_utils.get_put_call_ratio(t)
 
-        if math.isnan(calls) or math.isnan(puts) or math.isnan(pcr): continue
-        sentiment = ''
+        if math.isnan(pcr): continue
 
-        if pcr > 0.7:
-            sentiment = 'bearish'
-        else:
-            sentiment = 'bullish'
+        if pcr < 0.5:
+            tmp =  pd.DataFrame([[data.index[-1], 
+                                    tick, 
+                                    data['Close'].iloc[-1],
+                                    data['Volume'].iloc[-1],
+                                    pcr
+                                    ]], columns=COLUMNS)
 
-        tmp =  pd.DataFrame([[data.index[-1], 
-                                tick, 
-                                data['Close'].iloc[-1],
-                                data['Volume'].iloc[-1],
-                                calls,
-                                puts,
-                                pcr,
-                                sentiment
-                                ]], columns=COLUMNS)
-
-        df = pd.concat([df, tmp], ignore_index=True)
+            df = pd.concat([df, tmp], ignore_index=True)
     except Exception as e:
         continue
     

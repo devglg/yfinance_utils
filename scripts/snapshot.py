@@ -4,10 +4,10 @@
 # Copyright 2024 Lehi Gracia
 #
 
-import pandas as pd
 import time
-from datetime import date, timedelta
+import pandas as pd
 import yfinance
+from datetime import date, timedelta
 from yfinance import Ticker
 from yfinance_utils import list_utils, timing_utils, file_utils, constants
 

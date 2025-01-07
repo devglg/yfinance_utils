@@ -8,7 +8,7 @@ import pandas as pd
 import math
 from yfinance_utils import file_utils, timing_utils
 
-COLUMNS = ['DATE', 'TICK', 'PRICE 1', 'PRICE 2', 'PRICE 3']
+COLUMNS = ['DATE', 'TICK', 'HIGH', 'CLOSE', 'OPEN', 'CLOSE -1']
 FILENAME = 'daily_gap_up_close_high'
 
 df = pd.DataFrame(columns=COLUMNS)
@@ -22,19 +22,19 @@ for tick in filenames:
         vol_avg = data['Volume'].rolling(window=10).mean().iloc[-1]
 
         def gap_up():
-            return data['Open'].iloc[-2] > data['Close'].iloc[-3] and \
-                   data['Open'].iloc[-1] > data['Close'].iloc[-2]
+            return data['Open'].iloc[-1] > data['Close'].iloc[-2]
         
         def close_high():
-            return math.isclose(data['Close'].iloc[-2],data['High'].iloc[-2],abs_tol=(data['High'].iloc[-2]*.05)) and \
-                   math.isclose(data['Close'].iloc[-3],data['High'].iloc[-3],abs_tol=(data['High'].iloc[-2]*.05))
+            return data['Close'].iloc[-1] > data['Open'].iloc[-1] \
+                   and math.isclose(data['Close'].iloc[-1],data['High'].iloc[-1],abs_tol=(data['High'].iloc[-1]*.005))
 
         if gap_up() and close_high():
             tmp =  pd.DataFrame([[data.index[-1], 
                                   tick, 
+                                  data['High'].iloc[-1],
                                   data['Close'].iloc[-1],
+                                  data['Open'].iloc[-1],
                                   data['Close'].iloc[-2],
-                                  data['Close'].iloc[-3],
                                   ]], columns=COLUMNS)
     
             df = pd.concat([df, tmp], ignore_index=True)

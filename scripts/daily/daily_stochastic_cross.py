@@ -20,16 +20,9 @@ for tick in filenames:
         data = file_utils.read_historic_data(tick)
         if math.isnan(data['Close'].iloc[-1]): continue
 
-        if (
-            signals_utils.is_ma_bullish_trend(data) and \
-            signals_utils.is_stochastic_cross_down(data, days_back=3, line=20)
-            ) or (
-            signals_utils.is_ma_bearish_trend(data) and \
-            signals_utils.is_stochastic_cross_up(data, days_back=3, line=80)
-            ):
-
+        if (signals_utils.is_stochastic_cross_up(data, days_back=3, line=70)):
             tmp =  pd.DataFrame([[data.index[-1], 
-                                  tick, 
+                                  tick,
                                   data['Close'].iloc[-1],
                                   data['Volume'].iloc[-1]
                                   ]], columns=COLUMNS)
