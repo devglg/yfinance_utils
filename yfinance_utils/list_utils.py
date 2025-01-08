@@ -16,6 +16,8 @@ from yfinance_utils.lists.remove import remove
 from yfinance_utils.lists.adhoc import adhoc
 from yfinance_utils.lists.ab import ab
 from yfinance_utils.lists.dow import dow
+from yfinance_utils.lists.main import markets
+from yfinance_utils.lists.main import sectors
 
 def get_all_tickers():
     all = mag7 + nasdaq100 + snp500 + aero_def + nasdaq + nyse + rus2000 + adhoc + ab + dow
@@ -43,7 +45,13 @@ def get_adhoc():
     return list(set(adhoc) - set(remove))
 
 def get_ab():
-    return list(set(ab))
+    return list(set(ab + list(markets.keys()) + list(sectors.keys())))
 
 def get_dow():
     return list(set(dow))
+
+def get_markets():
+    return list(set(markets.keys()))
+
+def get_sectors():
+    return list(set(sectors.keys()))
