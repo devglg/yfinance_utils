@@ -18,6 +18,65 @@ from yfinance_utils.lists.ab import ab
 from yfinance_utils.lists.dow import dow
 from yfinance_utils.lists.main import markets
 from yfinance_utils.lists.main import sectors
+from yfinance_utils.lists.xlb_materials import XLB
+from yfinance_utils.lists.xlc_comm import XLC
+from yfinance_utils.lists.xle_energy import XLE
+from yfinance_utils.lists.xlf_financials import XLF
+from yfinance_utils.lists.xli_industrials import XLI
+from yfinance_utils.lists.xlk_tech import XLK
+from yfinance_utils.lists.xlp_staples import XLP
+from yfinance_utils.lists.xlre_realestate import XLRE
+from yfinance_utils.lists.xlu_utilities import XLU
+from yfinance_utils.lists.xlv_healthcare import XLV
+from yfinance_utils.lists.xly_discretionary import XLY
+
+def remove_duplicate_values(my_dict):
+    result = {}
+    seen_values = set()
+
+    for key, value in my_dict.items():
+        if value not in seen_values:
+            result[key] = value
+            seen_values.add(value)
+
+    return result
+
+def get_all_symbols_from_sectors():
+    all = {**XLB, **XLC, **XLE, **XLF, **XLI, **XLK, **XLP, **XLRE, **XLU, **XLV, **XLY}
+    return remove_duplicate_values(all)
+
+def get_discretionary():
+    return list(set(XLY.keys()))
+
+def get_health_care():
+    return list(set(XLV.keys()))
+
+def get_utilities():
+    return list(set(XLU.keys()))
+
+def get_real_estate():
+    return list(set(XLRE.keys()))
+
+def get_materials():
+    return list(set(XLB.keys()))
+
+def get_communication():
+    return list(set(XLC.keys()))
+
+def get_energy():
+    return list(set(XLE.keys()))
+
+def get_financials():
+    return list(set(XLF.keys()))
+
+def get_industrials():
+    return list(set(XLI.keys()))
+
+def get_technology():
+    return list(set(XLK.keys()))
+
+def get_staples():
+    return list(set(XLP.keys()))
 
 def get_all_tickers():
     all = mag7 + nasdaq100 + snp500 + aero_def + nasdaq + nyse + rus2000 + adhoc + ab + dow
@@ -55,3 +114,4 @@ def get_markets():
 
 def get_sectors():
     return list(set(sectors.keys()))
+
