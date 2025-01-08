@@ -1,8 +1,5 @@
 # yfinance_utils
-Just pounding the streets, adding some utilities to the yfinance library to make it easier for me to do technical analysis and look for trends. 
-This is a pet project of mine, not doing it for school or work, so if you think is not good then ¯\_(ツ)_/¯ don't use it. Marry Christmas ❄️!!
-My friend Joe just asked me if this was for a job, I just realized that only the technology industry people have personal projects that don't mind
-sharing with everyone without expecting a Grant from some government agency.
+Just trying to learn Tecnical Analysis
 
 > - **Investors be like: "Fundamental Analysis is the only way"**
 > - **Traders be like: "Technical Analysis is the only way"**
