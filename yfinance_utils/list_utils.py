@@ -4,6 +4,9 @@
 # Copyright 2024 Lehi Gracia
 #
 #
+import yfinance
+import pandas as pd
+from collections import Counter
 
 from yfinance_utils.lists.mag7 import mag7
 from yfinance_utils.lists.nasdaq100 import nasdaq100
@@ -18,6 +21,7 @@ from yfinance_utils.lists.ab import ab
 from yfinance_utils.lists.dow import dow
 from yfinance_utils.lists.main import markets
 from yfinance_utils.lists.main import sectors
+
 from yfinance_utils.lists.xlb_materials import XLB
 from yfinance_utils.lists.xlc_comm import XLC
 from yfinance_utils.lists.xle_energy import XLE
@@ -29,6 +33,21 @@ from yfinance_utils.lists.xlre_realestate import XLRE
 from yfinance_utils.lists.xlu_utilities import XLU
 from yfinance_utils.lists.xlv_healthcare import XLV
 from yfinance_utils.lists.xly_discretionary import XLY
+
+# this is to access sectors easily
+SECTORS = {
+    "XLB":XLB,
+    "XLC":XLC,
+    "XLE":XLE,
+    "XLF":XLF,
+    "XLI":XLI,
+    "XLK":XLK,
+    "XLP":XLP,
+    "XLRE":XLRE,
+    "XLU":XLU,
+    "XLV":XLV,
+    "XLY":XLY
+}
 
 def remove_duplicate_values(my_dict):
     result = {}
@@ -117,3 +136,21 @@ def get_markets():
 def get_sectors():
     return list(set(sectors.keys()))
 
+def get_top_performers(symbols, size=3, days=30):
+    COLUMNS = ['Adj Close', 'Open','High','Low','Close','Volume']
+    data = yfinance.download(symbols, period='1y')
+    symlist = {}
+    for symbol in symbols:
+        _df = pd.DataFrame()
+        _df = data.loc[:,(slice(None),symbol)]
+        _df.columns = COLUMNS
+        _df.reset_index(inplace=True)
+        _df = _df[-30:]
+        temp_1 = _df['Close'].iloc[-1]
+        temp_2 = _df['Close'].iloc[-days]
+        pct = round(((temp_1 - temp_2) / temp_2 * 100),2)
+        symlist[symbol] = pct
+
+    k = Counter(symlist)
+    top = k.most_common(size)
+    return  top

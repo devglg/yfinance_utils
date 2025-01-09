@@ -79,3 +79,6 @@ timing: script took 0.0 minutes. completed at 2025-01-04 06:46:41
 ```
 
 # The END
+
+# BUT WAIT, THERE IS MORE...
+Use notebooks "daily_report" then "quick_study" to look at the market's top performers. I think is correct, send me a pull request if you see an error, please. Note: some information in the notebooks are pulled from mongo so you will have to run the _run script at least once, probably more.
