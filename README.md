@@ -89,4 +89,5 @@ open the notebook and click "Run All"
 ### Quick Study
 open the notebook then change the top line with the symbol you want to search THEN click "Run All"
 
+# The END, like my slack friend loves to say.
 I think that's it, unless you want to change the code and get new information or new graphs, then dig in.
