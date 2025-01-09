@@ -43,7 +43,9 @@ def remove_duplicate_values(my_dict):
 
 def get_all_symbols_from_sectors():
     all = {**XLB, **XLC, **XLE, **XLF, **XLI, **XLK, **XLP, **XLRE, **XLU, **XLV, **XLY}
-    return remove_duplicate_values(all)
+    all = remove_duplicate_values(all)
+    keys = all.keys()
+    return list(set(keys))
 
 def get_discretionary():
     return list(set(XLY.keys()))
