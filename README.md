@@ -81,4 +81,12 @@ timing: script took 0.0 minutes. completed at 2025-01-04 06:46:41
 # The END
 
 # BUT WAIT, THERE IS MORE...
-Use notebooks "daily_report" then "quick_study" to look at the market's top performers. I think is correct, send me a pull request if you see an error, please. Note: some information in the notebooks are pulled from mongo so you will have to run the _run script at least once, probably more.
+Use the notebooks "daily_report" then "quick_study" to look at the market's top performers. I think is correct, send me a pull request if you see an error, please. Note: some information in the notebooks are pulled from mongo so you will have to run the _run script at least once, probably more.
+
+### Daily Report
+open the notebook and click "Run All"
+
+### Quick Study
+open the notebook then change the top line with the symbol you want to search THEN click "Run All"
+
+I think that's it, unless you want to change the code and get new information or new graphs, then dig in.
