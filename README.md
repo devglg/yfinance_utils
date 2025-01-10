@@ -1,6 +1,12 @@
 # yfinance_utils
 Just trying to learn Tecnical Analysis
 
+> [!NOTE]
+> Give a monkey a typewriter and infinite time and he eventually type the complete works of Shakespeare.
+> *I'm still in the "S" stage.*
+
+> [!NOTE]
+> This is how Wall Street works.
 > - **Investors be like: "Fundamental Analysis is the only way"**
 > - **Traders be like: "Technical Analysis is the only way"**
 > - **Real life be like: "Trump won with Elon's financing..."**
