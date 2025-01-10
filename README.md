@@ -1,6 +1,9 @@
 # yfinance_utils
 Just trying to learn Tecnical Analysis
 
+> [!CAUTION]
+> Please note this is a GPL3 project, we want to see your upgrades to the utilities when you do them.
+
 > [!NOTE]
 > Give a monkey a typewriter and infinite time and he eventually type the complete works of Shakespeare.
 > *I'm still in the "S" stage.*
