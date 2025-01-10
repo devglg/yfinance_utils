@@ -1,6 +1,6 @@
 markets = {
     'DIA': 'DOW JONES',
-    'SPY': 'SNP 500',
+    'SPY': 'S&P 500',
     'QQQ': 'NASDAQ 100'
 }
 
