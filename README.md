@@ -7,14 +7,14 @@ Just trying to learn Tecnical Analysis
 > [!NOTE]
 > Give a monkey a typewriter and infinite time and he eventually type the complete works of Shakespeare.
 > *I'm still in the "S" stage.*
-> <br><img src="https://github.com/devglg/yfinance_utils/blob/main/assets/images/monkeys-on-typewriters-1.png" width="50">
+> <br><img src="https://github.com/devglg/yfinance_utils/blob/main/assets/images/monkeys-on-typewriters-1.png" width="200">
 
 > [!NOTE]
 > This is how Wall Street works.
 > - **Investors be like: "Fundamental Analysis is the only way"**
 > - **Traders be like: "Technical Analysis is the only way"**
 > - **Real life be like: "Trump won with Elon's financing..."**
-> ![tesla](https://github.com/devglg/yfinance_utils/blob/main/assets/images/tsla.png)
+> <br> <img src="https://github.com/devglg/yfinance_utils/blob/main/assets/images/tsla.png" width="400">
 
 > [!TIP]
 > "There are two methods in software design. One is to make the program so complicated that there are no obvious errors. The other is to do it so simple that there are obviously no errors". This is meant to be the latter.
