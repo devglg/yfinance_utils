@@ -7,7 +7,7 @@ Just trying to learn Tecnical Analysis
 > [!NOTE]
 > Give a monkey a typewriter and infinite time and he eventually type the complete works of Shakespeare.
 > *I'm still in the "S" stage.*
-> <img src="https://github.com/devglg/yfinance_utils/blob/main/assets/images/monkeys-on-typewriters-1.png" width="30">
+> <br><img src="https://github.com/devglg/yfinance_utils/blob/main/assets/images/monkeys-on-typewriters-1.png" width="50">
 
 > [!NOTE]
 > This is how Wall Street works.
