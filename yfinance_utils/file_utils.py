@@ -64,7 +64,12 @@ def save_to_mongo(data, name):
     client = MongoClient('mongodb://localhost:27017/')
     db = client['bigdata']
     collection = db['market']
-    recs = data.to_dict('records')
+    recs = []
+
+    if isinstance(data, dict):
+        recs.append(data)
+    else:
+        recs.append(data.to_dict('records'))
     
     def update_dicts_in_list(list_of_dicts, key, value):
         for d in list_of_dicts:
