@@ -21,20 +21,20 @@ end_date = tomorrow
 symbol_list = []
 interval = '1d'
 
-symbol_list = list_utils.get_nasdaq100() \
-            + list_utils.get_adhoc() \
-            + list_utils.get_ab() \
-            + list_utils.get_snp500() \
-            + list_utils.get_dow() \
-            + list_utils.get_all_symbols_from_sectors()
 
-# Get the long list of symbols for weekend and shorter list for weekdays
+
+# Get the long list of symbols with a week interval for weekend and shorter list with daily interval for weekdays
 if date.today().strftime('%A') in ['Saturday', 'Sunday']:
+    symbol_list = list_utils.get_all_tickers()
     interval = '5d'
 else:
-    pass
-    # symbol_list = list_utils.get_nasdaq100() + list_utils.get_adhoc() + list_utils.get_ab() + list_utils.get_snp500() + list_utils.get_dow()
-    # symbol_list = list_utils.get_ab()
+    symbol_list = list_utils.get_nasdaq100() \
+                + list_utils.get_adhoc() \
+                + list_utils.get_ab() \
+                + list_utils.get_snp500() \
+                + list_utils.get_dow() \
+                + list_utils.get_all_symbols_from_sectors() \
+                + list_utils.get_nasdaq()
 
 # remove dups
 symbol_list = list(set(symbol_list))
