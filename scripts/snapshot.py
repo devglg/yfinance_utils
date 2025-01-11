@@ -11,30 +11,24 @@ from datetime import date, timedelta
 from yfinance import Ticker
 from yfinance_utils import list_utils, timing_utils, file_utils, constants
 
-twoyearsago = str(date.today() - timedelta(weeks=104))
+thirteen_months = str(date.today() - timedelta(weeks=60))
 oneyearago = str(date.today() - timedelta(weeks=52))
 today=str(date.today())
 tomorrow=str(date.today() + timedelta(days=1))
 
-start_date = twoyearsago
-end_date = tomorrow
-symbol_list = []
+start_date = thirteen_months # get 60 weeks to have complete SMA
+end_date = tomorrow 
 interval = '1d'
 
 
-
-# Get the long list of symbols with a week interval for weekend and shorter list with daily interval for weekdays
-if date.today().strftime('%A') in ['Saturday', 'Sunday']:
-    symbol_list = list_utils.get_all_tickers()
-    interval = '5d'
-else:
-    symbol_list = list_utils.get_nasdaq100() \
-                + list_utils.get_adhoc() \
-                + list_utils.get_ab() \
-                + list_utils.get_snp500() \
-                + list_utils.get_dow() \
-                + list_utils.get_all_symbols_from_sectors() \
-                + list_utils.get_nasdaq()
+# get only the important symbols. this is more than enough
+symbol_list = list_utils.get_nasdaq100() \
+            + list_utils.get_adhoc() \
+            + list_utils.get_ab() \
+            + list_utils.get_snp500() \
+            + list_utils.get_dow() \
+            + list_utils.get_all_symbols_from_sectors() \
+            + list_utils.get_nasdaq()
 
 # remove dups
 symbol_list = list(set(symbol_list))
