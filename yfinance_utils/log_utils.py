@@ -33,6 +33,6 @@ def log(file, msg):
 def log_to_mongo(file, msg):
     client = MongoClient('mongodb://localhost:27017/')
     ts = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    db = client['market']
+    db = client['bigdata']
     collection = db['log']
     collection.insert_one({'timestamp':ts, 'script':file, 'log':msg})

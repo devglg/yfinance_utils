@@ -9,6 +9,9 @@ import subprocess
 import datetime
 from yfinance_utils import file_utils, timing_utils
 
+# get new snapshots?
+snap = True
+
 mongod = subprocess.Popen(
     ['mongod', '--dbpath', os.path.expanduser(os.getenv('MONGODB_PATH')), '--logpath', os.path.expanduser(os.getenv('MONGODB_LOG'))]
 )
@@ -22,7 +25,8 @@ if today.strftime('%A') in ['Saturday', 'Sunday']:
 
 start_time = timing_utils.start(script_folders, 'run', f'{today.strftime("%A")} run: *** *** *** *** *** *** *** *** *** *** ***')
 
-subprocess.call([f'./.venv/bin/python3', f'./scripts/snapshot.py'])
+if snap:
+    subprocess.call([f'./.venv/bin/python3', f'./scripts/snapshot.py'])
 
 for folder in script_folders:
     filenames = os.listdir(folder)
