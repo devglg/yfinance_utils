@@ -27,9 +27,7 @@ symbol_list = list_utils.get_nasdaq100() \
             + list_utils.get_ab() \
             + list_utils.get_snp500() \
             + list_utils.get_dow() \
-            + list_utils.get_all_symbols_from_sectors() \
-            + list_utils.get_nasdaq()
-
+            + list_utils.get_all_symbols_from_sectors()
 # remove dups
 symbol_list = list(set(symbol_list))
 
