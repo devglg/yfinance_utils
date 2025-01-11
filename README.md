@@ -103,4 +103,5 @@ open the notebook then change the top line with the symbol you want to search TH
 I think that's it, unless you want to change the code and get new information or new graphs, then dig in.
 
 
-<sub><sup>!!! When a PhD professor/student start using your research, you know your code doesn't completely stink, lol. Don't forget to give credit. !!!</sup></sub>
+
+> !!! When a PhD professor/student start using your research, you know your code doesn't completely stink, lol. Don't forget to give credit. !!!
