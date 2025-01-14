@@ -15,5 +15,6 @@ sectors = {
     'XLB' : 'MATERIALS',
     'XLRE': 'REAL ESTATE',
     'XLK' : 'TECHNOLOGY',
-    'XLU' : 'UTILITIES' 
+    'XLU' : 'UTILITIES',
+    'XAR' : 'AEROSPACE AND DEFENSE' 
 }

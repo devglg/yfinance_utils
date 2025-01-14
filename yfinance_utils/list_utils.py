@@ -11,7 +11,7 @@ from collections import Counter
 from yfinance_utils.lists.mag7 import mag7
 from yfinance_utils.lists.nasdaq100 import nasdaq100
 from yfinance_utils.lists.snp500 import snp500
-from yfinance_utils.lists.aero_def import aero_def
+from yfinance_utils.lists.aero_def import aero_def as XAR
 from yfinance_utils.lists.nasdaq import nasdaq
 from yfinance_utils.lists.nyse import nyse
 from yfinance_utils.lists.rus2000 import rus2000
@@ -46,7 +46,8 @@ SECTORS = {
     "XLRE":XLRE,
     "XLU":XLU,
     "XLV":XLV,
-    "XLY":XLY
+    "XLY":XLY,
+    "XAR":XAR
 }
 
 def remove_duplicate_values(my_dict):
@@ -61,7 +62,7 @@ def remove_duplicate_values(my_dict):
     return result
 
 def get_all_symbols_from_sectors():
-    all = {**XLB, **XLC, **XLE, **XLF, **XLI, **XLK, **XLP, **XLRE, **XLU, **XLV, **XLY}
+    all = {**XLB, **XLC, **XLE, **XLF, **XLI, **XLK, **XLP, **XLRE, **XLU, **XLV, **XLY, **XAR}
     all = remove_duplicate_values(all)
     keys = all.keys()
     return list(set(keys))
@@ -100,14 +101,14 @@ def get_staples():
     return list(set(XLP.keys()))
 
 def get_all_tickers():
-    all = mag7 + nasdaq100 + snp500 + aero_def + nasdaq + nyse + rus2000 + adhoc + ab + dow
+    all = mag7 + nasdaq100 + snp500 + XAR + nasdaq + nyse + rus2000 + adhoc + ab + dow
     return list(set(all) - set(remove))
 
 def get_rus2000():
     return list(set(rus2000) - set(remove))
 
 def get_aero_def():
-    return list(set(aero_def) - set(remove))
+    return list(set(XAR) - set(remove))
 
 def get_mag7():
     return list(set(mag7) - set(remove))
