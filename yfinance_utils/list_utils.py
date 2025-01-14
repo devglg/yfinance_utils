@@ -11,7 +11,6 @@ from collections import Counter
 from yfinance_utils.lists.mag7 import mag7
 from yfinance_utils.lists.nasdaq100 import nasdaq100
 from yfinance_utils.lists.snp500 import snp500
-from yfinance_utils.lists.aero_def import aero_def as XAR
 from yfinance_utils.lists.nasdaq import nasdaq
 from yfinance_utils.lists.nyse import nyse
 from yfinance_utils.lists.rus2000 import rus2000
@@ -22,6 +21,7 @@ from yfinance_utils.lists.dow import dow
 from yfinance_utils.lists.main import markets
 from yfinance_utils.lists.main import sectors
 
+from yfinance_utils.lists.aero_def import aero_def as XAR
 from yfinance_utils.lists.xlb_materials import XLB
 from yfinance_utils.lists.xlc_comm import XLC
 from yfinance_utils.lists.xle_energy import XLE

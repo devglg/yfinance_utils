@@ -35,6 +35,5 @@
     "LW":"Lamb Weston Holdings Inc",
     "HRL":"Hormel Foods Corp",
     "CPB":"The Campbell's Company",
-    "WBA":"Walgreens Boots Alliance Inc",
-    "BF.b":"Brown-Forman Corp B"
+    "WBA":"Walgreens Boots Alliance Inc"
 }

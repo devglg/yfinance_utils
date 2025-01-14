@@ -1,6 +1,5 @@
 ﻿XLC={
     "META":"Meta Platforms Inc. Class A",
-    "GOOGL":"Alphabet Inc A",
     "GOOG":"Alphabet Inc C",
     "NFLX":"NetFlix Inc",
     "DIS":"Walt Disney Co",
