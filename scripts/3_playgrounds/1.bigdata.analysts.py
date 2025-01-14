@@ -15,7 +15,7 @@ db = client['bigdata']
 collection = db.market
 
 today = datetime.today().strftime('%Y-%m-%d')
-res = collection(
+res = collection.find(
                 {'DATE':today, 'script':'daily_analysts_ratings'}, 
                 {'_id':0, 'TOTAL':1, 'UP':1,'DOWN':1,'HOLD':1, 'TICK':1,'AVG':1}
                 )
