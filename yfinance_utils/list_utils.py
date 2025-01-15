@@ -101,8 +101,13 @@ def get_staples():
     return list(set(XLP.keys()))
 
 def get_all_tickers():
-    all = mag7 + nasdaq100 + snp500 + XAR + nasdaq + nyse + rus2000 + adhoc + ab + dow
+    all = mag7 + nasdaq100 + snp500 + list(XAR.keys()) + rus2000 + adhoc + ab + dow
     return list(set(all) - set(remove))
+
+def get_short_list():
+    all = mag7 + nasdaq100 + snp500 + adhoc + ab + dow
+    return list(set(all) - set(remove))
+
 
 def get_rus2000():
     return list(set(rus2000) - set(remove))
