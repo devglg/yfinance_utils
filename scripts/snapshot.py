@@ -34,7 +34,7 @@ symbol_list = list(set(symbol_list))
 # start the timer
 start_time = timing_utils.start(symbol_list, 'snapshot', f'getting historic data from: {start_date} to: {end_date}')
 
-if len(symbol_list) > 600:
+if len(symbol_list) > 800:
     COLUMNS = ['Open','High','Low','Close','Volume']
     # long list download one by one and pause in between to it doesn't kill the connection
     for symbol in symbol_list:
