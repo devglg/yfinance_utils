@@ -7,7 +7,7 @@
 import datetime
 import pandas as pd
 from yfinance import Tickers
-from yfinance_utils import financials_utils, file_utils, timing_utils
+from yfinance_utils import financials_utils, file_utils, timing_utils, list_utils
 
 COLUMNS = ['DATE', 'TICK', 'UP', 'DOWN', 'HOLD', 'AVG', 'TOTAL']
 FILENAME='daily_analysts_ratings'
@@ -16,6 +16,9 @@ dfups = pd.DataFrame(columns=COLUMNS)
 filenames = file_utils.get_datasets_list()
 start_time = timing_utils.start(filenames, FILENAME)
 
+# ETFs do not get ratings from analysts
+remove_etfs = ['SPY', 'VTI', 'MID', 'QQQ', 'VOO', 'USD', 'VGT', 'DIA', 'FOX'] + list_utils.get_sectors()
+filenames = list(set(filenames) - set(remove_etfs))
 t = Tickers(filenames)
 
 for tick in filenames:

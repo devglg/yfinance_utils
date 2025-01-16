@@ -67,9 +67,9 @@ def save_to_mongo(data, name):
     recs = []
 
     if isinstance(data, dict):
-        recs.append(data)
+        recs.extend(data)
     else:
-        recs.append(data.to_dict('records'))
+        recs.extend(data.to_dict('records'))
     
     def update_dicts_in_list(list_of_dicts, key, value):
         for d in list_of_dicts:

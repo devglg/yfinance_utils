@@ -35,4 +35,4 @@ for folder in script_folders:
         subprocess.call([f'./.venv/bin/python3', f'./{folder}/{file}'])
 
 timing_utils.end(start_time, 'run', f'{today.strftime("%A")} run: ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^')
-subprocess.run(['killall', 'mongod'])
+# subprocess.run(['killall', 'mongod'])
