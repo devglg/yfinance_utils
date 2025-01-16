@@ -40,5 +40,9 @@ adhoc = [
     "SIRI",
     "FDX",
     "XPO",
-    "ASAN"
+    "ASAN",
+    "FIVN",
+    "PATH",
+    "INOD",
+    "FSLY"
 ]
