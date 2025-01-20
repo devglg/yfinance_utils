@@ -17,12 +17,12 @@ def get_all_data_from_script(script, filter = {}, columns = {}):
     filter['script']=script
     return collection.find(filter,columns).to_list()
 
-res = collection(
+res = collection.find(
                 {'daily_52_week_extremes'}, 
                 {'_id':0, 'TICK':1, 'PRICE':1,'HIGH':1,'LOW':1, 'VOLUME':1}
                 )
 
-df = pd.DataFrame(res)
+df = pd.DataFrame(res.to_list())
 df = df.sort_values(by='PRICE', ascending=True)
 
 fig = make_subplots(rows=1, cols=1, subplot_titles=("EXTREMES"))
