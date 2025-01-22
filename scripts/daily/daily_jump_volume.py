@@ -26,7 +26,7 @@ for tick in filenames:
         continue
     
     if volume_0_pct > 150:
-        tmpvol =  pd.DataFrame([[data.index[-1], tick, avg, price_0, volume_0, volume_0_pct]], columns=COLUMNS)
+        tmpvol =  pd.DataFrame([[data.index[-1][:10], tick, avg, price_0, volume_0, volume_0_pct]], columns=COLUMNS)
         dfvol = pd.concat([dfvol, tmpvol], ignore_index=True)
 
 file_utils.save_output_file(dfvol,FILENAME)
