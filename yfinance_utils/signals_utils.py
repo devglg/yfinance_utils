@@ -30,19 +30,19 @@ def is_macd_cross_down(data, days_back = 5, line = -10):
 # STOCHASTIC indicators  #
 ##########################
 
-def is_stochastic_cross_up(data, days_back = 5, line = 30):
+def is_stochastic_cross_up(data, days_back = 2, line = 30):
     stochk = TA.STOCH(data)
     stochd = TA.STOCHD(data)
     return stochk.iloc[-1] > stochd.iloc[-1] \
            and stochk.iloc[-days_back] < stochd.iloc[-days_back] \
-           and stochk.iloc[-1] > line and stochk.iloc[-days_back] < line
+           and stochk.iloc[-1] < line
 
-def is_stochastic_cross_down(data, days_back = 5, line = 70):
+def is_stochastic_cross_down(data, days_back = 2, line = 70):
     stochk = TA.STOCH(data)
     stochd = TA.STOCHD(data)
     return stochk.iloc[-1] < stochd.iloc[-1] \
            and stochk.iloc[-days_back] > stochd.iloc[-days_back] \
-           and stochk.iloc[-1] < line and stochk.iloc[-days_back] > line
+           and stochk.iloc[-1] > line
 
 ##########################
 # SMA and EMA indicators #
