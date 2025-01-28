@@ -167,5 +167,5 @@ datasets*/*
 *.DS_Store
 out/*
 bigdata/*
-scripts/1_bash/*
-scripts/2_notebooks/*
+
+

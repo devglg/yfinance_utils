@@ -1,0 +1,1 @@
+mongod --dbpath ~/Documents/GitHub/yfinance_utils/out/mongo/bigdata --logpath ~/Documents/GitHub/yfinance_utils/out/mongo/log/mongo.log --fork
