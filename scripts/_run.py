@@ -26,13 +26,13 @@ if today.strftime('%A') in ['Saturday', 'Sunday']:
 start_time = timing_utils.start(script_folders, 'run', f'{today.strftime("%A")} run: *** *** *** *** *** *** *** *** *** *** ***')
 
 if snap:
-    subprocess.call([f'./.venv/bin/python3', f'./scripts/snapshot.py'])
+    subprocess.call([f'./venv/bin/python3', f'./scripts/snapshot.py'])
 
 for folder in script_folders:
     filenames = os.listdir(folder)
     for file in filenames:
         print(f'Running script: {file}')
-        subprocess.call([f'./.venv/bin/python3', f'./{folder}/{file}'])
+        subprocess.call([f'./venv/bin/python3', f'./{folder}/{file}'])
 
 timing_utils.end(start_time, 'run', f'{today.strftime("%A")} run: ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^')
 # subprocess.run(['killall', 'mongod'])
