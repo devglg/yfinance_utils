@@ -40,7 +40,7 @@ if len(symbol_list) > 800:
     for symbol in symbol_list:
         try:
             tmp = Ticker(symbol)
-            data = tmp.history(start=start_date, end=end_date, rounding=True, timeout=20, actions=False, interval=interval)
+            data = tmp.history(start=start_date, end=end_date, rounding=True, timeout=20, actions=False, interval=interval, auto_adjust=False)
             data.columns = COLUMNS
             if data['Close'].iloc[-1] > constants.MINIMUM_PRICE:
                 file_utils.save_historic_data(data, symbol)  
@@ -51,7 +51,7 @@ if len(symbol_list) > 800:
 else:
     # shorter list download all at once
     COLUMNS = ['Adj Close', 'Open','High','Low','Close','Volume']
-    data = yfinance.download(symbol_list, start=start_date, end=end_date, rounding=True, interval=interval)
+    data = yfinance.download(symbol_list, start=start_date, end=end_date, rounding=True, interval=interval, auto_adjust=False)
     for symbol in symbol_list:
         try:
             tdata = pd.DataFrame()
