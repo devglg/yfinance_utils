@@ -34,7 +34,7 @@ COLUMNS = ['Adj Close', 'Open','High','Low','Close','Volume']
 
 fig=make_subplots(rows=len(symbols), cols=1)
 
-data = yfinance.download(symbols, period='1y')
+data = yfinance.download(symbols, period='1y', auto_adjust=False)
 counter=1
 for symbol in symbols:
     _d2 = pd.DataFrame()
