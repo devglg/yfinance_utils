@@ -143,7 +143,7 @@ def get_sectors():
 
 def get_top_performers(symbols, size=3, days=30):
     COLUMNS = ['Adj Close', 'Open','High','Low','Close','Volume']
-    data = yfinance.download(symbols, period='1y')
+    data = yfinance.download(symbols, period='1y', auto_adjust=False)
     symlist = {}
     for symbol in symbols:
         _df = pd.DataFrame()
