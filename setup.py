@@ -6,7 +6,7 @@ setup(
     description='a few utilities to help with tech analysis and plotting',
     license='GPL 2.0',
     packages=find_packages(),
-    install_requires=['yfinance', 'pandas', 'finta', 'plotly'],
+    install_requires=['yfinance', 'pandas', 'finta', 'plotly', 'jupyter', 'pymongo'],
     author='Lehi Gracia',
     author_email='dev@glgracia.com',
     keywords=['utils', 'technical analysis', 'finance'],
