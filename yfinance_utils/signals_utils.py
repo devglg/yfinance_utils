@@ -53,29 +53,23 @@ def is_ma_bullish_trend(data, sma=30, ema=10, day=1):
     ema = TA.EMA(data, ema)
     return data['Close'].iloc[-day] > sma.iloc[-day] and data['Close'].iloc[-day] > ema.iloc[-day]
 
+def is_ma_bearish_trend(data, sma=30, ema=10, day=1):
+    sma = TA.SMA(data, sma)
+    ema = TA.EMA(data, ema)
+    return data['Close'].iloc[-day] < sma.iloc[-day] and data['Close'].iloc[-day] < ema.iloc[-day]
+
 def is_ma_trend_reversing(data, sma=30, ema=10, day=1):
     sma = TA.SMA(data, sma)
     ema = TA.EMA(data, ema)
     return data['Close'].iloc[-day] > ema.iloc[-day] and data['Close'].iloc[-day] < sma.iloc[-day]
 
-def is_ma_cross_down(data, sma=30, ema=10, days=1):
-    sma = TA.SMA(data, sma)
-    ema = TA.EMA(data, ema)
-    return is_ma_bullish_trend(data, day=2) \
-        and ema.iloc[-days] > sma.iloc[-days] \
-        and ema.iloc[-1] < sma.iloc[-1]
+def is_ma_cross_down(data, sma=30, ema=10):
+    return is_ma_bullish_trend(data, sma=sma, ema=ema, day=5) \
+        and is_ma_bearish_trend(data, sma=sma, ema=ema, day=1)
 
-def is_ma_cross_up(data, sma=30, ema=10, days=1):
-    sma = TA.SMA(data, sma)
-    ema = TA.EMA(data, ema)
-    return is_ma_bearish_trend(data, day=2) \
-        and ema.iloc[-days] < sma.iloc[-days] \
-        and ema.iloc[-1] > sma.iloc[-1]
-
-def is_ma_bearish_trend(data, sma=30, ema=10, day=1):
-    sma = TA.SMA(data, sma)
-    ema = TA.EMA(data, ema)
-    return data['Close'].iloc[-day] < sma.iloc[-day] and data['Close'].iloc[-day] < ema.iloc[-day]
+def is_ma_cross_up(data, sma=30, ema=10):
+    return is_ma_bearish_trend(data, sma=sma, ema=ema, day=5) \
+        and is_ma_bullish_trend(data, sma=sma, ema=ema, day=1)
 
 def is_ma_price_cross_down(data, ma='ema', ma_days=10, day=2):
     xma = pd.DataFrame()
@@ -84,8 +78,8 @@ def is_ma_price_cross_down(data, ma='ema', ma_days=10, day=2):
     else:
         xma = TA.SMA(data, ma_days)
         
-    return data['Open'].iloc[-1] > xma.iloc[-1] \
-        and data['Close'].iloc[-1] < xma.iloc[-1]
+    return data['Open'].iloc[-day] > xma.iloc[-day] \
+        and data['Close'].iloc[-day] < xma.iloc[-day]
 
 def is_ma_price_cross_up(data, ma='ema', ma_days=10, day=2):
     xma = pd.DataFrame()
@@ -94,8 +88,8 @@ def is_ma_price_cross_up(data, ma='ema', ma_days=10, day=2):
     else:
         xma = TA.SMA(data, ma_days)
         
-    return data['Open'].iloc[-1] < xma.iloc[-1] \
-        and data['Close'].iloc[-1] > xma.iloc[-1]
+    return data['Open'].iloc[-day] < xma.iloc[-day] \
+        and data['Close'].iloc[-day] > xma.iloc[-day]
 
 
 ##########################
@@ -155,6 +149,13 @@ def is_vix_hma_cross_down(day=2):
     hma20 = TA.HMA(data, period=20) 
     return hma10.iloc[-day] > hma20.iloc[-day] \
             and hma10.iloc[-1] < hma20.iloc[-1]
+
+def is_vix_trending_up():
+    t = yfinance.Ticker('^VIX')
+    data = t.history(period="1y")
+    hma10 = TA.HMA(data, period=10) 
+    hma20 = TA.HMA(data, period=20) 
+    return hma10.iloc[-1] > hma20.iloc[-1]
 
 #####################################
 # SUPPORT and RESISTANCE indicators #

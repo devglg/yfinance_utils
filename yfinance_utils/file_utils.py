@@ -35,7 +35,11 @@ def save_output_file(df, name):
         ticks = df['TICK']
         url = []
         for i in ticks:
-            url.append(f'{constants.QUOTE_BASE_URL}/{i}/')
+            if os.path.exists(f'{constants.OUTPUT_FOLDER}/FIDELITY'):
+                url.append(f'{constants.FIDELITY_BASE_URL}{i}')
+            else:
+               url.append(f'{constants.QUOTE_BASE_URL}/{i}/')
+    
         df['URL'] = url
     df.round(2).to_csv(filepath, index=False)
 
@@ -56,6 +60,9 @@ def get_scripts_folder(t='daily'):
         return constants.SCRIPTS_FOLDER_WEEKLY
     else:
         return constants.SCRIPTS_FOLDER_DAILY
+    
+def get_python_executable():
+    return constants.PYTHON_EXE
     
 def get_datasets_list():
     return os.listdir(constants.DATA_FOLDER)

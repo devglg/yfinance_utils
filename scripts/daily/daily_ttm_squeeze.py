@@ -25,7 +25,7 @@ for tick in filenames:
         if data['Close'].iloc[-1] < constants.MINIMUM_PRICE: continue
 
         data = pd.concat([data, TA.BBANDS(data)], axis=1)
-        data = pd.concat([data, TA.KC(data, kc_mult=2, atr_period=20)], axis=1)
+        data = pd.concat([data, TA.KC(data, kc_mult=1.5, atr_period=20)], axis=1)
         data['BB_SQUEEZE_IN'] = data['BB_UPPER'] < data['KC_UPPER']
         
         last = []

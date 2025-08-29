@@ -12,8 +12,10 @@ OUTPUT_FOLDER = "out"
 LOG_FOLDER = "_log"
 LOG_FILENAME = "log.csv"
 QUOTE_BASE_URL = 'https://finance.yahoo.com/quote'
+FIDELITY_BASE_URL = 'https://digital.fidelity.com/prgw/digital/research/quote/dashboard/chart?symbol='
 SCRIPTS_FOLDER_DAILY = "scripts/daily"
 SCRIPTS_FOLDER_WEEKLY = "scripts/weekly"
+PYTHON_EXE = "./.venv/Scripts/python.exe"
 TRADING_DAYS_IN_YEAR = 251
 RATINGS = ['Buy', 'Hold', 'Neutral', 'Outperform', 'Overweight', 'Underweight', 'Equal-Weight', 'Underperform', 'Market Perform', 'Sector Weight', 'Sector Perform', 'Gradually Accumulate']
 

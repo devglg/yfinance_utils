@@ -10,11 +10,13 @@ import datetime
 from yfinance_utils import file_utils, timing_utils
 
 # get new snapshots?
-snap = True
+snap = False
+mongo = False
 
-mongod = subprocess.Popen(
-    ['mongod', '--dbpath', os.path.expanduser(os.getenv('MONGODB_PATH')), '--logpath', os.path.expanduser(os.getenv('MONGODB_LOG'))]
-)
+if mongo:
+    mongod = subprocess.Popen(
+        ['mongod', '--dbpath', os.path.expanduser(os.getenv('MONGODB_PATH')), '--logpath', os.path.expanduser(os.getenv('MONGODB_LOG'))]
+    )
 
 today = datetime.date.today()
 script_folders = []
@@ -31,8 +33,10 @@ if snap:
 for folder in script_folders:
     filenames = os.listdir(folder)
     for file in filenames:
-        print(f'Running script: {file}')
-        subprocess.call([f'./venv/bin/python3', f'./{folder}/{file}'])
+        current_directory = os.getcwd()
+        print("Current Directory:", current_directory)
+        print(f'Running script: {file_utils.get_python_executable()} ./{folder}/{file}')
+        subprocess.run([f'{file_utils.get_python_executable()}', f'./{folder}/{file}'])
 
 timing_utils.end(start_time, 'run', f'{today.strftime("%A")} run: ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^')
 # subprocess.run(['killall', 'mongod'])
