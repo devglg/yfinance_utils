@@ -17,7 +17,6 @@
     "NWSA":"News Corp A",
     "IPG":"Interpublic Group Cos",
     "MTCH":"Match Group Inc.",
-    "PARA":"Paramount Global Class B",
     "FOX":"Fox Corp B",
     "NWS":"News Corp B"
 }

@@ -1,4 +1,5 @@
 dow = [
+    "DIA",
     "GS",
     "UNH",
     "MSFT",

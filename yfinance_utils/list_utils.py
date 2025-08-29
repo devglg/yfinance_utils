@@ -4,7 +4,9 @@
 # Copyright 2024 Lehi Gracia
 #
 #
-import yfinance
+import yfinance_utils.file_utils as file_utlis
+
+import os
 import pandas as pd
 from collections import Counter
 
@@ -101,7 +103,7 @@ def get_staples():
     return list(set(XLP.keys()))
 
 def get_short_list():
-    all = mag7 + nasdaq100 + snp500 + adhoc + ab + dow
+    all = mag7 + nasdaq100 + snp500 + adhoc + ab + dow + sectors.keys()
     return list(set(all) - set(remove))
 
 def get_long_list():
@@ -141,21 +143,35 @@ def get_markets():
 def get_sectors():
     return list(set(sectors.keys()))
 
+def get_percent_growth(symbol, days=30):
+    current_dir = os.getcwd()
+    current_file = os.path.basename(current_dir)
+
+    while not current_file == 'yfinance_utils':
+        os.chdir('../')
+        current_dir = os.getcwd()
+        current_file = os.path.basename(current_dir)
+
+    _df = pd.DataFrame()
+    _df = file_utlis.read_historic_data(symbol)
+    if _df is None:
+        return 0
+    _df.columns = ['Adj Close', 'Open','High','Low','Close','Volume']
+    _df.reset_index(inplace=True)
+
+    temp_1 = _df['Close'].iloc[-1]
+    temp_2 = _df['Close'].iloc[-days]
+    pct = round(((temp_1 - temp_2) / temp_2 * 100),2)
+    return pct
+
 def get_top_performers(symbols, size=3, days=30):
-    COLUMNS = ['Adj Close', 'Open','High','Low','Close','Volume']
-    data = yfinance.download(symbols, period='1y', auto_adjust=False)
     symlist = {}
     for symbol in symbols:
-        _df = pd.DataFrame()
-        _df = data.loc[:,(slice(None),symbol)]
-        _df.columns = COLUMNS
-        _df.reset_index(inplace=True)
-        _df = _df[-30:]
-        temp_1 = _df['Close'].iloc[-1]
-        temp_2 = _df['Close'].iloc[-days]
-        pct = round(((temp_1 - temp_2) / temp_2 * 100),2)
-        symlist[symbol] = pct
-
+        try:
+            symlist[symbol] = get_percent_growth(symbol, days=days)
+        except Exception as e:
+            print(f'{symbol} not found')
+    
     k = Counter(symlist)
     top = k.most_common(size)
     return  top

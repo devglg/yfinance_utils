@@ -1,4 +1,5 @@
 ab = [
+    "^VIX",
     "CEG",
     "SERV",
     "FSLR",

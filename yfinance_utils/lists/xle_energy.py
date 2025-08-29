@@ -12,7 +12,6 @@
     "BKR":"Baker Hughes Company",
     "TRGP":"Targa Resources Corp",
     "VLO":"Valero Energy Corp",
-    "HES":"Hess Corp",
     "OXY":"Occidental Petroleum",
     "FANG":"Diamondback Energy Inc",
     "EQT":"EQT Corporation",

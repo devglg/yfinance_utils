@@ -224,7 +224,6 @@ snp500 = [
     "FIS",
     "F",
     "PCG",
-    "HES",
     "KDP",
     "VLO",
     "CTVA",
@@ -495,7 +494,6 @@ snp500 = [
     "HII",
     "BWA",
     "FMC",
-    "PARA",
     "QRVO",
     "AMTM"
 ]

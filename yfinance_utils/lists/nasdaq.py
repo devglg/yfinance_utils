@@ -3246,8 +3246,6 @@ nasdaq = [
     "PAMT",
     "PANL",
     "PANW",
-    "PARA",
-    "PARAA",
     "PASG",
     "PATK",
     "PATN",

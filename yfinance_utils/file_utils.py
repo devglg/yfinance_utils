@@ -43,11 +43,31 @@ def save_output_file(df, name):
         df['URL'] = url
     df.round(2).to_csv(filepath, index=False)
 
-def read_historic_data(name):
-    name = f'{constants.DATA_FOLDER}/{name}'
-    return pd.read_csv(name, index_col=0)
+def read_historic_data(symbol):
+    current_dir = os.getcwd()
+    current_file = os.path.basename(current_dir)
+
+    while not current_file == 'yfinance_utils':
+        os.chdir('../')
+        current_dir = os.getcwd()
+        current_file = os.path.basename(current_dir)
+        
+    path = f'{constants.DATA_FOLDER}/{symbol}'
+    try:
+        data = pd.read_csv(path, index_col=0)
+    except Exception:
+        return None
+    return data
 
 def save_historic_data(df, name):
+    current_dir = os.getcwd()
+    current_file = os.path.basename(current_dir)
+
+    while not current_file == 'yfinance_utils':
+        os.chdir('../')
+        current_dir = os.getcwd()
+        current_file = os.path.basename(current_dir)
+
     name = f'{constants.DATA_FOLDER}/{name}'
     try:
         os.mkdir(constants.DATA_FOLDER)
