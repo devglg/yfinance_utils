@@ -134,21 +134,21 @@ def is_rsi_year_high(data, period=14):
 ##########################
 
 def is_vix_cross_up(day=2):
-    data = file_utils.get_historic_data('^VIX')
+    data = file_utils.get_history('^VIX')
     fast = TA.HMA(data, period=10) 
     slow = TA.HMA(data, period=20) 
     return fast.iloc[-day] < slow.iloc[-day] \
             and fast.iloc[-1] > slow.iloc[-1]
 
 def is_vix_cross_down(day=2):
-    data = file_utils.get_historic_data('^VIX')
+    data = file_utils.get_history('^VIX')
     fast = TA.HMA(data, period=10) 
     slow = TA.HMA(data, period=20) 
     return fast.iloc[-day] > slow.iloc[-day] \
             and fast.iloc[-1] < slow.iloc[-1]
 
 def is_vix_trending_up():
-    data = file_utils.get_historic_data('^VIX')
+    data = file_utils.get_history('^VIX')
     fast = TA.HMA(data, period=10) 
     slow = TA.HMA(data, period=20) 
     return fast.iloc[-1] > slow.iloc[-1]

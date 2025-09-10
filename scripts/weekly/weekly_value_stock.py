@@ -18,7 +18,7 @@ start_time = timing_utils.start(filenames, f'{FILENAME}')
 
 for tick in filenames:
     try:
-        data = file_utils.get_historic_data(tick)
+        data = file_utils.get_history(tick)
         t = yfinance.Ticker(tick)
         last_price = data['Close'].iloc[-1]
 

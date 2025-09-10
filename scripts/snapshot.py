@@ -9,7 +9,7 @@ import pandas as pd
 import yfinance
 from datetime import date, timedelta
 from yfinance import Ticker
-from yfinance_utils import list_utils, timing_utils, file_utils, constants, financials_utils
+from yfinance_utils import list_utils, timing_utils, file_utils, constants
 
 DOWNLOAD_HISTORY = False
 DOWNLOAD_FINANCIALS = True
@@ -73,37 +73,43 @@ if DOWNLOAD_HISTORY:
 if DOWNLOAD_FINANCIALS:
     for symbol in symbol_list:        
         try:
-            financials_utils.download_income_statement(symbol)
+            file_utils.download_info(symbol)
+        except Exception as e:
+            print(f'error downloading {symbol} INFO')
+            pass
+
+        try:
+            file_utils.download_income_statement(symbol)
         except Exception as e:
             print(f'error downloading {symbol} IS')
             pass
 
         try:
-            financials_utils.download_balance_sheet(symbol)
+            file_utils.download_balance_sheet(symbol)
         except Exception as e:
             print(f'error downloading {symbol} BS')
             pass
 
         try:    
-            financials_utils.download_cashflow(symbol)
+            file_utils.download_cashflow(symbol)
         except Exception as e:
             print(f'error downloading {symbol} CF')
             pass
 
         try:    
-            financials_utils.download_ratings(symbol)
+            file_utils.download_ratings(symbol)
         except Exception as e:
             print(f'error downloading {symbol} RT')
             pass
 
         try:    
-            financials_utils.download_analysts(symbol)
+            file_utils.download_analysts(symbol)
         except Exception as e:
             print(f'error downloading {symbol} ANALYSTS')
             pass
 
         try:    
-            financials_utils.download_news(symbol)
+            file_utils.download_news(symbol)
         except Exception as e:
             print(f'error downloading {symbol} NEWS')
             pass

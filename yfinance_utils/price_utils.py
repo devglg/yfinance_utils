@@ -8,7 +8,7 @@ from yfinance_utils import file_utils as file_utils
 
 
 def get_price_intervals_rising(tick):
-    data = file_utils.get_historic_data(tick)
+    data = file_utils.get_history(tick)
     c = list(data['Close'])
     for i in range(len(c)-1, 2, -1):
         if c[i-1] < c[i]:

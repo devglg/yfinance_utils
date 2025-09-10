@@ -153,7 +153,7 @@ def get_percent_growth(symbol, days=30):
         current_file = os.path.basename(current_dir)
 
     _df = pd.DataFrame()
-    _df = file_utlis.get_historic_data(symbol)
+    _df = file_utlis.get_history(symbol)
     if _df is None:
         return 0
     _df.columns = ['Adj Close', 'Open','High','Low','Close','Volume']

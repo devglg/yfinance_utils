@@ -4,6 +4,9 @@
 # Copyright 2024 Lehi Gracia
 #
 
+from collections import Counter
+from yfinance import Ticker as Ticker
+
 import os, json
 from datetime import datetime
 import pandas as pd
@@ -46,10 +49,7 @@ def save_output_file(df, name):
     df.round(2).to_csv(filepath, index=False)
 
 
-
-
-
-def get_historic_data(symbol):
+def get_history(symbol):
     current_dir = os.getcwd()
     current_file = os.path.basename(current_dir)
 
@@ -91,8 +91,9 @@ type:
     CF - Cash Flow
     RT - Ratings
     NEWS - News
+    ANALYSTS - upgrades and downgrades
 '''
-def get_financials(symbol):
+def get_data(symbol):
     current_dir = os.getcwd()
     current_file = os.path.basename(current_dir)
     read_data = {}
@@ -111,7 +112,7 @@ def get_financials(symbol):
         return None
 
 
-def save_financials(data, symbol, type):
+def save_data(data, symbol, type):
     current_dir = os.getcwd()
     current_file = os.path.basename(current_dir)
 
@@ -144,6 +145,101 @@ def save_financials(data, symbol, type):
 ###############################################################
 ###############################################################
 
+"""
+GET FINANCIAL STATEMENTS as dictionary
+"""
+def download_income_statement(symbol, period = 0):
+  ticker = Ticker(symbol)
+  data = dict(ticker.get_income_stmt()[ticker.get_income_stmt().columns[period]])
+  save_data(data, symbol=symbol, type="IS")
+  return data
+
+def download_balance_sheet(symbol, period = 0):
+  ticker = Ticker(symbol)
+  data = dict(ticker.get_balance_sheet()[ticker.get_balance_sheet().columns[period]])
+  save_data(data, symbol=symbol, type="BS")
+  return data
+
+def download_cashflow(symbol, period = 0):
+  ticker = Ticker(symbol)
+  data = dict(ticker.get_cashflow()[ticker.get_cashflow().columns[period]])
+  save_data(data, symbol=symbol, type="CF")
+  return data
+
+
+def get_income_statement(symbol):
+  data = get_data(symbol)
+  return data['IS']
+
+def get_balance_sheet(symbol):
+  data = get_data(symbol)
+  return data['BS']
+
+def get_cashflow(symbol):
+  data = get_data(symbol)
+  return data['CF']
+
+
+"""
+GET OTHER FINANCIAL INFORMATION
+
+INFO
+RATINGS
+ANALYSTS RATINGS UPGRADE AND DOWNGRADES
+NEWS
+"""
+
+def download_info(symbol):
+  ticker = Ticker(symbol)
+  d = ticker.info
+  save_data(d, symbol=symbol, type='INFO')
+  return d
+
+def get_info(symbol):
+  data = get_data(symbol)
+  return data['INFO']
+
+def download_ratings(symbol):
+  ticker = Ticker(symbol)
+  d = ticker.recommendations.iloc[0]
+  up = d['strongBuy'] + d['buy']
+  down = d['strongSell'] + d['sell']
+  hold = d['hold']
+  total = d['strongBuy'] + d['buy'] + d['strongSell'] + d['sell'] + d['hold']
+  data = {'up':int(up), 'down': int(down), 'total': int(total), 'hold': int(hold)}
+  save_data(data, symbol=symbol, type="RT")
+  return data
+
+def get_ratings(symbol):
+  data = get_data(symbol)
+  return data['RT']
+
+
+def download_news(symbol):
+  ticker = Ticker(symbol)
+  d = ticker.news
+  save_data(d, symbol=symbol, type='NEWS')
+  return d
+
+def get_news(symbol):
+  news = get_data(symbol)
+  return news['NEWS']
+
+
+def download_analysts(symbol):
+  t = Ticker(symbol)
+  dupdown = t.get_upgrades_downgrades()
+  grades = list(dupdown['ToGrade'])
+
+  values = list(Counter(grades).values())
+  keys = list(Counter(grades).keys())
+  ratings = dict(zip(keys, values))
+  save_data(ratings, symbol, type='ANALYSTS')
+  return ratings
+
+def get_analysts(symbol):
+  an = get_data(symbol)
+  return an['ANALYSTS']
 
 
 ### utilities

@@ -21,7 +21,7 @@ start_time = timing_utils.start(filenames, FILENAME)
 
 for tick in filenames:
     try:
-        data = file_utils.get_historic_data(tick)
+        data = file_utils.get_history(tick)
         if data['Close'].iloc[-1] < constants.MINIMUM_PRICE: continue
 
         data = pd.concat([data, TA.BBANDS(data)], axis=1)

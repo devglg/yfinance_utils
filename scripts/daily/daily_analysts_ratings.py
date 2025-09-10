@@ -7,7 +7,7 @@
 import datetime
 import pandas as pd
 from yfinance import Tickers
-from yfinance_utils import financials_utils, file_utils, timing_utils, list_utils
+from yfinance_utils import file_utils, file_utils, timing_utils, list_utils
 
 COLUMNS = ['DATE', 'TICK', 'UP', 'DOWN', 'HOLD', 'AVG', 'TOTAL']
 FILENAME='daily_analysts_ratings'
@@ -23,7 +23,7 @@ filenames = list(set(filenames) - set(remove_etfs))
 for symbol in filenames:
     try:
         # TODO: change this to t.recommendstions
-        tmp = financials_utils.get_ratings(symbol)
+        tmp = file_utils.get_ratings(symbol)
         up = tmp['up']
         down = tmp['down']
         hold = tmp['hold']

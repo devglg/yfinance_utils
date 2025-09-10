@@ -19,7 +19,7 @@ start_time = timing_utils.start(filenames, FILENAME)
 
 for tick in filenames:
     try:
-        data = file_utils.get_historic_data(tick)
+        data = file_utils.get_history(tick)
         df_rsi = TA.RSI(data.iloc[-constants.TRADING_DAYS_IN_YEAR:])
 
         rsi = df_rsi['rsi'].iloc[-1]

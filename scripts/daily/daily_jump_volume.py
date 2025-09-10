@@ -17,7 +17,7 @@ start_time = timing_utils.start(filenames, FILENAME)
 
 for tick in filenames:
     try:
-        data = file_utils.get_historic_data(tick)
+        data = file_utils.get_history(tick)
         avg = data['Volume'].rolling(10).mean().iloc[-1]
         volume_0 = data['Volume'].iloc[-1]
         volume_0_pct = volume_0/avg*100
