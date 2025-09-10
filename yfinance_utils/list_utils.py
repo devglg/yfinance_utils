@@ -103,7 +103,7 @@ def get_staples():
     return list(set(XLP.keys()))
 
 def get_short_list():
-    all = mag7 + nasdaq100 + snp500 + adhoc + ab + dow + sectors.keys()
+    all = mag7 + nasdaq100 + snp500 + adhoc + ab + dow
     return list(set(all) - set(remove))
 
 def get_long_list():
@@ -153,7 +153,7 @@ def get_percent_growth(symbol, days=30):
         current_file = os.path.basename(current_dir)
 
     _df = pd.DataFrame()
-    _df = file_utlis.read_historic_data(symbol)
+    _df = file_utlis.get_historic_data(symbol)
     if _df is None:
         return 0
     _df.columns = ['Adj Close', 'Open','High','Low','Close','Volume']

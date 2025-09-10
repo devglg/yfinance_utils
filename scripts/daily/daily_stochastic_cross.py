@@ -17,7 +17,7 @@ start_time = timing_utils.start(filenames, FILENAME)
 
 for tick in filenames:
     try:
-        data = file_utils.read_historic_data(tick)
+        data = file_utils.get_historic_data(tick)
         if math.isnan(data['Close'].iloc[-1]): continue
 
         if (signals_utils.is_stochastic_cross_up(data, days_back=3, line=70)):

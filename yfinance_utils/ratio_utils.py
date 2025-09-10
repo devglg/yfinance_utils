@@ -17,7 +17,7 @@ import math
 ## TODO: COR should be changed to COGS
 def get_net_revenue(tick, period = 0):
     try:
-        ist = fu.get_is(tick, period = period)
+        ist = fu.get_income_statement(tick, period = period)
     except Exception as e:
         return math.nan
     return ist['NetIncome']
@@ -28,7 +28,7 @@ def get_net_income(tick, period = 0):
 
 def get_net_sales(tick, period = 0):
     try:
-        ist = fu.get_is(tick, period = period)
+        ist = fu.get_income_statement(tick, period = period)
         sales_expenses = ist['CostOfRevenue'] \
                 - ist['SellingGeneralAndAdministration'] \
                 - ist['GeneralAndAdministrativeExpense'] \
@@ -42,8 +42,8 @@ def get_net_sales(tick, period = 0):
 
 def get_avg_assets(tick, period = 0):
     try:
-        bs = fu.get_bs(tick, period = period)
-        bs1 = fu.get_bs(tick, period = period + 1)
+        bs = fu.get_balance_sheet(tick, period = period)
+        bs1 = fu.get_balance_sheet(tick, period = period + 1)
         avg_assets = (bs['TotalAssets'] + bs1['TotalAssets']) / 2
     except Exception as e:
         return math.nan
@@ -51,8 +51,8 @@ def get_avg_assets(tick, period = 0):
 
 def get_avg_inventory(tick, period = 0):
     try:
-        bs = fu.get_bs(tick, period=period)
-        bs1 = fu.get_bs(tick, period=(period + 1))
+        bs = fu.get_balance_sheet(tick, period=period)
+        bs1 = fu.get_balance_sheet(tick, period=(period + 1))
         ratio = (bs['Inventory'] + bs1['Inventory']) / 2
     except Exception as e:
         return math.nan
@@ -74,7 +74,7 @@ def get_current_ratio(tick):
 ### company’s ability to pay off short-term liabilities with quick assets###
 def get_acid_test_ratio(tick, period = 0):
     try:
-        bs = fu.get_bs(tick, period=period)
+        bs = fu.get_balance_sheet(tick, period=period)
         acid = bs['CurrentAssets'] - bs['Inventory']
     except Exception as e:
         return math.nan
@@ -83,7 +83,7 @@ def get_acid_test_ratio(tick, period = 0):
 ### company’s ability to pay off short-term liabilities with cash and cash equivalents###
 def get_cash_ratio(tick, period = 0):
     try:
-        bs = fu.get_bs(tick, period = period)
+        bs = fu.get_balance_sheet(tick, period = period)
     except Exception as e:
         return math.nan
     return bs['CashAndCashEquivalents'] / bs['CurrentLiabilities']
@@ -91,7 +91,7 @@ def get_cash_ratio(tick, period = 0):
 ### number of times a company can pay off current liabilities with the cash generated in a given period###
 def get_operating_cash_flow_ratio(tick, period = 0):
     try:
-        bs = fu.get_bs(tick, period = period)
+        bs = fu.get_balance_sheet(tick, period = period)
         cf = fu.get_cashflow(tick, period = period)
     except Exception as e:
         return math.nan
@@ -105,7 +105,7 @@ def get_operating_cash_flow_ratio(tick, period = 0):
 ### assets that are provided from debt###
 def get_debt_ratio(tick, period = 0):
     try:
-        bs = fu.get_bs(tick, period = period)
+        bs = fu.get_balance_sheet(tick, period = period)
         ratio = bs['TotalLiabilitiesNetMinorityInterest'] / bs['TotalAssets']
     except Exception as e:
         return math.nan
@@ -114,7 +114,7 @@ def get_debt_ratio(tick, period = 0):
 ### weight of total debt and financial liabilities against shareholders’ equity###
 def get_debt_to_equity_ratio(tick, period = 0):
     try:
-        bs = fu.get_bs(tick, period = period)
+        bs = fu.get_balance_sheet(tick, period = period)
         ratio = bs['TotalLiabilitiesNetMinorityInterest'] / bs['StockholdersEquity']
     except Exception as e:
         return math.nan
@@ -123,7 +123,7 @@ def get_debt_to_equity_ratio(tick, period = 0):
 ### company can pay its interest expenses###
 def get_interest_coverage_ratio(tick, period = 0):
     try:
-        ist = fu.get_is(tick, period = period)
+        ist = fu.get_income_statement(tick, period = period)
         ratio = ist['OperatingIncome'] / ist['InterestExpense']
     except Exception as e:
         return math.nan
@@ -132,8 +132,8 @@ def get_interest_coverage_ratio(tick, period = 0):
 ### company can pay its debt obligations###
 def get_service_coverage_ratio(tick, period = 0):
     try:
-        ist = fu.get_is(tick, period = period)
-        bs = fu.get_bs(tick, period = period)
+        ist = fu.get_income_statement(tick, period = period)
+        bs = fu.get_balance_sheet(tick, period = period)
         ratio = ist['OperatingIncome'] / bs['TotalDebt']
     except Exception as e:
         return math.nan
@@ -157,7 +157,7 @@ def get_asset_turnover_ratio(tick, period = 1):
 ### how many times a company’s inventory is sold and replaced ###
 def get_inventory_turnover_ratio(tick, period = 0):
     try:
-        ist = fu.get_is(tick, period = period)
+        ist = fu.get_income_statement(tick, period = period)
         avg_inventory = get_avg_inventory(tick, period = period + 1)
         ratio = ist['CostOfRevenue'] / avg_inventory
     except Exception as e:
@@ -182,7 +182,7 @@ def get_day_sales_in_inventory_ratio(tick, period = 0):
 # getting 1.0, this can't be right
 def get_gross_margin_ratio(tick, period = 0):
     try:
-        ist = fu.get_is(tick, period = period)
+        ist = fu.get_income_statement(tick, period = period)
         net_sales = get_net_sales(tick, period = period)
         ratio = ist['GrossProfit'] / net_sales
     except Exception as e:
@@ -192,7 +192,7 @@ def get_gross_margin_ratio(tick, period = 0):
 ### operating efficiency###
 def get_operating_margin_ratio(tick, period = 0):
     try:
-        ist = fu.get_is(tick, period=period)
+        ist = fu.get_income_statement(tick, period=period)
         net_sales = get_net_sales(tick, period=period)
         ratio = ist['OperatingRevenue'] / net_sales
     except Exception as e:
@@ -203,7 +203,7 @@ def get_operating_margin_ratio(tick, period = 0):
 def get_return_on_assets_ratio(tick, period = 0):
     try:
         ni = get_net_income(tick, period)
-        bs = fu.get_bs(tick, period = period)
+        bs = fu.get_balance_sheet(tick, period = period)
         ratio = ni / bs['TotalAssets']
     except Exception as e:
         return math.nan
@@ -213,7 +213,7 @@ def get_return_on_assets_ratio(tick, period = 0):
 def get_return_on_equity(tick, period = 0):
     try:
         ni = get_net_income(tick, period)
-        bs = fu.get_bs(tick, period = period)
+        bs = fu.get_balance_sheet(tick, period = period)
         ratio = ni / bs['StockholdersEquity']
     except Exception as e:
         return math.nan
@@ -243,7 +243,7 @@ def get_dividend_yield_ratio(tick):
 ### amount of net income earned for each share outstanding###
 def get_earnings_per_share(tick, period = 0):
     try:
-        ist = fu.get_is(tick, period=period)
+        ist = fu.get_income_statement(tick, period=period)
         deps = ist['DilutedEPS']
     except Exception as e:
         return math.nan
@@ -251,7 +251,7 @@ def get_earnings_per_share(tick, period = 0):
 
 def get_revenue_per_share(tick, period = 0):
     try:
-        ist = fu.get_is(tick, period=period)
+        ist = fu.get_income_statement(tick, period=period)
         revenue = ist['TotalRevenue']
         shares = ist['DilutedAverageShares']
         rps = revenue / shares

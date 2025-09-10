@@ -18,7 +18,7 @@ start_time = timing_utils.start(filenames, FILENAME)
 
 for tick in filenames:
     try:
-        data = file_utils.read_historic_data(tick)
+        data = file_utils.get_historic_data(tick)
         vol_avg = data['Volume'].rolling(window=10).mean().iloc[-1]
 
         def gap_up():

@@ -6,8 +6,7 @@
 from finta import TA
 import math
 import pandas as pd
-import yfinance
-from yfinance_utils import constants
+from yfinance_utils import constants, file_utils
 
 ##########################
 # MACD indicators        #
@@ -49,19 +48,19 @@ def is_stochastic_cross_down(data, days_back = 2, line = 70):
 ##########################
 
 def is_ma_bullish_trend(data, sma=30, ema=10, day=1):
-    sma = TA.SMA(data, sma)
-    ema = TA.EMA(data, ema)
-    return data['Close'].iloc[-day] > sma.iloc[-day] and data['Close'].iloc[-day] > ema.iloc[-day]
+    slow = TA.SMA(data, sma)
+    fast = TA.EMA(data, ema)
+    return data['Close'].iloc[-day] > slow.iloc[-day] and data['Close'].iloc[-day] > fast.iloc[-day]
 
 def is_ma_bearish_trend(data, sma=30, ema=10, day=1):
-    sma = TA.SMA(data, sma)
-    ema = TA.EMA(data, ema)
-    return data['Close'].iloc[-day] < sma.iloc[-day] and data['Close'].iloc[-day] < ema.iloc[-day]
+    slow = TA.SMA(data, sma)
+    fast = TA.EMA(data, ema)
+    return data['Close'].iloc[-day] < slow.iloc[-day] and data['Close'].iloc[-day] < fast.iloc[-day]
 
 def is_ma_trend_reversing(data, sma=30, ema=10, day=1):
-    sma = TA.SMA(data, sma)
-    ema = TA.EMA(data, ema)
-    return data['Close'].iloc[-day] > ema.iloc[-day] and data['Close'].iloc[-day] < sma.iloc[-day]
+    slow = TA.SMA(data, sma)
+    fast = TA.EMA(data, ema)
+    return data['Close'].iloc[-day] > fast.iloc[-day] and data['Close'].iloc[-day] < slow.iloc[-day]
 
 def is_ma_cross_down(data, sma=30, ema=10):
     return is_ma_bullish_trend(data, sma=sma, ema=ema, day=5) \
@@ -134,28 +133,25 @@ def is_rsi_year_high(data, period=14):
 # IV indicators          #
 ##########################
 
-def is_vix_hma_cross_up(day=2):
-    t = yfinance.Ticker('^VIX')
-    data = t.history(period="1y")
-    hma10 = TA.HMA(data, period=10) 
-    hma20 = TA.HMA(data, period=20) 
-    return hma10.iloc[-day] < hma20.iloc[-day] \
-            and hma10.iloc[-1] > hma20.iloc[-1]
+def is_vix_cross_up(day=2):
+    data = file_utils.get_historic_data('^VIX')
+    fast = TA.HMA(data, period=10) 
+    slow = TA.HMA(data, period=20) 
+    return fast.iloc[-day] < slow.iloc[-day] \
+            and fast.iloc[-1] > slow.iloc[-1]
 
-def is_vix_hma_cross_down(day=2):
-    t = yfinance.Ticker('^VIX')
-    data = t.history(period="1y")
-    hma10 = TA.HMA(data, period=10) 
-    hma20 = TA.HMA(data, period=20) 
-    return hma10.iloc[-day] > hma20.iloc[-day] \
-            and hma10.iloc[-1] < hma20.iloc[-1]
+def is_vix_cross_down(day=2):
+    data = file_utils.get_historic_data('^VIX')
+    fast = TA.HMA(data, period=10) 
+    slow = TA.HMA(data, period=20) 
+    return fast.iloc[-day] > slow.iloc[-day] \
+            and fast.iloc[-1] < slow.iloc[-1]
 
 def is_vix_trending_up():
-    t = yfinance.Ticker('^VIX')
-    data = t.history(period="1y")
-    hma10 = TA.HMA(data, period=10) 
-    hma20 = TA.HMA(data, period=20) 
-    return hma10.iloc[-1] > hma20.iloc[-1]
+    data = file_utils.get_historic_data('^VIX')
+    fast = TA.HMA(data, period=10) 
+    slow = TA.HMA(data, period=20) 
+    return fast.iloc[-1] > slow.iloc[-1]
 
 #####################################
 # SUPPORT and RESISTANCE indicators #

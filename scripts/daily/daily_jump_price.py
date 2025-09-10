@@ -21,7 +21,7 @@ start_time = timing_utils.start(filenames, f'{FILENAME_UP}-{FILENAME_DOWN}')
 
 for tick in filenames:
     try:
-        data = file_utils.read_historic_data(tick)
+        data = file_utils.get_historic_data(tick)
         pctjump = (data['Close'].iloc[-1] - data['Close'].iloc[-2]) / data['Close'].iloc[-2] * 100
         
         if pctjump < constants.PERCENTAGE_MOVE and pctjump > -(constants.PERCENTAGE_MOVE): continue

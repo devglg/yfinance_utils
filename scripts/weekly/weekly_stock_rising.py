@@ -19,7 +19,7 @@ stars = []
 
 for tick in filenames:
     try:
-        data = file_utils.read_historic_data(tick)
+        data = file_utils.get_historic_data(tick)
         close = list(data['Close'])
 
         counter = 0

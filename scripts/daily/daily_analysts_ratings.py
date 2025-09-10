@@ -19,12 +19,11 @@ start_time = timing_utils.start(filenames, FILENAME)
 # ETFs do not get ratings from analysts
 remove_etfs = ['SPY', 'VTI', 'MID', 'QQQ', 'VOO', 'USD', 'VGT', 'DIA', 'FOX'] + list_utils.get_sectors()
 filenames = list(set(filenames) - set(remove_etfs))
-t = Tickers(filenames)
 
-for tick in filenames:
+for symbol in filenames:
     try:
         # TODO: change this to t.recommendstions
-        tmp = financials_utils.get_ratings(t.tickers[tick])
+        tmp = financials_utils.get_ratings(symbol)
         up = tmp['up']
         down = tmp['down']
         hold = tmp['hold']
@@ -35,7 +34,7 @@ for tick in filenames:
         continue
     
     if avg_up > 85:
-        tmpups =  pd.DataFrame([[datetime.date.today().strftime('%Y-%m-%d'), tick, up, down, hold, avg_up, total]], columns=COLUMNS)
+        tmpups =  pd.DataFrame([[datetime.date.today().strftime('%Y-%m-%d'), symbol, up, down, hold, avg_up, total]], columns=COLUMNS)
         dfups = pd.concat([dfups, tmpups], ignore_index=True)
 
 file_utils.save_output_file(dfups,FILENAME)
