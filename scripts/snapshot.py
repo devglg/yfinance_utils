@@ -109,6 +109,13 @@ if DOWNLOAD_FINANCIALS:
             pass
 
         try:    
+            file_utils.download_options(symbol)
+        except Exception as e:
+            print(f'error downloading {symbol} OPTIONS')
+            print(e)
+            pass
+
+        try:    
             file_utils.download_news(symbol)
         except Exception as e:
             print(f'error downloading {symbol} NEWS')

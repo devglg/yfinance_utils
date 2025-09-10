@@ -4,6 +4,7 @@
 # Copyright 2024 Lehi Gracia
 #
 
+import math
 from collections import Counter
 from yfinance import Ticker as Ticker
 
@@ -240,6 +241,28 @@ def download_analysts(symbol):
 def get_analysts(symbol):
   an = get_data(symbol)
   return an['ANALYSTS']
+
+
+def download_options(symbol):
+    t = Ticker(symbol)
+    options = t.option_chain()
+    data = {}
+
+    cv = list(options.calls['volume'])
+    pv = list(options.puts['volume'])
+
+    calls_volume = int(sum(x for x in cv if not math.isnan(x)))
+    puts_volume = int(sum(x for x in pv if not math.isnan(x)))
+
+    data['calls'] = calls_volume
+    data['puts'] = puts_volume
+
+    save_data(data, symbol=symbol, type='OPTIONS')
+    return options
+
+def get_options(symbol):
+    op = get_data(symbol)
+    return op['OPTIONS']
 
 
 ### utilities

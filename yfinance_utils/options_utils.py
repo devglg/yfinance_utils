@@ -5,24 +5,18 @@
 #
 # 
 import math
+from yfinance_utils import file_utils
 
 def get_all_options(t):
-    return get_calls(t) + get_puts(t)
-
-def get_calls(t):
-    options = t.option_chain()
-    return options.calls
+    return get_puts_volume(t) + get_calls_volume(t)
 
 def get_calls_volume(t):
-    options = t.option_chain()
-    volume = list(options.calls['volume'])
-    return sum(x for x in volume if not math.isnan(x))
-
-def get_puts(t):
-    options = t.option_chain()
-    return options.puts
+    volume = file_utils.get_options(t)['calls']
+    return volume
 
 def get_puts_volume(t):
-    options = t.option_chain()
-    volume = list(options.puts['volume'])
-    return sum(x for x in volume if not math.isnan(x))
+    volume = file_utils.get_options(t)['puts']
+    return volume
+
+def get_put_call_ration(t):
+    return get_puts_volume(t) / get_calls_volume(t)

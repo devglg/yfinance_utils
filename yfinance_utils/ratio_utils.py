@@ -66,7 +66,7 @@ def get_avg_inventory(tick, period = 0):
 ### company’s ability to pay off short-term liabilities with current assets###
 def get_current_ratio(tick):
     try:
-        cr = tick.info['currentRatio']
+        cr = fu.get_info()['currentRatio']
     except Exception as e:
         return math.nan
     return cr
@@ -227,7 +227,7 @@ def get_return_on_equity(tick, period = 0):
 ### per-share value of a company based on the equity available to shareholders###
 def get_book_value_per_share_ratio(tick):
     try:
-        bv = tick.info['bookValue']
+        bv = fu.get_info()['bookValue']
     except Exception as e:
         return math.nan
     return  bv
@@ -235,7 +235,7 @@ def get_book_value_per_share_ratio(tick):
 ### amount of dividends attributed to shareholders###
 def get_dividend_yield_ratio(tick):
     try:
-        ratio = tick.info['dividendYield'] * 100 * 4 / tick.info['currentPrice']
+        ratio = fu.get_info()['dividendYield'] * 100 * 4 / fu.get_info()['currentPrice']
     except Exception:
         return math.nan
     return  ratio
@@ -263,7 +263,7 @@ def get_revenue_per_share(tick, period = 0):
 def get_price_to_earnings(tick, period=0):
     try:
         earnings = get_earnings_per_share(tick)
-        ratio = tick.info['currentPrice'] / earnings
+        ratio = fu.get_info()['currentPrice'] / earnings
     except Exception:
         return math.nan
     return ratio
@@ -272,17 +272,12 @@ def get_price_to_earnings(tick, period=0):
 def get_price_to_sales(tick, period=0):
     try:
         revenue_per_share = get_revenue_per_share(tick)
-        ratio = tick.info['currentPrice'] / revenue_per_share
+        ratio = fu.get_info()['currentPrice'] / revenue_per_share
     except Exception:
         return math.nan
     return ratio
 
 ### puts over calls show the sentiment from whales ###
 def get_put_call_ratio(tick):
-    calls = options_utils.get_calls_volume(tick)
-    puts = options_utils.get_puts_volume(tick)
-    ratio = round(puts/calls,2)
-    if math.isnan(calls) or math.isnan(puts):
-        return math.nan 
-    return ratio
+    return options_utils.get_put_call_ration(tick)
 
