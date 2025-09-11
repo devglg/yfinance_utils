@@ -79,19 +79,19 @@ if DOWNLOAD_FINANCIALS:
             pass
 
         try:
-            file_utils.download_income_statement(symbol)
+            file_utils.download_income_statement(symbol, periods=4)
         except Exception as e:
             print(f'error downloading {symbol} IS')
             pass
 
         try:
-            file_utils.download_balance_sheet(symbol)
+            file_utils.download_balance_sheet(symbol, periods=4)
         except Exception as e:
             print(f'error downloading {symbol} BS')
             pass
 
         try:    
-            file_utils.download_cashflow(symbol)
+            file_utils.download_cashflow(symbol, periods=4)
         except Exception as e:
             print(f'error downloading {symbol} CF')
             pass

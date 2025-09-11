@@ -149,36 +149,42 @@ def save_data(data, symbol, type):
 """
 GET FINANCIAL STATEMENTS as dictionary
 """
-def download_income_statement(symbol, period = 0):
+def download_income_statement(symbol, periods = 1):
   ticker = Ticker(symbol)
-  data = dict(ticker.get_income_stmt()[ticker.get_income_stmt().columns[period]])
-  save_data(data, symbol=symbol, type="IS")
+  income = ticker.get_income_stmt()
+  for i in range(periods):
+    data = dict(income[ticker.get_income_stmt().columns[i]])
+    save_data(data, symbol=symbol, type=f"IS{i}")
   return data
 
-def download_balance_sheet(symbol, period = 0):
+def download_balance_sheet(symbol, periods = 1):
   ticker = Ticker(symbol)
-  data = dict(ticker.get_balance_sheet()[ticker.get_balance_sheet().columns[period]])
-  save_data(data, symbol=symbol, type="BS")
+  balance = ticker.get_balance_sheet()
+  for i in range(periods):
+    data = dict(balance[ticker.get_balance_sheet().columns[i]])
+    save_data(data, symbol=symbol, type=f"BS{i}")
   return data
 
-def download_cashflow(symbol, period = 0):
+def download_cashflow(symbol, periods = 1):
   ticker = Ticker(symbol)
-  data = dict(ticker.get_cashflow()[ticker.get_cashflow().columns[period]])
-  save_data(data, symbol=symbol, type="CF")
+  cash = ticker.get_cashflow()
+  for i in range(periods):
+    data = dict(cash[ticker.get_cashflow().columns[i]])
+    save_data(data, symbol=symbol, type=f"CF{i}")
   return data
 
 
-def get_income_statement(symbol):
+def get_income_statement(symbol, period = 0):
   data = get_data(symbol)
-  return data['IS']
+  return data[f'IS{period}']
 
-def get_balance_sheet(symbol):
+def get_balance_sheet(symbol, period = 0):
   data = get_data(symbol)
-  return data['BS']
+  return data[f'BS{period}']
 
-def get_cashflow(symbol):
+def get_cashflow(symbol, period = 0):
   data = get_data(symbol)
-  return data['CF']
+  return data[f'CF{period}']
 
 
 """

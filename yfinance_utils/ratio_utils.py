@@ -66,7 +66,7 @@ def get_avg_inventory(tick, period = 0):
 ### company’s ability to pay off short-term liabilities with current assets###
 def get_current_ratio(tick):
     try:
-        cr = fu.get_info()['currentRatio']
+        cr = fu.get_info(tick)['currentRatio']
     except Exception as e:
         return math.nan
     return cr
@@ -227,7 +227,7 @@ def get_return_on_equity(tick, period = 0):
 ### per-share value of a company based on the equity available to shareholders###
 def get_book_value_per_share_ratio(tick):
     try:
-        bv = fu.get_info()['bookValue']
+        bv = fu.get_info(tick)['bookValue']
     except Exception as e:
         return math.nan
     return  bv
