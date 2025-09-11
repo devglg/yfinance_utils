@@ -11,7 +11,7 @@ from datetime import date, timedelta
 from yfinance import Ticker
 from yfinance_utils import list_utils, timing_utils, file_utils, constants
 
-DOWNLOAD_HISTORY = False
+DOWNLOAD_HISTORY = True
 DOWNLOAD_FINANCIALS = True
 
 thirteen_months = str(date.today() - timedelta(weeks=60))
@@ -35,7 +35,7 @@ symbol_list = list_utils.get_nasdaq100() \
 symbol_list = list(set(symbol_list))
 
 # start the timer
-# start_time = timing_utils.start(symbol_list, 'snapshot', f'getting historic data from: {start_date} to: {end_date}')
+start_time = timing_utils.start(symbol_list, 'snapshot', f'getting historic data from: {start_date} to: {end_date}')
 
 
 
@@ -122,5 +122,5 @@ if DOWNLOAD_FINANCIALS:
             pass
 
 
-# timing_utils.end(start_time, 'snapshot', f'data downloaded and saved')
+timing_utils.end(start_time, 'snapshot', f'data downloaded and saved')
     
