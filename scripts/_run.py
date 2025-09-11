@@ -22,8 +22,10 @@ today = datetime.date.today()
 script_folders = []
 
 script_folders.append(file_utils.get_scripts_folder('daily'))
-if today.strftime('%A') in ['Saturday', 'Sunday']:
-    script_folders.append(file_utils.get_scripts_folder('weekly'))
+script_folders.append(file_utils.get_scripts_folder('weekly'))
+
+# if today.strftime('%A') in ['Saturday', 'Sunday']:
+#     script_folders.append(file_utils.get_scripts_folder('weekly'))
 
 start_time = timing_utils.start(script_folders, 'run', f'{today.strftime("%A")} run: *** *** *** *** *** *** *** *** *** *** ***')
 

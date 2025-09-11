@@ -20,8 +20,7 @@ start_time = timing_utils.start(filenames, FILENAME)
 for tick in filenames:
     try:
         data = file_utils.get_history(tick)
-        t = yfinance.Ticker(tick)
-        pcr = ratio_utils.get_put_call_ratio(t)
+        pcr = ratio_utils.get_put_call_ratio(tick)
 
         if math.isnan(pcr): continue
 

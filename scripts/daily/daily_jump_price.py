@@ -31,7 +31,7 @@ for tick in filenames:
     except Exception as e:
         continue
     
-    tmpjump =  pd.DataFrame([[data.index[-1][10:], tick, data['Close'].iloc[-1], pctjump, data['Volume'].iloc[-1], pctvol, pctvol2]], columns=COLUMNS)
+    tmpjump =  pd.DataFrame([[data.index[-1], tick, data['Close'].iloc[-1], pctjump, data['Volume'].iloc[-1], pctvol, pctvol2]], columns=COLUMNS)
     if pctjump > 0:
         dfjumpup = pd.concat([dfjumpup, tmpjump], ignore_index=True)
     else:
